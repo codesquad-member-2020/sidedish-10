@@ -30,3 +30,5 @@ docs: 문서 작업
 - [ ] 요구사항 1
 - [ ] 요구사항 2
 - [ ] 요구사항 3
+
+#### [요구사항 기술서](https://docs.google.com/spreadsheets/d/1N0ke16qvi8vZ40LPPmtMnCK3UHQAr8UXOGP0utGEhRE/edit?usp=sharing)
