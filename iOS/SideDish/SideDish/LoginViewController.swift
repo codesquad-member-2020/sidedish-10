@@ -7,13 +7,11 @@
 //
 
 import UIKit
-import Toaster
 
-class ViewController: UIViewController {
+class LoginViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        Toast(text: "ASDASD").show()
     }
 }
 
