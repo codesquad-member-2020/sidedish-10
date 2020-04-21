@@ -35,6 +35,7 @@
   },
   "devDependencies": {
     "@storybook/addons": "^5.3.18",
-    "@storybook/react": "^5.3.18"
+    "@storybook/react": "^5.3.18",
+    "storybook-addon-jsx": "^7.2.3"
   }
 }
