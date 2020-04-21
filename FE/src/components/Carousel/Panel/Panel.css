@@ -1,0 +1,35 @@
+.panel-side img {
+  width: 150px;
+  height: 150px;
+}
+
+.panel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 150px;
+  height: 150px;
+  background: rgba(255, 255, 255, 0.5);
+  border: 0.2px solid #000000;
+  cursor: pointer;
+}
+
+.panel-side {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  transition: 0.5s linear;
+}
+
+.panel-front {
+  background-color: #908f90;
+  color: #fff;
+}
+
+.panel-back {
+  transform-origin: top left;
+  transform: rotateY(0deg);
+}

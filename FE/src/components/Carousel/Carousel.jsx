@@ -1,5 +1,5 @@
 import React from "react";
-import Profile from "./Profile/Profile";
+import Panel from "./Panel/Panel";
 
 import irene from "../../mockData/imgs/irene.jpg";
 import jisu from "../../mockData/imgs/jisu.jpg";
@@ -133,29 +133,15 @@ class Carousel extends React.Component {
           {this.state.profiles.map((profile, index) => {
             const panelBack = React.createRef();
             this.panelBacks.push(panelBack);
-
             return (
-              <div
-                style={{
-                  transform: `rotateY(${
-                    oneUnitDeg * index
-                  }deg) translateZ(${height}px)`,
-                }}
-                className="panel"
-                onClick={this.toggleCard.bind(this, index)}
-              >
-                <div className="panel-side panel-front">
-                  <Profile
-                    birthday={profile.birthday}
-                    name={profile.name}
-                    pay={profile.pay}
-                    description={profile.description}
-                  />
-                </div>
-                <div className="panel-side panel-back" ref={panelBack}>
-                  <img src={profile.imgSrc}></img>
-                </div>
-              </div>
+              <Panel
+                key={index}
+                rotateYDeg={oneUnitDeg * index}
+                translateZPx={height}
+                clickHandler={this.toggleCard.bind(this, index)}
+                refer={panelBack}
+                profile={profile}
+              />
             );
           })}
         </div>
