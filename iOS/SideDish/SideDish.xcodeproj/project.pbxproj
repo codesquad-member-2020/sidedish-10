@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -76,6 +76,49 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		A52A3F01244ECC1F005795A4 /* Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				A5BD927D244DCAE600D6442F /* AppDelegate.swift */,
+				A5BD927F244DCAE600D6442F /* SceneDelegate.swift */,
+			);
+			path = Delegate;
+			sourceTree = "<group>";
+		};
+		A52A3F02244ECC56005795A4 /* MainMenuView */ = {
+			isa = PBXGroup;
+			children = (
+				A53BA05E244EA6DE0023D27D /* MainMenuViewController.swift */,
+			);
+			path = MainMenuView;
+			sourceTree = "<group>";
+		};
+		A52A3F03244ECC65005795A4 /* LoginView */ = {
+			isa = PBXGroup;
+			children = (
+				A5BD9281244DCAE600D6442F /* LoginViewController.swift */,
+			);
+			path = LoginView;
+			sourceTree = "<group>";
+		};
+		A52A3F04244ECC69005795A4 /* StoryBoard */ = {
+			isa = PBXGroup;
+			children = (
+				A5BD9283244DCAE600D6442F /* Main.storyboard */,
+				A5BD9288244DCAE900D6442F /* LaunchScreen.storyboard */,
+			);
+			path = StoryBoard;
+			sourceTree = "<group>";
+		};
+		A52A3F05244ECC70005795A4 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				A5BD9286244DCAE900D6442F /* Assets.xcassets */,
+				A53BA05C244EA46A0023D27D /* BMYEONSUNG_otf.otf */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
 		A5BD9271244DCAE500D6442F = {
 			isa = PBXGroup;
 			children = (
@@ -99,15 +142,12 @@
 		A5BD927C244DCAE500D6442F /* SideDish */ = {
 			isa = PBXGroup;
 			children = (
-				A53BA05E244EA6DE0023D27D /* MainMenuViewController.swift */,
-				A5BD927D244DCAE600D6442F /* AppDelegate.swift */,
-				A5BD927F244DCAE600D6442F /* SceneDelegate.swift */,
-				A5BD9281244DCAE600D6442F /* LoginViewController.swift */,
-				A5BD9283244DCAE600D6442F /* Main.storyboard */,
-				A5BD9286244DCAE900D6442F /* Assets.xcassets */,
-				A5BD9288244DCAE900D6442F /* LaunchScreen.storyboard */,
+				A52A3F01244ECC1F005795A4 /* Delegate */,
+				A52A3F03244ECC65005795A4 /* LoginView */,
+				A52A3F02244ECC56005795A4 /* MainMenuView */,
+				A52A3F05244ECC70005795A4 /* Resource */,
+				A52A3F04244ECC69005795A4 /* StoryBoard */,
 				A5BD928B244DCAE900D6442F /* Info.plist */,
-				A53BA05C244EA46A0023D27D /* BMYEONSUNG_otf.otf */,
 			);
 			path = SideDish;
 			sourceTree = "<group>";
