@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		756DD0F088748D04D6155428 /* libPods-SideDish.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 134EC406CFF23CB27CFEB752 /* libPods-SideDish.a */; };
 		A53BA05D244EA46A0023D27D /* BMYEONSUNG_otf.otf in Resources */ = {isa = PBXBuildFile; fileRef = A53BA05C244EA46A0023D27D /* BMYEONSUNG_otf.otf */; };
 		A53BA05F244EA6DE0023D27D /* MainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53BA05E244EA6DE0023D27D /* MainMenuViewController.swift */; };
 		A5BD927E244DCAE600D6442F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BD927D244DCAE600D6442F /* AppDelegate.swift */; };
@@ -16,7 +17,6 @@
 		A5BD9287244DCAE900D6442F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5BD9286244DCAE900D6442F /* Assets.xcassets */; };
 		A5BD928A244DCAE900D6442F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5BD9288244DCAE900D6442F /* LaunchScreen.storyboard */; };
 		A5BD9295244DCAE900D6442F /* SideDishTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BD9294244DCAE900D6442F /* SideDishTests.swift */; };
-		DC0351DB2B7688D941993758 /* Pods_SideDish.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A98E303FEF1FD90EEBD1A53 /* Pods_SideDish.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,9 +30,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		134EC406CFF23CB27CFEB752 /* libPods-SideDish.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SideDish.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		351C86E347EA7654E8C0F0FE /* Pods-SideDish.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SideDish.release.xcconfig"; path = "Target Support Files/Pods-SideDish/Pods-SideDish.release.xcconfig"; sourceTree = "<group>"; };
 		3863BEB21E4549E58523F8FF /* Pods-SideDish.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SideDish.debug.xcconfig"; path = "Target Support Files/Pods-SideDish/Pods-SideDish.debug.xcconfig"; sourceTree = "<group>"; };
-		8A98E303FEF1FD90EEBD1A53 /* Pods_SideDish.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SideDish.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A53BA05C244EA46A0023D27D /* BMYEONSUNG_otf.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BMYEONSUNG_otf.otf; sourceTree = "<group>"; };
 		A53BA05E244EA6DE0023D27D /* MainMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuViewController.swift; sourceTree = "<group>"; };
 		A5BD927A244DCAE500D6442F /* SideDish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SideDish.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -53,7 +53,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DC0351DB2B7688D941993758 /* Pods_SideDish.framework in Frameworks */,
+				756DD0F088748D04D6155428 /* libPods-SideDish.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -124,7 +124,7 @@
 		D0503BEE24127367757CA086 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				8A98E303FEF1FD90EEBD1A53 /* Pods_SideDish.framework */,
+				134EC406CFF23CB27CFEB752 /* libPods-SideDish.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -140,7 +140,6 @@
 				A5BD9276244DCAE500D6442F /* Sources */,
 				A5BD9277244DCAE500D6442F /* Frameworks */,
 				A5BD9278244DCAE500D6442F /* Resources */,
-				CB6BFEAEBC0BCEF3952F38DA /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -249,23 +248,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		CB6BFEAEBC0BCEF3952F38DA /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-SideDish/Pods-SideDish-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-SideDish/Pods-SideDish-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SideDish/Pods-SideDish-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
