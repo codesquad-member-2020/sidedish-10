@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		756DD0F088748D04D6155428 /* libPods-SideDish.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 134EC406CFF23CB27CFEB752 /* libPods-SideDish.a */; };
+		A52A3F07244ECFEC005795A4 /* MainMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52A3F06244ECFEC005795A4 /* MainMenuTableViewCell.swift */; };
 		A53BA05D244EA46A0023D27D /* BMYEONSUNG_otf.otf in Resources */ = {isa = PBXBuildFile; fileRef = A53BA05C244EA46A0023D27D /* BMYEONSUNG_otf.otf */; };
 		A53BA05F244EA6DE0023D27D /* MainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53BA05E244EA6DE0023D27D /* MainMenuViewController.swift */; };
 		A5BD927E244DCAE600D6442F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BD927D244DCAE600D6442F /* AppDelegate.swift */; };
@@ -33,6 +34,7 @@
 		134EC406CFF23CB27CFEB752 /* libPods-SideDish.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SideDish.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		351C86E347EA7654E8C0F0FE /* Pods-SideDish.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SideDish.release.xcconfig"; path = "Target Support Files/Pods-SideDish/Pods-SideDish.release.xcconfig"; sourceTree = "<group>"; };
 		3863BEB21E4549E58523F8FF /* Pods-SideDish.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SideDish.debug.xcconfig"; path = "Target Support Files/Pods-SideDish/Pods-SideDish.debug.xcconfig"; sourceTree = "<group>"; };
+		A52A3F06244ECFEC005795A4 /* MainMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuTableViewCell.swift; sourceTree = "<group>"; };
 		A53BA05C244EA46A0023D27D /* BMYEONSUNG_otf.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BMYEONSUNG_otf.otf; sourceTree = "<group>"; };
 		A53BA05E244EA6DE0023D27D /* MainMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuViewController.swift; sourceTree = "<group>"; };
 		A5BD927A244DCAE500D6442F /* SideDish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SideDish.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -89,6 +91,7 @@
 			isa = PBXGroup;
 			children = (
 				A53BA05E244EA6DE0023D27D /* MainMenuViewController.swift */,
+				A52A3F06244ECFEC005795A4 /* MainMenuTableViewCell.swift */,
 			);
 			path = MainMenuView;
 			sourceTree = "<group>";
@@ -300,6 +303,7 @@
 				A53BA05F244EA6DE0023D27D /* MainMenuViewController.swift in Sources */,
 				A5BD9282244DCAE600D6442F /* LoginViewController.swift in Sources */,
 				A5BD927E244DCAE600D6442F /* AppDelegate.swift in Sources */,
+				A52A3F07244ECFEC005795A4 /* MainMenuTableViewCell.swift in Sources */,
 				A5BD9280244DCAE600D6442F /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
