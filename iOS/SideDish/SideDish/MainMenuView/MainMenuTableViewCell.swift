@@ -28,8 +28,4 @@ class MainMenuTableViewCell: UITableViewCell {
         
         self.originalPriceLabel.attributedText = attributedString
     }
-    
-    func setPadding(_ label: UILabel) {
-        label
-    }
 }

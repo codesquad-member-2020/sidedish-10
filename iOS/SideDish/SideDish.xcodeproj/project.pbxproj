@@ -13,7 +13,6 @@
 		A53BA05D244EA46A0023D27D /* BMYEONSUNG_otf.otf in Resources */ = {isa = PBXBuildFile; fileRef = A53BA05C244EA46A0023D27D /* BMYEONSUNG_otf.otf */; };
 		A53BA05F244EA6DE0023D27D /* MainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53BA05E244EA6DE0023D27D /* MainMenuViewController.swift */; };
 		A5BD927E244DCAE600D6442F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BD927D244DCAE600D6442F /* AppDelegate.swift */; };
-		A5BD9280244DCAE600D6442F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BD927F244DCAE600D6442F /* SceneDelegate.swift */; };
 		A5BD9282244DCAE600D6442F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BD9281244DCAE600D6442F /* LoginViewController.swift */; };
 		A5BD9285244DCAE600D6442F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5BD9283244DCAE600D6442F /* Main.storyboard */; };
 		A5BD9287244DCAE900D6442F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5BD9286244DCAE900D6442F /* Assets.xcassets */; };
@@ -41,7 +40,6 @@
 		A53BA05E244EA6DE0023D27D /* MainMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuViewController.swift; sourceTree = "<group>"; };
 		A5BD927A244DCAE500D6442F /* SideDish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SideDish.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5BD927D244DCAE600D6442F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A5BD927F244DCAE600D6442F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		A5BD9281244DCAE600D6442F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A5BD9284244DCAE600D6442F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A5BD9286244DCAE900D6442F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -84,7 +82,6 @@
 			isa = PBXGroup;
 			children = (
 				A5BD927D244DCAE600D6442F /* AppDelegate.swift */,
-				A5BD927F244DCAE600D6442F /* SceneDelegate.swift */,
 			);
 			path = Delegate;
 			sourceTree = "<group>";
@@ -307,7 +304,6 @@
 				A5BD9282244DCAE600D6442F /* LoginViewController.swift in Sources */,
 				A5BD927E244DCAE600D6442F /* AppDelegate.swift in Sources */,
 				A52A3F07244ECFEC005795A4 /* MainMenuTableViewCell.swift in Sources */,
-				A5BD9280244DCAE600D6442F /* SceneDelegate.swift in Sources */,
 				A508FC37244EDBDE009AC902 /* EventLabel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -472,7 +468,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 735P3R8MUU;
 				INFOPLIST_FILE = SideDish/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -492,7 +488,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 735P3R8MUU;
 				INFOPLIST_FILE = SideDish/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

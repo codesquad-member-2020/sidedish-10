@@ -9,7 +9,7 @@
 import UIKit
 
 class MainMenuViewController: UIViewController {
-
+    
     @IBOutlet weak var mainMenuTableView: UITableView!
     
     override func viewDidLoad() {
@@ -25,7 +25,7 @@ extension MainMenuViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier:
-            "MainMenuCell") as? MainMenuTableViewCell else {return UITableViewCell()}
+            "MainMenuCell", for: indexPath) as? MainMenuTableViewCell else {return UITableViewCell()}
         cell.configuration()
         return cell
     }
