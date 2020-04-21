@@ -25,8 +25,8 @@ extension MainMenuViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier:
-            "MainMenuCell") else {return UITableViewCell()}
-        
+            "MainMenuCell") as? MainMenuTableViewCell else {return UITableViewCell()}
+        cell.configuration()
         return cell
     }
 }
