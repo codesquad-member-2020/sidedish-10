@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="v3o-ng-NTa">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -7,6 +7,11 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="BMYEONSUNG_otf.otf">
+            <string>BMYEONSUNG-OTF</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -22,31 +27,38 @@
                                     <constraint firstAttribute="width" secondItem="VzC-IZ-ahl" secondAttribute="height" multiplier="1:1" id="faT-pp-DBA"/>
                                 </constraints>
                             </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RmU-2E-K0a">
-                                <rect key="frame" x="75" y="489" width="225" height="45"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="59K-Ng-j2B">
+                                <rect key="frame" x="75" y="459" width="225" height="45"/>
+                                <color key="backgroundColor" red="0.96078431369999995" green="0.96470588239999999" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="45" id="VgK-Wc-m7L"/>
+                                    <constraint firstAttribute="height" constant="45" id="EXN-cV-aCa"/>
                                 </constraints>
-                            </view>
+                                <fontDescription key="fontDescription" name="BMYEONSUNG-OTF" family="BM YEONSUNG OTF" pointSize="30"/>
+                                <state key="normal" title="로그인">
+                                    <color key="titleColor" name="PrimaryColor"/>
+                                </state>
+                                <connections>
+                                    <segue destination="qPn-pl-vDW" kind="presentation" modalPresentationStyle="fullScreen" modalTransitionStyle="coverVertical" id="c9c-qZ-xOd"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" name="PrimaryColor"/>
                         <constraints>
-                            <constraint firstItem="RmU-2E-K0a" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="GFK-6e-0nU"/>
                             <constraint firstItem="VzC-IZ-ahl" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.6" id="GdE-5D-9jm"/>
+                            <constraint firstItem="59K-Ng-j2B" firstAttribute="leading" secondItem="VzC-IZ-ahl" secondAttribute="trailing" constant="200" id="OmH-pc-rUe">
+                                <variation key="heightClass=compact" constant="120"/>
+                            </constraint>
+                            <constraint firstItem="59K-Ng-j2B" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="YbJ-WR-l13"/>
                             <constraint firstItem="VzC-IZ-ahl" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Zta-Y2-toN"/>
-                            <constraint firstItem="RmU-2E-K0a" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="cPA-7X-Lmy"/>
-                            <constraint firstItem="RmU-2E-K0a" firstAttribute="top" secondItem="VzC-IZ-ahl" secondAttribute="bottom" constant="70" id="drZ-tM-9Cn"/>
                             <constraint firstItem="VzC-IZ-ahl" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.6" id="jwy-U3-tK5"/>
                             <constraint firstItem="VzC-IZ-ahl" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="150" id="l8F-2H-W93"/>
-                            <constraint firstItem="RmU-2E-K0a" firstAttribute="width" secondItem="VzC-IZ-ahl" secondAttribute="width" id="mIQ-EI-ytq"/>
                             <constraint firstItem="VzC-IZ-ahl" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="uTK-yZ-NiQ"/>
+                            <constraint firstItem="59K-Ng-j2B" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="vBW-WR-XrE"/>
                             <constraint firstItem="VzC-IZ-ahl" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="100" id="vio-1g-dAg">
                                 <variation key="heightClass=compact" constant="50"/>
                             </constraint>
-                            <constraint firstItem="RmU-2E-K0a" firstAttribute="leading" secondItem="VzC-IZ-ahl" secondAttribute="trailing" constant="250" id="zkE-Yt-j7F">
-                                <variation key="heightClass=compact" constant="130"/>
-                            </constraint>
+                            <constraint firstItem="59K-Ng-j2B" firstAttribute="top" secondItem="VzC-IZ-ahl" secondAttribute="bottom" constant="40" id="xu6-Mn-bYg"/>
+                            <constraint firstItem="59K-Ng-j2B" firstAttribute="width" secondItem="VzC-IZ-ahl" secondAttribute="width" id="y5h-PP-ZDZ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <variation key="default">
@@ -54,8 +66,8 @@
                                 <exclude reference="GdE-5D-9jm"/>
                                 <exclude reference="uTK-yZ-NiQ"/>
                                 <exclude reference="vio-1g-dAg"/>
-                                <exclude reference="GFK-6e-0nU"/>
-                                <exclude reference="zkE-Yt-j7F"/>
+                                <exclude reference="OmH-pc-rUe"/>
+                                <exclude reference="vBW-WR-XrE"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=compact">
@@ -66,10 +78,10 @@
                                 <exclude reference="l8F-2H-W93"/>
                                 <include reference="uTK-yZ-NiQ"/>
                                 <include reference="vio-1g-dAg"/>
-                                <include reference="GFK-6e-0nU"/>
-                                <exclude reference="cPA-7X-Lmy"/>
-                                <exclude reference="drZ-tM-9Cn"/>
-                                <include reference="zkE-Yt-j7F"/>
+                                <include reference="OmH-pc-rUe"/>
+                                <exclude reference="YbJ-WR-l13"/>
+                                <include reference="vBW-WR-XrE"/>
+                                <exclude reference="xu6-Mn-bYg"/>
                             </mask>
                         </variation>
                     </view>
@@ -79,22 +91,21 @@
             </objects>
             <point key="canvasLocation" x="885.50724637681162" y="125.89285714285714"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="dcz-l2-S0d">
+        <!--View Controller-->
+        <scene sceneID="35g-EQ-BHf">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="v3o-ng-NTa" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Mh7-f9-gTc">
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="We6-27-ued"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="f1C-nM-URi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <viewController id="qPn-pl-vDW" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Fnl-wn-UeD">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="Vzh-UY-v8W"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="TKF-9m-Ky7"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="n8N-sQ-S2A" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="137.68115942028987" y="125.89285714285714"/>
+            <point key="canvasLocation" x="1590" y="126"/>
         </scene>
     </scenes>
     <resources>
