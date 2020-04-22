@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EventLabel: UILabel {
+class PaddingLabel: UILabel {
     @IBInspectable var padding: UIEdgeInsets = UIEdgeInsets(top: 0, left: 7, bottom: 0, right: 7)
     
     override func drawText(in rect: CGRect) {
@@ -20,5 +20,10 @@ class EventLabel: UILabel {
         var contentSize = super.intrinsicContentSize
         contentSize.width += padding.left + padding.right
         return contentSize
+    }
+    
+    func setBorder(color: UIColor, width: CGFloat) {
+        self.layer.borderWidth = width
+        self.layer.borderColor = color.cgColor
     }
 }

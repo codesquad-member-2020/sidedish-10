@@ -15,12 +15,13 @@ class MainMenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         mainMenuTableView.dataSource = self
+        mainMenuTableView.delegate = self
     }
 }
 
 extension MainMenuViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        10
+        return 10
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -28,5 +29,22 @@ extension MainMenuViewController: UITableViewDataSource {
             "MainMenuCell", for: indexPath) as? MainMenuTableViewCell else {return UITableViewCell()}
         cell.configuration()
         return cell
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+}
+
+extension MainMenuViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier:
+            "MainMenuHeader") as? MainMenuHeaderCell else {return UITableViewCell()}
+        cell.configuration()
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 80
     }
 }
