@@ -11,6 +11,7 @@
 		A508FC37244EDBDE009AC902 /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A508FC36244EDBDE009AC902 /* PaddingLabel.swift */; };
 		A508FC3F24501479009AC902 /* MainMenuHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A508FC3E24501479009AC902 /* MainMenuHeaderCell.swift */; };
 		A516CF18245060C100F96635 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A516CF17245060C100F96635 /* NetworkManager.swift */; };
+		A516CF1A245061E000F96635 /* SideDish.swift in Sources */ = {isa = PBXBuildFile; fileRef = A516CF19245061E000F96635 /* SideDish.swift */; };
 		A52A3F07244ECFEC005795A4 /* MainMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52A3F06244ECFEC005795A4 /* MainMenuTableViewCell.swift */; };
 		A53BA05D244EA46A0023D27D /* BMYEONSUNG_otf.otf in Resources */ = {isa = PBXBuildFile; fileRef = A53BA05C244EA46A0023D27D /* BMYEONSUNG_otf.otf */; };
 		A53BA05F244EA6DE0023D27D /* MainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53BA05E244EA6DE0023D27D /* MainMenuViewController.swift */; };
@@ -39,6 +40,7 @@
 		A508FC36244EDBDE009AC902 /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
 		A508FC3E24501479009AC902 /* MainMenuHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuHeaderCell.swift; sourceTree = "<group>"; };
 		A516CF17245060C100F96635 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		A516CF19245061E000F96635 /* SideDish.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideDish.swift; sourceTree = "<group>"; };
 		A52A3F06244ECFEC005795A4 /* MainMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuTableViewCell.swift; sourceTree = "<group>"; };
 		A53BA05C244EA46A0023D27D /* BMYEONSUNG_otf.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BMYEONSUNG_otf.otf; sourceTree = "<group>"; };
 		A53BA05E244EA6DE0023D27D /* MainMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuViewController.swift; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 			isa = PBXGroup;
 			children = (
 				A516CF17245060C100F96635 /* NetworkManager.swift */,
+				A516CF19245061E000F96635 /* SideDish.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -320,6 +323,7 @@
 				A516CF18245060C100F96635 /* NetworkManager.swift in Sources */,
 				A5BD927E244DCAE600D6442F /* AppDelegate.swift in Sources */,
 				A52A3F07244ECFEC005795A4 /* MainMenuTableViewCell.swift in Sources */,
+				A516CF1A245061E000F96635 /* SideDish.swift in Sources */,
 				A508FC37244EDBDE009AC902 /* PaddingLabel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
