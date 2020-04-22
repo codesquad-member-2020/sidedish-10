@@ -1,0 +1,36 @@
+div,
+span {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.stage {
+  background: powderblue;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 1500px;
+  perspective-origin: 10% 20% 70%;
+}
+
+.carousel {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  transform-style: preserve-3d;
+  animation: bingle 10s infinite linear;
+  animation-play-state: running;
+}
+
+.carousel:hover {
+  animation-play-state: paused;
+}
+
+@keyframes bingle {
+  to {
+    transform: rotateY(360deg);
+  }
+}
