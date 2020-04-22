@@ -380,7 +380,7 @@
     <resources>
         <image name="logo" width="134" height="146.66667175292969"/>
         <namedColor name="HeaderBackgroundColor">
-            <color red="0.99991601705551147" green="1" blue="0.99988490343093872" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.99607843137254903" green="1" blue="0.99607843137254903" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="PrimaryColor">
             <color red="0.37254901960784315" green="0.74509803921568629" blue="0.73333333333333328" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
