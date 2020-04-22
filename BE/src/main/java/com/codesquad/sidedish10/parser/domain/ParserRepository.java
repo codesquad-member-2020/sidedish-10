@@ -11,10 +11,11 @@ import org.springframework.stereotype.Repository;
 public interface ParserRepository extends CrudRepository<BabChanObject, Long> {
 
   @Modifying
-  @Query("INSERT INTO item (detail_hash, alt, title, description, image) VALUES (:detail_hash, :alt, :title, :description, :image)")
-  void insertItemAltTitleDescImage(@Param("detail_hash") String detail_hash,
+  @Query("INSERT INTO item (detail_hash, alt, title, description, image, menu_id) VALUES (:detail_hash, :alt, :title, :description, :image, :menu_id)")
+  void insertItemElements(@Param("detail_hash") String detail_hash,
       @Param("alt") String alt, @Param("title") String title,
-      @Param("description") String description, @Param("image") String image);
+      @Param("description") String description, @Param("image") String image,
+      @Param("menu_id") int menu_id);
 
   @Modifying
   @Query("INSERT INTO s_price (s_price, detail_hash) VALUES (:s_price, :detail_hash)")
@@ -46,4 +47,13 @@ public interface ParserRepository extends CrudRepository<BabChanObject, Long> {
   @Modifying
   @Query("INSERT INTO detail (detail_hash) VALUES (:detail_hash)")
   void insertDetailDetailHash(String detail_hash);
+
+
+  @Modifying
+  @Query("INSERT INTO thumb_images (link, detail_hash) VALUES (:link, :detail_hash)")
+  void insertThumbImages(@Param("link") String link, @Param("detail_hash") String detail_hash);
+
+  @Modifying
+  @Query("INSERT INTO detail_section (link, detail_hash) VALUES (:link, :detail_hash)")
+  void insertDetailSection(@Param("link") String link, @Param("detail_hash") String detail_hash);
 }

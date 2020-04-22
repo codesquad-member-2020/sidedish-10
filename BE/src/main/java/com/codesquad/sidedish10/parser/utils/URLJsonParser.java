@@ -2,7 +2,6 @@ package com.codesquad.sidedish10.parser.utils;
 
 import com.codesquad.sidedish10.parser.domain.BabChanDetailObject;
 import com.codesquad.sidedish10.parser.domain.BabChanObject;
-import com.codesquad.sidedish10.parser.domain.ParserRepository;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -10,19 +9,16 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
-import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 public class URLJsonParser {
@@ -129,6 +125,7 @@ public class URLJsonParser {
           .setDelivery_info(nowParsingArray.get("delivery_info").toString().replaceAll("\"", ""));
       nowDetail
           .setDelivery_fee(nowParsingArray.get("delivery_fee").toString().replaceAll("\"", ""));
+      nowDetail.setPoint(nowParsingArray.get("point").toString().replaceAll("\"", ""));
 
       JsonElement detail_section_element = nowParsingArray.get("detail_section");
       Type listType = new TypeToken<List<String>>() {
@@ -146,7 +143,7 @@ public class URLJsonParser {
       List<String> thumb_images_element_list = new Gson()
           .fromJson(thumb_images_element, listType);
       if (thumb_images_element_list != null) {
-        nowDetail.setDetail_section(thumb_images_element_list.stream()
+        nowDetail.setThumb_images(thumb_images_element_list.stream()
             .filter(Objects::nonNull)
             .map(element -> element.replaceAll("\"", ""))
             .collect(Collectors.toList()));

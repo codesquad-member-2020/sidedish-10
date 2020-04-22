@@ -8,15 +8,16 @@ DROP TABLE IF EXISTS delivery_type;
 DROP TABLE IF EXISTS badge;
 DROP TABLE IF EXISTS item;
 DROP TABLE IF EXISTS detail;
+DROP TABLE IF EXISTS point;
 
 CREATE TABLE menu
 (
-    id    int,
+    id    int primary key auto_increment,
     title varchar(45)
 );
 CREATE TABLE best_category
 (
-    id    int,
+    id    int primary key auto_increment,
     title varchar(45)
 );
 CREATE TABLE thumb_images
@@ -55,6 +56,12 @@ CREATE TABLE badge
     title varchar(45),
     detail_hash varchar(45)
 );
+CREATE TABLE point
+(
+    id    int primary key auto_increment,
+    price varchar(45),
+    detail_hash varchar(45)
+);
 CREATE TABLE item
 (
     id          int primary key auto_increment,
@@ -62,7 +69,8 @@ CREATE TABLE item
     alt         varchar(45),
     title       varchar(45),
     description varchar(100),
-    image       varchar(300)
+    image       varchar(300),
+    menu_id     int
 );
 CREATE TABLE detail
 (

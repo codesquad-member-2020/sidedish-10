@@ -26,7 +26,7 @@ public class ParseService {
     babChanList.forEach(
         element -> {
           try {
-            insertBabChanItemsService(URL + element);
+            insertBabChanItemsService(URL + element, babChanList.indexOf(element) + 1);
           } catch (ParseException e) {
             e.printStackTrace();
           }
@@ -34,7 +34,7 @@ public class ParseService {
     );
   }
 
-  public void insertBabChanItemsService(String URL) throws ParseException {
+  public void insertBabChanItemsService(String URL, int menuNum) throws ParseException {
     List<BabChanObject> babChanObjectList = urlJsonParser.BanChanParser(URL);
     // TODO 스트림으로 아래 nullable 처리를 못하나 궁금
     String thisAlt = "";
@@ -74,7 +74,8 @@ public class ParseService {
         s_price = babChanObject.getS_price();
         parserRepository.insert_s_price(s_price, detail_hash);
       }
-      parserRepository.insertItemAltTitleDescImage(detail_hash, thisAlt, thisTitle, thisDescription, thisImage);
+      parserRepository
+          .insertItemElements(detail_hash, thisAlt, thisTitle, thisDescription, thisImage, menuNum);
       parserRepository.insert_s_price(babChanObject.getS_price(), detail_hash);
     }
   }
@@ -107,9 +108,24 @@ public class ParseService {
       if (detailObject.getDetail_hash() != null) {
         detail_hash = detailObject.getDetail_hash();
       }
+
+      if (detailObject.getThumb_images() != null) {
+        String finalDetail_hash = detail_hash;
+        detailObject.getThumb_images()
+            .forEach(element -> parserRepository.insertThumbImages(element,
+                finalDetail_hash));
+      }
+
+      if (detailObject.getDetail_section() != null) {
+        String finalDetail_hash = detail_hash;
+        detailObject.getDetail_section()
+            .forEach(element -> parserRepository.insertDetailSection(element,
+                finalDetail_hash));
+      }
+
       parserRepository
-          .insertDetailWithOutPrices(detail_hash, top_image, product_description, point, delivery_info,
-              delivery_fee);
+          .insertDetailWithOutPrices(detail_hash, top_image, product_description, point,
+              delivery_info, delivery_fee);
     }
   }
 }
