@@ -12,27 +12,11 @@ class MainMenuViewController: UIViewController {
     
     @IBOutlet weak var mainMenuTableView: UITableView!
     
+    private var mainMenuDataSource: MainMenuViewDataSource!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        mainMenuTableView.dataSource = self
         mainMenuTableView.delegate = self
-    }
-}
-
-extension MainMenuViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier:
-            "MainMenuCell", for: indexPath) as? MainMenuTableViewCell else {return UITableViewCell()}
-        cell.configuration()
-        return cell
-    }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
     }
 }
 
