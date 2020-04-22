@@ -21,59 +21,56 @@ CREATE TABLE best_category
 );
 CREATE TABLE thumb_images
 (
-    id        int primary key auto_increment,
-    link      varchar(600),
-    detail_id int
+    id   int primary key auto_increment,
+    link varchar(600),
+    detail_hash varchar(45)
 );
 CREATE TABLE detail_section
 (
-    id        int primary key auto_increment,
-    link      varchar(600),
-    detail_id int
+    id   int primary key auto_increment,
+    link varchar(600),
+    detail_hash varchar(45)
 );
 CREATE TABLE s_price
 (
     id      int primary key auto_increment,
-    s_price int
+    s_price varchar(45),
+    detail_hash varchar(45)
 );
 CREATE TABLE n_price
 (
     id      int primary key auto_increment,
-    n_price int
+    n_price varchar(45),
+    detail_hash varchar(45)
 );
 CREATE TABLE delivery_type
 (
     id    int primary key auto_increment,
-    title varchar(45)
+    title varchar(45),
+    detail_hash varchar(45)
 );
 CREATE TABLE badge
 (
     id    int primary key auto_increment,
-    title varchar(45)
+    title varchar(45),
+    detail_hash varchar(45)
 );
 CREATE TABLE item
 (
-    id               int primary key auto_increment,
-    alt              varchar(45),
-    title            varchar(45),
-    description      varchar(100),
-    image            varchar(300),
-    menu_id          int,
-    detail_id        int,
-    best_category_id int,
-    s_price_id       int,
-    n_price_id       int,
-    badge_id         int
+    id          int primary key auto_increment,
+    detail_hash varchar(45),
+    alt         varchar(45),
+    title       varchar(45),
+    description varchar(100),
+    image       varchar(300)
 );
 CREATE TABLE detail
 (
-    item_id             int NOT NULL,
-    top_image           varchar(45),
-    product_description varchar(100),
+    id                  int auto_increment primary key,
+    detail_hash         varchar(45),
+    top_image           varchar(150),
+    product_description varchar(150),
     point               varchar(45),
     delivery_info       varchar(150),
-    delivery_fee        varchar(150),
-    prices              varchar(150),
-    s_price_id          int,
-    n_price_id          int
+    delivery_fee        varchar(150)
 );

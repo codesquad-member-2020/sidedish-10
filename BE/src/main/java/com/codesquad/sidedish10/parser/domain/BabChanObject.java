@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BabChanObject {
+  private String detail_hash;
   private String image;
   private String alt;
   private List<String> delivery_types = new ArrayList<>();
   private String title;
   private String description;
-  private int n_price;
-  private int s_price;
+  private String n_price;
+  private String s_price;
   private List<String> badges = new ArrayList<>();
 
   public String getImage() {
@@ -61,19 +62,27 @@ public class BabChanObject {
     this.badges = badges;
   }
 
-  public int getN_price() {
+  public String getN_price() {
     return n_price;
   }
 
-  public void setN_price(int n_price) {
+  public void setN_price(String n_price) {
     this.n_price = n_price;
   }
 
-  public int getS_price() {
+  public String getS_price() {
     return s_price;
   }
 
-  public void setS_price(int s_price) {
+  public void setS_price(String s_price) {
     this.s_price = s_price;
+  }
+
+  public String getDetail_hash() {
+    return detail_hash;
+  }
+
+  public void setDetail_hash(String detail_hash) {
+    this.detail_hash = detail_hash;
   }
 }

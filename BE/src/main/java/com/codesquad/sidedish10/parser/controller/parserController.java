@@ -14,8 +14,10 @@ public class parserController {
     this.parseService = parseService;
   }
 
-  @GetMapping("/parse/menu")
-  public void parseMenuAPI() throws ParseException {
-    parseService.insertItemAltTitleDescImage();
+  @GetMapping("/parse/items")
+  public String parseMenuAPI() throws ParseException {
+    parseService.IterateBabChanURLsAndInsert();
+    parseService.insertBabChanDetailService();
+    return "work done. check your mysql";
   }
 }

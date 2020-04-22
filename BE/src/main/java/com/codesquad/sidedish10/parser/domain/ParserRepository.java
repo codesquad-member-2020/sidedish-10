@@ -11,23 +11,39 @@ import org.springframework.stereotype.Repository;
 public interface ParserRepository extends CrudRepository<BabChanObject, Long> {
 
   @Modifying
-  @Query("INSERT INTO item (alt, title, description, image) VALUES (:alt, :title, :description, :image)")
-  void insertItemAltTitleDescImage(@Param("alt") String alt, @Param("title") String title,
+  @Query("INSERT INTO item (detail_hash, alt, title, description, image) VALUES (:detail_hash, :alt, :title, :description, :image)")
+  void insertItemAltTitleDescImage(@Param("detail_hash") String detail_hash,
+      @Param("alt") String alt, @Param("title") String title,
       @Param("description") String description, @Param("image") String image);
 
   @Modifying
-  @Query("INSERT INTO s_price (s_price) VALUES (:s_price)")
-  void insert_s_price(@Param("s_price") int s_price);
+  @Query("INSERT INTO s_price (s_price, detail_hash) VALUES (:s_price, :detail_hash)")
+  void insert_s_price(@Param("s_price") String s_price, @Param("detail_hash") String detail_hash);
 
   @Modifying
-  @Query("INSERT INTO n_price (n_price) VALUES (:n_price)")
-  void insert_n_price(@Param("n_price") int n_price);
+  @Query("INSERT INTO n_price (n_price, detail_hash) VALUES (:n_price, :detail_hash)")
+  void insert_n_price(@Param("n_price") String n_price, @Param("detail_hash") String detail_hash);
 
   @Modifying
-  @Query("INSERT INTO badge (title) VALUES (:title)")
-  void insert_badge_title(@Param("title") String title);
+  @Query("INSERT INTO badge (title, detail_hash) VALUES (:title, :detail_hash)")
+  void insert_badge_title(@Param("title") String title, @Param("detail_hash") String detail_hash);
 
   @Modifying
-  @Query("INSERT INTO delivery_type (title) VALUES (:title)")
-  void insert_delivery_type(@Param("title") String title);
+  @Query("INSERT INTO delivery_type (title, detail_hash) VALUES (:title, :detail_hash)")
+  void insert_delivery_type(@Param("title") String title, @Param("detail_hash") String detail_hash);
+
+  @Modifying
+  @Query("INSERT INTO detail (detail_hash, top_image, product_description, point, delivery_info, delivery_fee) VALUES (:detail_hash, :top_image, :product_description, :point, :delivery_info, :delivery_fee)")
+  void insertDetailWithOutPrices(@Param("detail_hash") String detail_hash,
+      @Param("top_image") String top_image,
+      @Param("product_description") String product_description, @Param("point") String point,
+      @Param("delivery_info") String delivery_info, @Param("delivery_fee") String delivery_fee);
+
+  @Modifying
+  @Query("INSERT INTO item (detail_hash) VALUES (:detail_hash)")
+  void insertItemDetailHash(String detail_hash);
+
+  @Modifying
+  @Query("INSERT INTO detail (detail_hash) VALUES (:detail_hash)")
+  void insertDetailDetailHash(String detail_hash);
 }
