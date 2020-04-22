@@ -33,3 +33,11 @@
   transform-origin: top left;
   transform: rotateY(0deg);
 }
+
+.panel-hide {
+  transform: rotateY(90deg);
+}
+
+.panel-show {
+  transform: rotateY(0deg);
+}

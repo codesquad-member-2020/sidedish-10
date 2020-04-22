@@ -109,17 +109,26 @@ class Carousel extends React.Component {
             "우주소녀의 리드보컬로 새벽에 듣기 좋은 꿀성대의 소유자. 어려 보이는 외모와 달리 팀의 맏언니이기도 하다.",
         },
       ],
+      panels: [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+      ],
     };
-    this.panelBacks = [];
   }
 
   toggleCard(index) {
-    let { transform } = this.panelBacks[index].current.style;
-    if (!transform) {
-      this.panelBacks[index].current.style.transform = `rotateY(90deg)`;
-      return;
-    }
-    this.panelBacks[index].current.style.transform = "";
+    const newPanels = [...this.state.panels];
+    newPanels[index] = !newPanels[index];
+    this.setState({ ...this.state, panels: newPanels });
   }
 
   render() {
@@ -131,15 +140,13 @@ class Carousel extends React.Component {
       <div className="stage">
         <div className="carousel">
           {this.state.profiles.map((profile, index) => {
-            const panelBack = React.createRef();
-            this.panelBacks.push(panelBack);
             return (
               <Panel
                 key={index}
                 rotateYDeg={oneUnitDeg * index}
                 translateZPx={height}
                 clickHandler={this.toggleCard.bind(this, index)}
-                refer={panelBack}
+                show={this.state.panels[index]}
                 profile={profile}
               />
             );

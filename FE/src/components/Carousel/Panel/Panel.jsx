@@ -13,7 +13,7 @@ class Panel extends React.Component {
       rotateYDeg,
       translateZPx,
       clickHandler,
-      refer,
+      show,
       profile,
     } = this.props;
 
@@ -33,7 +33,11 @@ class Panel extends React.Component {
             description={profile.description}
           />
         </div>
-        <div className="panel-side panel-back" ref={refer}>
+        <div
+          className={
+            show ? "panel-side panel-back panel-hide" : "panel-side panel-back"
+          }
+        >
           <img src={profile.imgSrc}></img>
         </div>
       </div>
