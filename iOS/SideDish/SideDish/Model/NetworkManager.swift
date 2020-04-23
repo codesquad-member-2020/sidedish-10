@@ -26,4 +26,22 @@ class NetworkManager: NetworkManageable {
             handler($0)
         }
     }
+    
+    func getMainDish(handler: @escaping (AFDataResponse<Data>) -> ()) {
+        getResource(from: EndPoints.main, method: .get, headers: nil) {
+            handler($0)
+        }
+    }
+    
+    func getSoupDish(handler: @escaping (AFDataResponse<Data>) -> ()) {
+        getResource(from: EndPoints.soup, method: .get, headers: nil) {
+            handler($0)
+        }
+    }
+    
+    func getSideDish(handler: @escaping (AFDataResponse<Data>) -> ()) {
+        getResource(from: EndPoints.side, method: .get, headers: nil) {
+            handler($0)
+        }
+    }
 }
