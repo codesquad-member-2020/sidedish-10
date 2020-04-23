@@ -67,7 +67,7 @@ public class ParseService {
             finalDetail_hash));
       }
       if (babChanObject.getN_price() != null) {
-        n_price = babChanObject.getN_price();
+        n_price = babChanObject.getN_price() + "원";
         parserRepository.insert_n_price(n_price, detail_hash);
       }
       if (babChanObject.getS_price() != null) {
@@ -76,7 +76,6 @@ public class ParseService {
       }
       parserRepository
           .insertItemElements(detail_hash, thisAlt, thisTitle, thisDescription, thisImage, menuNum);
-      parserRepository.insert_s_price(babChanObject.getS_price(), detail_hash);
     }
   }
 
