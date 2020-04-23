@@ -48,7 +48,7 @@ extension MainMenuViewController: UITableViewDelegate {
         guard let cell = tableView.dequeueReusableCell(withIdentifier:
             "MainMenuHeader") as? MainMenuHeaderCell else {return UITableViewCell()}
         cell.configuration(sectionInfo: sectionName[section])
-        return cell
+        return cell.contentView
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
