@@ -9,7 +9,8 @@
 import Foundation
 
 class SideDishManager {
-    var sideDish: [[SideDishInfo]]
+    private var sideDish: [[SideDishInfo]]
+    private let sectionName = ["메인반찬 / 한그릇 뚝딱 메인 요리","국.찌개 / 김이 모락모락 국.찌개","밑반찬 / 언제 먹어도 든든한 밑반찬"]
     
     init() {
         sideDish = [[SideDishInfo]]()
@@ -24,5 +25,17 @@ class SideDishManager {
     
     func sideDish(section: Int, row: Int) -> SideDishInfo {
         return sideDish[section][row]
+    }
+    
+    func numOfRows(at section: Int) -> Int {
+        return sideDish[section].count
+    }
+    
+    func sectionName(at index: Int) -> String {
+        return sectionName[index]
+    }
+    
+    func numOfSections() -> Int {
+        return sectionName.count
     }
 }
