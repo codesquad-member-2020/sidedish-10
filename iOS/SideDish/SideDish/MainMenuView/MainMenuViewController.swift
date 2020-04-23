@@ -13,6 +13,11 @@ class MainMenuViewController: UIViewController {
     @IBOutlet weak var mainMenuTableView: UITableView!
     
     private var mainMenuDataSource =  MainMenuViewDataSource()
+    private let sectionName = ["메인반찬 / 한그릇 뚝딱 메인 요리","국.찌개 / 김이 모락모락 국.찌개","밑반찬 / 언제 먹어도 든든한 밑반찬"]
+    
+    private func sectionName(at index: Int) -> String {
+        return sectionName[index]
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +47,7 @@ extension MainMenuViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let cell = tableView.dequeueReusableCell(withIdentifier:
             "MainMenuHeader") as? MainMenuHeaderCell else {return UITableViewCell()}
-        cell.configuration()
+        cell.configuration(sectionInfo: sectionName[section])
         return cell
     }
     
