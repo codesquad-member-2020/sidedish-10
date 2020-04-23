@@ -65,9 +65,9 @@ class MainMenuTableViewCell: UITableViewCell {
         badges.forEach {
             let label = PaddingLabel()
             label.text = $0
-            label.font = UIFont.systemFont(ofSize: 10)
+            label.font = UIFont.systemFont(ofSize: 12)
             label.textColor = .white
-            label.backgroundColor = .purple
+            label.backgroundColor = UIColor(named: "SpecialPriceColor")
             eventStackView.addArrangedSubview(label)
         }
     }
