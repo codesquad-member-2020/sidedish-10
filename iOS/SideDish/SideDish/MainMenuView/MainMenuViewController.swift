@@ -26,6 +26,10 @@ class MainMenuViewController: UIViewController {
         configureUseCase()
         
         NotificationCenter.default.addObserver(self,
+                                               selector: #selector(injectModel(_:)),
+                                               name: .InjectionModel,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
                                                selector: #selector(reloadSection(_:)),
                                                name: .ModelInserted,
                                                object: nil)
@@ -40,6 +44,12 @@ class MainMenuViewController: UIViewController {
     @objc func reloadSection(_ notification: Notification) {
         guard let index = notification.userInfo?["index"] as? Int else {return}
         mainMenuTableView.reloadSections(IndexSet(index...index), with: .automatic)
+    }
+    
+    @objc func injectModel(_ notification: Notification) {
+        guard let model = notification.userInfo?["model"] as? [SideDishInfo] else {return}
+        guard let index = notification.userInfo?["index"] as? Int else {return}
+        mainMenuDataSource.sideDishManager.insert(into: index, rows: model)
     }
 }
 
