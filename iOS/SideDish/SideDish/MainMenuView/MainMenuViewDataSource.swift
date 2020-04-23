@@ -9,6 +9,14 @@
 import UIKit
 
 class MainMenuViewDataSource: NSObject, UITableViewDataSource {
+    
+    private var sideDishManager: SideDishManager
+    
+    override init() {
+        sideDishManager = SideDishManager()
+        super.init()
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 10
     }

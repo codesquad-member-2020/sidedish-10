@@ -98,14 +98,6 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		A516CF3B2450673400F96635 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				A516CF3C2450684500F96635 /* MainMenuViewDataSource.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		A52A3F01244ECC1F005795A4 /* Delegate */ = {
 			isa = PBXGroup;
 			children = (
@@ -117,6 +109,7 @@
 		A52A3F02244ECC56005795A4 /* MainMenuView */ = {
 			isa = PBXGroup;
 			children = (
+				A516CF3C2450684500F96635 /* MainMenuViewDataSource.swift */,
 				A53BA05E244EA6DE0023D27D /* MainMenuViewController.swift */,
 				A52A3F06244ECFEC005795A4 /* MainMenuTableViewCell.swift */,
 				A508FC36244EDBDE009AC902 /* PaddingLabel.swift */,
@@ -151,6 +144,13 @@
 			path = Resource;
 			sourceTree = "<group>";
 		};
+		A5A4DFE6245133A200C734F1 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		A5BD9271244DCAE500D6442F = {
 			isa = PBXGroup;
 			children = (
@@ -174,7 +174,7 @@
 		A5BD927C244DCAE500D6442F /* SideDish */ = {
 			isa = PBXGroup;
 			children = (
-				A516CF3B2450673400F96635 /* View */,
+				A5A4DFE6245133A200C734F1 /* Controller */,
 				A516CF162450609600F96635 /* Model */,
 				A52A3F01244ECC1F005795A4 /* Delegate */,
 				A52A3F03244ECC65005795A4 /* LoginView */,
