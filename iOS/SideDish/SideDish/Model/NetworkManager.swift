@@ -16,9 +16,10 @@ protocol NetworkManageable {
 class NetworkManager: NetworkManageable {
     
     enum EndPoints {
-        static let main = "https://h3rb9c0ugl.execute-api.ap-northeast-2.amazonaws.com/develop/baminchan/main"
-        static let soup = "https://h3rb9c0ugl.execute-api.ap-northeast-2.amazonaws.com/develop/baminchan/soup"
-        static let side = "https://h3rb9c0ugl.execute-api.ap-northeast-2.amazonaws.com/develop/baminchan/side"
+        static let serverURL = "http://15.165.138.17:8080/develop/baminchan/"
+        static let main = "main"
+        static let soup = "soup"
+        static let side = "side"
     }
     
     func getResource(from: String, method: HTTPMethod, headers: HTTPHeaders?, handler: @escaping (AFDataResponse<Data>) -> ()) {
@@ -28,19 +29,19 @@ class NetworkManager: NetworkManageable {
     }
     
     func getMainDish(handler: @escaping (AFDataResponse<Data>) -> ()) {
-        getResource(from: EndPoints.main, method: .get, headers: nil) {
+        getResource(from: EndPoints.serverURL + EndPoints.main, method: .get, headers: nil) {
             handler($0)
         }
     }
     
     func getSoupDish(handler: @escaping (AFDataResponse<Data>) -> ()) {
-        getResource(from: EndPoints.soup, method: .get, headers: nil) {
+        getResource(from: EndPoints.serverURL + EndPoints.soup, method: .get, headers: nil) {
             handler($0)
         }
     }
     
     func getSideDish(handler: @escaping (AFDataResponse<Data>) -> ()) {
-        getResource(from: EndPoints.side, method: .get, headers: nil) {
+        getResource(from: EndPoints.serverURL + EndPoints.side, method: .get, headers: nil) {
             handler($0)
         }
     }

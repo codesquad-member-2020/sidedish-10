@@ -17,22 +17,22 @@ struct SideDish: Codable {
 }
 
 struct SideDishInfo: Codable {
-    var id: String
+    var id: Int
     var imageUrl: String
     var title: String
     var description: String
     var originalPrice: String?
     var specialPrice: String
-    var badge: [String]?
+    var badges: [String]?
     
     enum CodingKeys: String, CodingKey {
-        case id = "detail_hash"
+        case id
         case imageUrl = "image"
         case title
         case description
         case originalPrice = "n_price"
         case specialPrice = "s_price"
-        case badge
+        case badges
     }
 }
 
