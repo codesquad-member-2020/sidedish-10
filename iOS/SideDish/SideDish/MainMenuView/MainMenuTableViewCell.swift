@@ -12,20 +12,71 @@ class MainMenuTableViewCell: UITableViewCell {
     
     @IBOutlet weak var menuImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var explanationLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var originalPriceLabel: UILabel!
     @IBOutlet weak var specialPriceLabel: UILabel!
+    @IBOutlet weak var eventStackView: UIStackView!
     
-    func configuration() {
-        setOriginPriceLabel()
+    func configuration(info: SideDishInfo) {
+        setImage(url: info.imageUrl)
+        setTitle(text: info.title)
+        setDescription(text: info.description)
+        setOriginPriceLabel(text: info.originalPrice)
+        setSpecialPriceLabel(text: info.specialPrice)
+        setEventStackView(badges: info.badges)
     }
     
-    func setOriginPriceLabel() {
-        let originPrice = "원가"
-        let attributedString = NSMutableAttributedString(string: originPrice)
-        attributedString.addAttribute(.baselineOffset, value: 0, range: (originPrice as NSString).range(of: originPrice))
-        attributedString.addAttribute(.strikethroughStyle, value: 1, range: (originPrice as NSString).range(of: originPrice))
+    private func setImage(url: String) {
+        NetworkManager().getResource(from: url, method: .get, headers: nil) {
+            guard let data = $0.data else {return}
+            self.menuImageView.image = UIImage(data: data)
+            self.menuImageView?.layer.cornerRadius = (self.menuImageView?.frame.height)! / 2
+        }
+    }
+    
+    private func setTitle(text title: String) {
+        titleLabel.text = title
+    }
+    
+    private func setDescription(text description: String) {
+        descriptionLabel.text = description
+    }
+    
+    private func setOriginPriceLabel(text original: String?) {
+        if let original = original {
+            let originPrice = original
+            let attributedString = NSMutableAttributedString(string: originPrice)
+            attributedString.addAttribute(.baselineOffset, value: 0, range: (originPrice as NSString).range(of: originPrice))
+            attributedString.addAttribute(.strikethroughStyle, value: 1, range: (originPrice as NSString).range(of: originPrice))
+            
+            self.originalPriceLabel.attributedText = attributedString
+        } else {
+            originalPriceLabel.isHidden = true
+        }
+    }
+    
+    private func setSpecialPriceLabel(text special: String) {
+        specialPriceLabel.text = special
+    }
+    
+    private func setEventStackView(badges: [String]?) {
+        guard let badges = badges, badges.count > 0 else {return}
         
-        self.originalPriceLabel.attributedText = attributedString
+        badges.forEach {
+            let label = PaddingLabel()
+            label.text = $0
+            label.font = UIFont.systemFont(ofSize: 12)
+            label.textColor = .white
+            label.backgroundColor = UIColor(named: "SpecialPriceColor")
+            eventStackView.addArrangedSubview(label)
+        }
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        originalPriceLabel.isHidden = false
+        for subview in eventStackView.arrangedSubviews {
+            subview.removeFromSuperview()
+        }
     }
 }
