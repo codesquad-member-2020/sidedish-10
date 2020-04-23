@@ -1,0 +1,127 @@
+div,
+span {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+
+.detail-page {
+  width: 50%;
+  height: 90vh;
+  padding: 1rem;
+  border: 1px solid black;
+}
+
+.upper-page {
+  display: flex;
+  width: 100%;
+  border: 1px solid black;
+  padding: 0.5rem;
+}
+
+.banchan-picture {
+  width: 50%;
+  margin-right: 0.5rem;
+}
+
+.banchan-picture img {
+  width: 100%;
+}
+
+.explanation {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.underline {
+  border-bottom: 1px solid #000000;
+}
+
+.explanation-title {
+  font-size: 2rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.explanation-title span {
+  display: block;
+}
+
+.explanation-memo {
+  font-size: 0.7rem;
+}
+
+.explanation-shipment {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  height: 50%;
+}
+
+.shipment-contents {
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.shipment-type {
+  width: 35%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.shipment-data {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.shipment-type li,
+.shipment-data li {
+  height: 25%;
+  font-size: 0.8rem;
+}
+
+.explanation-price {
+  text-align: right;
+  font-weight: 900;
+  font-size: 2rem;
+}
+
+.shipment-count {
+  display: flex;
+  justify-content: space-between;
+}
+
+.counts {
+  font-size: 0.8rem;
+}
+
+.counts-input {
+  text-align: right;
+}
+
+.counts-input input {
+  width: 30%;
+}
+.total-price {
+  text-align: right;
+}
+.total-price-label {
+  font-size: 1.2rem;
+  margin-right: 0.5rem;
+  display: inline-block;
+}
+
+.total-price-data {
+  font-size: 2rem;
+  font-weight: 900;
+  display: inline-block;
+}
