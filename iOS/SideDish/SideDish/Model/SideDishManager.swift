@@ -25,8 +25,8 @@ class SideDishManager {
                                         userInfo: ["index" : section])
     }
     
-    func sideDish(section: Int, row: Int) -> SideDishInfo {
-        return sideDish[section][row]
+    func sideDish(indexPath: IndexPath) -> SideDishInfo {
+        return sideDish[indexPath.section][indexPath.row]
     }
     
     func numOfRows(at section: Int) -> Int {

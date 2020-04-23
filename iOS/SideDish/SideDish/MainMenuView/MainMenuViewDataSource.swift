@@ -10,7 +10,7 @@ import UIKit
 
 class MainMenuViewDataSource: NSObject, UITableViewDataSource {
     
-    private var sideDishManager: SideDishManager
+    private(set) var sideDishManager: SideDishManager
     
     override init() {
         sideDishManager = SideDishManager()
@@ -28,7 +28,7 @@ class MainMenuViewDataSource: NSObject, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier:
             "MainMenuCell", for: indexPath) as? MainMenuTableViewCell else {return UITableViewCell()}
-        cell.configuration(info: sideDishManager.sideDish(section: indexPath.section, row: indexPath.row))
+        cell.configuration(info: sideDishManager.sideDish(indexPath: indexPath))
         return cell
     }
     

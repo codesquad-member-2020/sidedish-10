@@ -344,6 +344,21 @@
             </objects>
             <point key="canvasLocation" x="2365.5999999999999" y="125.61576354679804"/>
         </scene>
+        <!--Detail View Controller-->
+        <scene sceneID="ICD-Kh-mga">
+            <objects>
+                <viewController storyboardIdentifier="DetailViewController" id="zP7-pS-LQX" customClass="DetailViewController" customModule="SideDish" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="9w0-Ty-qEz">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="NfB-2d-qEb"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RnT-XR-7sI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3092" y="126"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="eCI-H7-iIn">
             <objects>

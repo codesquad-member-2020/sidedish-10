@@ -54,6 +54,13 @@ extension MainMenuViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 80
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let id = mainMenuDataSource.sideDishManager.sideDish(indexPath: indexPath).id
+        guard let detailViewController = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else {return}
+        detailViewController.dishID = id
+        self.navigationController?.pushViewController(detailViewController, animated: true)
+    }
 }
 
 extension Notification.Name {

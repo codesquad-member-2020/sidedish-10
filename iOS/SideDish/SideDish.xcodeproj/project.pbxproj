@@ -24,6 +24,7 @@
 		A5BD9287244DCAE900D6442F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5BD9286244DCAE900D6442F /* Assets.xcassets */; };
 		A5BD928A244DCAE900D6442F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5BD9288244DCAE900D6442F /* LaunchScreen.storyboard */; };
 		A5BD9295244DCAE900D6442F /* SideDishTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BD9294244DCAE900D6442F /* SideDishTests.swift */; };
+		A5E4F581245176E1007AAA3D /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E4F580245176E1007AAA3D /* DetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +61,7 @@
 		A5BD9290244DCAE900D6442F /* SideDishTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SideDishTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5BD9294244DCAE900D6442F /* SideDishTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideDishTests.swift; sourceTree = "<group>"; };
 		A5BD9296244DCAE900D6442F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A5E4F580245176E1007AAA3D /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,6 +179,7 @@
 		A5BD927C244DCAE500D6442F /* SideDish */ = {
 			isa = PBXGroup;
 			children = (
+				A5E4F57E2451769D007AAA3D /* DetailView */,
 				A5A4DFE6245133A200C734F1 /* Controller */,
 				A516CF162450609600F96635 /* Model */,
 				A52A3F01244ECC1F005795A4 /* Delegate */,
@@ -196,6 +199,14 @@
 				A5BD9296244DCAE900D6442F /* Info.plist */,
 			);
 			path = SideDishTests;
+			sourceTree = "<group>";
+		};
+		A5E4F57E2451769D007AAA3D /* DetailView */ = {
+			isa = PBXGroup;
+			children = (
+				A5E4F580245176E1007AAA3D /* DetailViewController.swift */,
+			);
+			path = DetailView;
 			sourceTree = "<group>";
 		};
 		D0503BEE24127367757CA086 /* Frameworks */ = {
@@ -337,6 +348,7 @@
 				A508FC3F24501479009AC902 /* MainMenuHeaderCell.swift in Sources */,
 				A516CF3D2450684500F96635 /* MainMenuViewDataSource.swift in Sources */,
 				A53BA05F244EA6DE0023D27D /* MainMenuViewController.swift in Sources */,
+				A5E4F581245176E1007AAA3D /* DetailViewController.swift in Sources */,
 				A5BD9282244DCAE600D6442F /* LoginViewController.swift in Sources */,
 				A5A4DFE82451467700C734F1 /* SideDishUseCase.swift in Sources */,
 				A516CF18245060C100F96635 /* NetworkManager.swift in Sources */,
