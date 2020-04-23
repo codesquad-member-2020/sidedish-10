@@ -228,32 +228,32 @@
                                                         <constraint firstAttribute="width" secondItem="t99-we-N8l" secondAttribute="height" multiplier="1:1" id="OpX-T8-mnD"/>
                                                     </constraints>
                                                 </imageView>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="gDV-St-3eq">
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="gDV-St-3eq">
                                                     <rect key="frame" x="124" y="13" width="226" height="104"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="[셰프찬] 전복낙지삼계탕 1KG" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EqY-ii-XAZ">
-                                                            <rect key="frame" x="0.0" y="0.0" width="200.66666666666666" height="29"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="200.66666666666666" height="26"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="닭, 전복, 낙지가 모두 들어가있는 프리미엄 삼계탕" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z5w-hL-hUb">
-                                                            <rect key="frame" x="0.0" y="29" width="197" height="17"/>
+                                                            <rect key="frame" x="0.0" y="26" width="197" height="26"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="NvC-n1-ntc">
-                                                            <rect key="frame" x="0.0" y="46" width="64.333333333333329" height="29"/>
+                                                            <rect key="frame" x="0.0" y="52" width="64.333333333333329" height="26"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="원가" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vsY-ZO-Gmb">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="29.666666666666668" height="29"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="29.666666666666668" height="26"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="특가" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GfW-Yf-0DC">
-                                                                    <rect key="frame" x="34.666666666666657" y="0.0" width="29.666666666666671" height="29"/>
+                                                                    <rect key="frame" x="34.666666666666657" y="0.0" width="29.666666666666671" height="26"/>
                                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                                     <color key="textColor" name="PrimaryColor"/>
                                                                     <nil key="highlightedColor"/>
@@ -261,23 +261,7 @@
                                                             </subviews>
                                                         </stackView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Chw-wy-5va">
-                                                            <rect key="frame" x="0.0" y="75" width="110.66666666666667" height="29"/>
-                                                            <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이벤트1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ub0-6e-bAf" customClass="PaddingLabel" customModule="SideDish" customModuleProvider="target">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="51.666666666666664" height="29"/>
-                                                                    <color key="backgroundColor" systemColor="systemIndigoColor" red="0.34509803919999998" green="0.33725490200000002" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이벤트2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NjL-TM-DGE" customClass="PaddingLabel" customModule="SideDish" customModuleProvider="target">
-                                                                    <rect key="frame" x="56.666666666666657" y="0.0" width="54" height="29"/>
-                                                                    <color key="backgroundColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
-                                                            </subviews>
+                                                            <rect key="frame" x="0.0" y="78" width="54" height="26"/>
                                                         </stackView>
                                                     </subviews>
                                                 </stackView>
@@ -293,7 +277,8 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="explanationLabel" destination="z5w-hL-hUb" id="fW2-F1-5QX"/>
+                                            <outlet property="descriptionLabel" destination="z5w-hL-hUb" id="fJL-co-v2b"/>
+                                            <outlet property="eventStackView" destination="Chw-wy-5va" id="ann-lG-wkT"/>
                                             <outlet property="menuImageView" destination="t99-we-N8l" id="DMT-ht-fxL"/>
                                             <outlet property="originalPriceLabel" destination="vsY-ZO-Gmb" id="hmc-gK-c3k"/>
                                             <outlet property="specialPriceLabel" destination="GfW-Yf-0DC" id="NuF-z3-kbi"/>

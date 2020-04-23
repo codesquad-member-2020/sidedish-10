@@ -28,7 +28,7 @@ class MainMenuViewDataSource: NSObject, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier:
             "MainMenuCell", for: indexPath) as? MainMenuTableViewCell else {return UITableViewCell()}
-        cell.configuration()
+        cell.configuration(info: sideDishManager.sideDish(section: indexPath.section, row: indexPath.row))
         return cell
     }
     
