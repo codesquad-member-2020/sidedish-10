@@ -15,10 +15,14 @@ class MainMenuViewDataSource: NSObject, UITableViewDataSource {
     override init() {
         sideDishManager = SideDishManager()
         super.init()
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(injectModel(_:)),
+                                               name: .InjectionModel,
+                                               object: nil)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return sideDishManager.numOfRows(at: section)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -29,6 +33,12 @@ class MainMenuViewDataSource: NSObject, UITableViewDataSource {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 3
+    }
+    
+    @objc func injectModel(_ notification: Notification) {
+        guard let model = notification.userInfo?["model"] as? [SideDishInfo] else {return}
+        guard let index = notification.userInfo?["index"] as? Int else {return}
+        sideDishManager.insert(into: index, rows: model)
     }
 }

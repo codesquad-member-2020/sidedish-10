@@ -21,6 +21,9 @@ class SideDishManager {
     
     func insert(into section: Int, rows: [SideDishInfo]) {
         sideDish[section] = rows
+        NotificationCenter.default.post(name: .ModelInserted,
+                                        object: nil,
+                                        userInfo: ["index" : section])
     }
     
     func sideDish(section: Int, row: Int) -> SideDishInfo {
@@ -38,4 +41,8 @@ class SideDishManager {
     func numOfSections() -> Int {
         return sectionName.count
     }
+}
+
+extension Notification.Name {
+    static let ModelInserted = Notification.Name("ModelInserted")
 }
