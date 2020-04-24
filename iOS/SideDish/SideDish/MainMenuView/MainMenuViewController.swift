@@ -21,11 +21,12 @@ class MainMenuViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        mainMenuTableView.delegate = self
-        mainMenuTableView.dataSource = mainMenuDataSource
-        mainMenuTableView.register(MainMenuHeader.self, forHeaderFooterViewReuseIdentifier: "MenuHeaderView")
         configureUseCase()
-        
+        setupTableView()
+        setupObserver()
+    }
+    
+    private func setupObserver() {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(injectModel(_:)),
                                                name: .InjectionModel,
@@ -34,6 +35,12 @@ class MainMenuViewController: UIViewController {
                                                selector: #selector(reloadSection(_:)),
                                                name: .ModelInserted,
                                                object: nil)
+    }
+    
+    private func setupTableView() {
+        mainMenuTableView.delegate = self
+        mainMenuTableView.dataSource = mainMenuDataSource
+        mainMenuTableView.register(MainMenuHeader.self, forHeaderFooterViewReuseIdentifier: "MenuHeaderView")
     }
     
     private func configureUseCase() {
