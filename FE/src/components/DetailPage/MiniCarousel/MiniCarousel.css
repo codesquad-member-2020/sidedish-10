@@ -1,6 +1,10 @@
-.mini-panels img {
-  width: 100%;
+.panel-img {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
   height: 100%;
+  width: 100%;
+  cursor: pointer;
 }
 
 .mini-stage {
@@ -21,8 +25,8 @@
 
 .mini-panels {
   position: absolute;
-  width: 200px;
-  height: 200px;
+  width: 50%;
+  height: 50%;
   transform-style: preserve-3d;
   transition: 1s;
 }

@@ -30,9 +30,10 @@ class DetailPage extends React.Component {
     return (
       <div className="detail-page">
         <div className="upper-page">
-          <div className="banchan-picture">
-            <img src={irene}></img>
-          </div>
+          <div
+            className="banchan-picture"
+            style={{ backgroundImage: `url(${irene})` }}
+          ></div>
           <div className="explanation">
             <div className="explanation-header underline">
               <div className="explanation-title">

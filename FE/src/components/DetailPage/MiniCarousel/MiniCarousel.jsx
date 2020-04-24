@@ -2,9 +2,9 @@ import React from "react";
 
 import seulgi from "../../../mockData/imgs/seulgi.jpg";
 import luda from "../../../mockData/imgs/luda3.jpg";
-import luda1 from "../../../mockData/imgs/luda2.jpg";
-import jiae from "../../../mockData/imgs/jiae.jpg";
-import minju from "../../../mockData/imgs/minju.jpg";
+import luda1 from "../../../mockData/imgs/luda1.jpg";
+import jiae from "../../../mockData/imgs/jiae1.jpg";
+import yein from "../../../mockData/imgs/yein.jpg";
 import jisu from "../../../mockData/imgs/jisu.jpg";
 
 import "./MiniCarousel.css";
@@ -17,7 +17,7 @@ class MiniCarousel extends React.Component {
     this.prev = this.prev.bind(this);
     this.nextTransform = this.nextTransform.bind(this);
     this.prevTransform = this.prevTransform.bind(this);
-    this.pictures = [seulgi, luda, luda1, jiae, minju, jisu];
+    this.pictures = [seulgi, luda, luda1, jiae, yein, jisu];
     this.refers = [];
     this.transforms = [
       { x: 0, z: "-40px", scale: 0.9, opacity: 0.8 },
@@ -76,9 +76,11 @@ class MiniCarousel extends React.Component {
   }
 
   move(e) {
+    const imgWidth = document.querySelector(".panel-img").offsetWidth;
+
     const rect = e.currentTarget.getBoundingClientRect();
     const offsetX = e.clientX - rect.left;
-    if (offsetX >= 200) {
+    if (offsetX >= imgWidth) {
       this.next();
       return;
     }
@@ -93,8 +95,13 @@ class MiniCarousel extends React.Component {
             const pictureRef = React.createRef();
             this.refers.push(pictureRef);
             return (
-              <div className="mini-panels" ref={pictureRef}>
-                <img src={picture}></img>
+              <div className="mini-panels" key={picture} ref={pictureRef}>
+                <div
+                  className="panel-img"
+                  style={{
+                    backgroundImage: `url(${picture})`,
+                  }}
+                ></div>
               </div>
             );
           })}
