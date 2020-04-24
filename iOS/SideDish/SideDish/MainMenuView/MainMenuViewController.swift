@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Toaster
 
 class MainMenuViewController: UIViewController {
     
@@ -65,6 +66,8 @@ extension MainMenuViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let cell = tableView.dequeueReusableHeaderFooterView(withIdentifier: "MenuHeaderView") as? MainMenuHeader else {return UIView()}
         cell.configureLabel(content: sectionName[section])
+        cell.index = section
+        cell.delegate = self
         return cell
     }
     
@@ -82,4 +85,11 @@ extension MainMenuViewController: UITableViewDelegate {
 
 extension Notification.Name {
     static let InjectionModel = Notification.Name("InjectionModel")
+}
+
+extension MainMenuViewController: SectionTapped {
+    func sectionTapped(at section: Int, title: String) {
+        let numOfRows = mainMenuDataSource.sideDishManager.numOfRows(at: section)
+        Toast(text: "\(title): \(numOfRows)개").show()
+    }
 }

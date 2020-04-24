@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol SectionTapped {
+    func sectionTapped(at section: Int, title: String)
+}
+
 class MainMenuHeader: UITableViewHeaderFooterView {
     
     private let stackView: UIStackView = {
@@ -35,14 +39,24 @@ class MainMenuHeader: UITableViewHeaderFooterView {
         return label
     }()
     
+    var index: Int!
+    var delegate: SectionTapped!
+    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         configureLayout()
+        self.contentView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapped(_:))))
+    }
+    
+    @objc func tapped(_ recognizer: UITapGestureRecognizer) {
+        guard let title = titleLabel.text else {return}
+        delegate.sectionTapped(at: index, title: title)
     }
     
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
         configureLayout()
+        self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapped(_:))))
     }
     
     private func configureLayout() {
