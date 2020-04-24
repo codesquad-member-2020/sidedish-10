@@ -1,4 +1,5 @@
 import React from "react";
+import MiniCarousel from "./MiniCarousel/MiniCarousel";
 
 import irene from "../../mockData/imgs/irene.jpg";
 
@@ -7,6 +8,22 @@ import "./DetailPage.css";
 class DetailPage extends React.Component {
   constructor() {
     super();
+    this.state = {
+      counts: 0,
+      totalSum: 0,
+    };
+    this.buttonClickHandler = this.buttonClickHandler.bind(this);
+    this.inputChangeHandler = this.inputChangeHandler.bind(this);
+  }
+
+  buttonClickHandler() {
+    const totalSum = this.state.counts * this.props.price;
+    this.setState({ ...this.state, totalSum });
+  }
+
+  inputChangeHandler(e) {
+    const { value } = e.target;
+    this.setState({ ...this.state, counts: value });
   }
 
   render() {
@@ -40,22 +57,27 @@ class DetailPage extends React.Component {
                   <li>2500원(40,000원) 이상 구매 시 무료</li>
                 </div>
               </div>
-              <div className="explanation-price">4200원</div>
+              <div className="explanation-price">{this.props.price}원</div>
             </div>
             <div className="shipment-count">
               <div className="counts">수량</div>
               <div className="counts-input">
-                <input type="number"></input>
+                <input type="number" onChange={this.inputChangeHandler} />
               </div>
             </div>
             <div className="total-price">
               <div className="total-price-label">총 상품금액</div>
-              <div className="total-price-data">4200원</div>
+              <div className="total-price-data">{this.state.totalSum}원</div>
             </div>
-            <div className="add-button">담기</div>
+            <button className="add-button" onClick={this.buttonClickHandler}>
+              담기
+            </button>
           </div>
         </div>
-        <div className="lower-page"></div>
+        <div className="lower-page">
+          <div className="lower-title">함께 하면 좋은 아이돌</div>
+          <MiniCarousel />
+        </div>
       </div>
     );
   }

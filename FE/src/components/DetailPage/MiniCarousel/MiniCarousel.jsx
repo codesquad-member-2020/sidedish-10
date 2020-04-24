@@ -14,17 +14,23 @@ class MiniCarousel extends React.Component {
     super();
     this.move = this.move.bind(this);
     this.next = this.next.bind(this);
+    this.prev = this.prev.bind(this);
     this.nextTransform = this.nextTransform.bind(this);
+    this.prevTransform = this.prevTransform.bind(this);
     this.pictures = [seulgi, luda, luda1, jiae, minju, jisu];
     this.refers = [];
     this.transforms = [
-      { x: 0, z: "-40px", scale: 0.9, opacity: 1 },
-      { x: "-55%", z: "-20px", scale: 0.95, opacity: 0.8 },
-      { x: 0, z: 0, scale: 1, opacity: 0.8 },
+      { x: 0, z: "-40px", scale: 0.9, opacity: 0.8 },
+      { x: "-55%", z: "-20px", scale: 0.95, opacity: 0.9 },
+      { x: 0, z: 0, scale: 1, opacity: 1 },
       { x: "105%", z: "0px", scale: 1, opacity: 1 },
-      { x: "155%", z: "-20px", scale: 0.95, opacity: 0.8 },
+      { x: "155%", z: "-20px", scale: 0.95, opacity: 0.9 },
       { x: "105%", z: "-40px", scale: 0.9, opacity: 0.8 },
     ];
+  }
+
+  shouldComponentUpdate() {
+    return false;
   }
 
   nextTransform(x) {
@@ -34,18 +40,20 @@ class MiniCarousel extends React.Component {
     return x + 1;
   }
 
+  prevTransform(x) {
+    if (x === 0) {
+      return this.refers.length - 1;
+    }
+    return x - 1;
+  }
+
   next() {
     for (let i = 0; i < this.refers.length; i++) {
-      this.refers[i].current.style.transform =
-        "translateX(" +
-        this.transforms[this.nextTransform(i)].x +
-        ")" +
-        "translateZ(" +
-        this.transforms[this.nextTransform(i)].z +
-        ")" +
-        "scale(" +
-        this.transforms[this.nextTransform(i)].scale +
-        ")";
+      this.refers[i].current.style.transform = `translateX(${
+        this.transforms[this.nextTransform(i)].x
+      }) translateZ(${this.transforms[this.nextTransform(i)].z}) scale(${
+        this.transforms[this.nextTransform(i)].scale
+      })`;
       this.refers[i].current.style.opacity = this.transforms[
         this.nextTransform(i)
       ].opacity;
@@ -53,9 +61,28 @@ class MiniCarousel extends React.Component {
     this.transforms.push(this.transforms.shift());
   }
 
-  move() {
-    this.next();
-    this.next();
+  prev() {
+    for (let i = 0; i < this.refers.length; i++) {
+      this.refers[i].current.style.transform = `translateX(${
+        this.transforms[this.prevTransform(i)].x
+      }) translateZ(${this.transforms[this.prevTransform(i)].z}) scale(${
+        this.transforms[this.prevTransform(i)].scale
+      })`;
+      this.refers[i].current.style.opacity = this.transforms[
+        this.prevTransform(i)
+      ].opacity;
+    }
+    this.transforms.unshift(this.transforms.pop());
+  }
+
+  move(e) {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const offsetX = e.clientX - rect.left;
+    if (offsetX >= 200) {
+      this.next();
+      return;
+    }
+    this.prev();
   }
 
   render() {

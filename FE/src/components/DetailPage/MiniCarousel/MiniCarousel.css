@@ -1,19 +1,24 @@
 .mini-panels img {
-  width: 200px;
-  height: 200px;
+  width: 100%;
+  height: 100%;
 }
 
 .mini-stage {
   position: relative;
   perspective: 400px;
+  height: 400px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .mini-carousel {
-  position: absolute;
-  top: 50px;
-  left: 90px;
   transform-style: preserve-3d;
+  width: 70%;
+  height: 100%;
 }
+
 .mini-panels {
   position: absolute;
   width: 200px;
@@ -46,4 +51,11 @@
 .mini-panels:nth-child(6) {
   transform: translateX(105%) translateZ(-40px) scale(0.9);
   background: chartreuse;
+}
+
+.mini-carousel-buttons {
+  display: flex;
+  justify-content: center;
+  width: 50%;
+  transform: translateY(200px);
 }
