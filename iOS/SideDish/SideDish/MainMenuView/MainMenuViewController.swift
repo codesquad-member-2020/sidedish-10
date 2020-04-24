@@ -78,7 +78,9 @@ extension MainMenuViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let dish = mainMenuDataSource.sideDishManager.sideDish(indexPath: indexPath)
         guard let detailViewController = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else {return}
-        detailViewController.dish = dish
+        detailViewController.id = dish.id
+        let text = "타이틀 메뉴 : \(dish.title)\n\(dish.specialPrice)"
+        Toast(text: text).show()
         self.navigationController?.pushViewController(detailViewController, animated: true)
     }
 }
