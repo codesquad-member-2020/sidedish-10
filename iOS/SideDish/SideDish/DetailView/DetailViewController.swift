@@ -7,15 +7,11 @@
 //
 
 import UIKit
-
+import Toaster
 class DetailViewController: UIViewController {
     
-    var dishID: Int! {
-        didSet {
-            
-        }
-    }
-
+    var id: Int!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.isNavigationBarHidden = false

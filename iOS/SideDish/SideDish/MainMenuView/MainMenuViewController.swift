@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Toaster
 
 class MainMenuViewController: UIViewController {
     
@@ -21,10 +22,12 @@ class MainMenuViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        mainMenuTableView.delegate = self
-        mainMenuTableView.dataSource = mainMenuDataSource
         configureUseCase()
-        
+        setupTableView()
+        setupObserver()
+    }
+    
+    private func setupObserver() {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(injectModel(_:)),
                                                name: .InjectionModel,
@@ -33,6 +36,12 @@ class MainMenuViewController: UIViewController {
                                                selector: #selector(reloadSection(_:)),
                                                name: .ModelInserted,
                                                object: nil)
+    }
+    
+    private func setupTableView() {
+        mainMenuTableView.delegate = self
+        mainMenuTableView.dataSource = mainMenuDataSource
+        mainMenuTableView.register(MainMenuHeader.self, forHeaderFooterViewReuseIdentifier: "MenuHeaderView")
     }
     
     private func configureUseCase() {
@@ -55,10 +64,11 @@ class MainMenuViewController: UIViewController {
 
 extension MainMenuViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier:
-            "MainMenuHeader") as? MainMenuHeaderCell else {return UITableViewCell()}
-        cell.configuration(sectionInfo: sectionName[section])
-        return cell.contentView
+        guard let cell = tableView.dequeueReusableHeaderFooterView(withIdentifier: "MenuHeaderView") as? MainMenuHeader else {return UIView()}
+        cell.configureLabel(content: sectionName[section])
+        cell.index = section
+        cell.delegate = self
+        return cell
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -66,13 +76,22 @@ extension MainMenuViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let id = mainMenuDataSource.sideDishManager.sideDish(indexPath: indexPath).id
+        let dish = mainMenuDataSource.sideDishManager.sideDish(indexPath: indexPath)
         guard let detailViewController = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else {return}
-        detailViewController.dishID = id
+        detailViewController.id = dish.id
+        let text = "타이틀 메뉴 : \(dish.title)\n\(dish.specialPrice)"
+        Toast(text: text).show()
         self.navigationController?.pushViewController(detailViewController, animated: true)
     }
 }
 
 extension Notification.Name {
     static let InjectionModel = Notification.Name("InjectionModel")
+}
+
+extension MainMenuViewController: SectionTapped {
+    func sectionTapped(at section: Int, title: String) {
+        let numOfRows = mainMenuDataSource.sideDishManager.numOfRows(at: section)
+        Toast(text: "\(title): \(numOfRows)개").show()
+    }
 }

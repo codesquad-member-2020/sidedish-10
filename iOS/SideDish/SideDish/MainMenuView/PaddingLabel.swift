@@ -11,7 +11,16 @@ import UIKit
 class PaddingLabel: UILabel {
     @IBInspectable var padding: UIEdgeInsets = UIEdgeInsets(top: 0, left: 7, bottom: 0, right: 7)
     
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
     override func drawText(in rect: CGRect) {
+        super.drawText(in: rect)
         let paddingRect = rect.inset(by: padding)
         super.drawText(in: paddingRect)
     }

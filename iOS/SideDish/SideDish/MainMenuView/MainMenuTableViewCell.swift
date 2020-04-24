@@ -67,6 +67,7 @@ class MainMenuTableViewCell: UITableViewCell {
             label.text = $0
             label.font = UIFont.systemFont(ofSize: 12)
             label.textColor = .white
+            label.textAlignment = .center
             label.backgroundColor = UIColor(named: "SpecialPriceColor")
             eventStackView.addArrangedSubview(label)
         }
