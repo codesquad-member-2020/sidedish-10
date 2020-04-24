@@ -23,6 +23,7 @@ class MainMenuViewController: UIViewController {
         super.viewDidLoad()
         mainMenuTableView.delegate = self
         mainMenuTableView.dataSource = mainMenuDataSource
+        mainMenuTableView.register(MainMenuHeader.self, forHeaderFooterViewReuseIdentifier: "MenuHeaderView")
         configureUseCase()
         
         NotificationCenter.default.addObserver(self,
@@ -55,10 +56,9 @@ class MainMenuViewController: UIViewController {
 
 extension MainMenuViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier:
-            "MainMenuHeader") as? MainMenuHeaderCell else {return UITableViewCell()}
-        cell.configuration(sectionInfo: sectionName[section])
-        return cell.contentView
+        guard let cell = tableView.dequeueReusableHeaderFooterView(withIdentifier: "MenuHeaderView") as? MainMenuHeader else {return UIView()}
+        cell.configureLabel(content: sectionName[section])
+        return cell
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
