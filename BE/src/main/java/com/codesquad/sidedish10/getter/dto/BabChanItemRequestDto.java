@@ -1,6 +1,4 @@
-package com.codesquad.sidedish10.getter.domain;
-
-import java.util.List;
+package com.codesquad.sidedish10.getter.dto;
 
 public class BabChanItemRequestDto {
 

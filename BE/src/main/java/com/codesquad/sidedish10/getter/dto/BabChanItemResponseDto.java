@@ -1,4 +1,4 @@
-package com.codesquad.sidedish10.getter.domain;
+package com.codesquad.sidedish10.getter.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.List;

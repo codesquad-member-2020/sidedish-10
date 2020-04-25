@@ -1,4 +1,4 @@
-package com.codesquad.sidedish10.getter.domain;
+package com.codesquad.sidedish10.getter.dto;
 
 import java.util.List;
 import org.springframework.data.jdbc.repository.query.Query;
