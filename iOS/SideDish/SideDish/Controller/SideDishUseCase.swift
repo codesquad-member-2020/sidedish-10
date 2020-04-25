@@ -10,7 +10,7 @@ import Foundation
 
 struct SideDishUseCase {
     
-    static func loadDishes(with manager: NetworkManager, failureHandler: @escaping (NetworkManager.NetworkError) -> () = {_ in}, completed: @escaping([SideDishInfo], Int) -> ()) {
+    static func loadMainDish(with manager: NetworkManager, failureHandler: @escaping (NetworkManager.NetworkError) -> () = {_ in}, completed: @escaping([SideDishInfo], Int) -> ()) {
         
         manager.getMainDish {
             switch $0 {
@@ -25,6 +25,9 @@ struct SideDishUseCase {
                 }
             }
         }
+    }
+    
+    static func loadSideDish(with manager: NetworkManager, failureHandler: @escaping (NetworkManager.NetworkError) -> () = {_ in}, completed: @escaping([SideDishInfo], Int) -> ()) {
         
         manager.getSideDish {
             switch $0 {
@@ -39,6 +42,9 @@ struct SideDishUseCase {
                 }
             }
         }
+    }
+    
+    static func loadSoupDish(with manager: NetworkManager, failureHandler: @escaping (NetworkManager.NetworkError) -> () = {_ in}, completed: @escaping([SideDishInfo], Int) -> ()) {
         
         manager.getSoupDish {
             switch $0 {

@@ -40,9 +40,19 @@ class MainMenuViewController: UIViewController {
     }
     
     private func configureUseCase() {
-        SideDishUseCase.loadDishes(with: NetworkManager(), failureHandler: { error in
-            self.errorHandling(error: error)
-        }) {model, index in
+        SideDishUseCase.loadMainDish(with: NetworkManager(), failureHandler: {self.errorHandling(error: $0)}) {model, index in
+            DispatchQueue.main.async {
+                self.mainMenuDataSource.sideDishManager.insert(into: index, rows: model)
+            }
+        }
+        
+        SideDishUseCase.loadSideDish(with: NetworkManager(), failureHandler: {self.errorHandling(error: $0)}) {model, index in
+            DispatchQueue.main.async {
+                self.mainMenuDataSource.sideDishManager.insert(into: index, rows: model)
+            }
+        }
+        
+        SideDishUseCase.loadSoupDish(with: NetworkManager(), failureHandler: {self.errorHandling(error: $0)}) {model, index in
             DispatchQueue.main.async {
                 self.mainMenuDataSource.sideDishManager.insert(into: index, rows: model)
             }
