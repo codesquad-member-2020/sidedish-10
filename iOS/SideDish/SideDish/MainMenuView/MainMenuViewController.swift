@@ -115,7 +115,7 @@ extension Notification.Name {
 }
 
 extension MainMenuViewController: SectionTapped {
-    func sectionTapped(at section: Int, title: String) {
+    func sectionTapped(headerView: MainMenuHeader, at section: Int, title: String) {
         let numOfRows = mainMenuDataSource.sideDishManager.numOfRows(at: section)
         Toast(text: "\(title): \(numOfRows)개").show()
     }
