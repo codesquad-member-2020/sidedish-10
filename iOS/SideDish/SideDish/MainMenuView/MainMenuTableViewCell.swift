@@ -41,25 +41,6 @@ class MainMenuTableViewCell: UITableViewCell {
         setEventStackView(badges: info.badges)
     }
     
-    private func setImage(url: String) {
-        NetworkManager().getResource(from: url, method: .get, headers: nil) {
-            switch $0 {
-            case .failure(let error):
-                switch error {
-                case .DataEmpty: break
-                case .InvalidStatusCode( _): break
-                case .InvalidURL: break
-                case .requestError: break
-                }
-            case .success(let data):
-                DispatchQueue.main.async {
-                    self.menuImageView.image = UIImage(data: data)
-                    self.menuImageView?.layer.cornerRadius = (self.menuImageView?.frame.height)! / 2
-                }
-            }
-        }
-    }
-    
     private func setTitle(text title: String) {
         titleLabel.text = title
     }
