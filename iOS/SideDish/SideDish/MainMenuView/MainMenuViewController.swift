@@ -29,12 +29,12 @@ class MainMenuViewController: UIViewController {
     
     private func setupObserver() {
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(injectModel(_:)),
-                                               name: .InjectionModel,
-                                               object: nil)
-        NotificationCenter.default.addObserver(self,
                                                selector: #selector(reloadSection(_:)),
                                                name: .ModelInserted,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(decodeError),
+                                               name: .DecodeError,
                                                object: nil)
     }
     
@@ -45,8 +45,38 @@ class MainMenuViewController: UIViewController {
     }
     
     private func configureUseCase() {
-        SideDishUseCase.loadDishes(with: NetworkManager()) {
-            NotificationCenter.default.post(name: .InjectionModel, object: nil, userInfo: ["model" : $0, "index" : $1])
+        SideDishUseCase.loadDishes(with: NetworkManager(), failureHandler: { error in
+            self.errorHandling(error: error)
+        }) {model, index in
+            DispatchQueue.main.async {
+                self.mainMenuDataSource.sideDishManager.insert(into: index, rows: model)
+            }
+        }
+    }
+    
+    private func alertError(message: String) {
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: "문제가 생겼어요", message: message, preferredStyle: .alert)
+            let ok = UIAlertAction(title: "넵...", style: .default)
+            alert.addAction(ok)
+            self.present(alert, animated: true)
+        }
+    }
+    
+    private func errorHandling(error: NetworkManager.NetworkError) {
+        switch error {
+        case .DataEmpty:
+            alertError(message: "데이터가 비었어요.")
+            break
+        case .InvalidStatusCode(let code):
+            alertError(message: "\(code) 에러 발생했어요.")
+            break
+        case .InvalidURL:
+            alertError(message: "URL이 유효하지 않아요.")
+            break
+        case .requestError:
+            alertError(message: "요청을 보내는 중에 오류가 발생했어요.")
+            break
         }
     }
     
@@ -55,10 +85,8 @@ class MainMenuViewController: UIViewController {
         mainMenuTableView.reloadSections(IndexSet(index...index), with: .automatic)
     }
     
-    @objc func injectModel(_ notification: Notification) {
-        guard let model = notification.userInfo?["model"] as? [SideDishInfo] else {return}
-        guard let index = notification.userInfo?["index"] as? Int else {return}
-        mainMenuDataSource.sideDishManager.insert(into: index, rows: model)
+    @objc func decodeError() {
+        alertError(message: "응답을 복호화 하는 도중 문제가 발생했어요.")
     }
 }
 

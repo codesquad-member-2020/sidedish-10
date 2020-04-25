@@ -10,37 +10,52 @@ import Foundation
 
 struct SideDishUseCase {
     
-    enum JsonConvertError: Error {
-        case InvalidJson
+    static func loadDishes(with manager: NetworkManager, failureHandler: @escaping (NetworkManager.NetworkError) -> () = {_ in}, completed: @escaping([SideDishInfo], Int) -> ()) {
+        
+        manager.getMainDish {
+            switch $0 {
+            case .failure(let error):
+                failureHandler(error)
+            case .success(let data):
+                do {
+                    let model = try JSONDecoder().decode(SideDish.self, from: data)
+                    completed(model.sideDishes, 0)
+                } catch {
+                    NotificationCenter.default.post(name: .DecodeError, object: nil)
+                }
+            }
+        }
+        
+        manager.getSideDish {
+            switch $0 {
+            case .failure(let error):
+                failureHandler(error)
+            case .success(let data):
+                do {
+                    let model = try JSONDecoder().decode(SideDish.self, from: data)
+                    completed(model.sideDishes, 1)
+                } catch {
+                    NotificationCenter.default.post(name: .DecodeError, object: nil)
+                }
+            }
+        }
+        
+        manager.getSoupDish {
+            switch $0 {
+            case .failure(let error):
+                failureHandler(error)
+            case .success(let data):
+                do {
+                    let model = try JSONDecoder().decode(SideDish.self, from: data)
+                    completed(model.sideDishes, 2)
+                } catch {
+                    NotificationCenter.default.post(name: .DecodeError, object: nil)
+                }
+            }
+        }
     }
-    
-    static func loadDishes(with manager: NetworkManager, failureHandler: @escaping (Error) -> () = {_ in}, completed: @escaping([SideDishInfo], Int) -> ()) {
-        
-        manager.getMainDish(failureHandler: failureHandler) {
-            do {
-                let model = try JSONDecoder().decode(SideDish.self, from: $0)
-                completed(model.sideDishes, 0)
-            } catch {
-                failureHandler(JsonConvertError.InvalidJson)
-            }
-        }
-        
-        manager.getSideDish(failureHandler: failureHandler) {
-            do {
-                let model = try JSONDecoder().decode(SideDish.self, from: $0)
-                completed(model.sideDishes, 1)
-            } catch {
-                failureHandler(JsonConvertError.InvalidJson)
-            }
-        }
-        
-        manager.getSoupDish(failureHandler: failureHandler) {
-            do {
-                let model = try JSONDecoder().decode(SideDish.self, from: $0)
-                completed(model.sideDishes, 2)
-            } catch {
-                failureHandler(JsonConvertError.InvalidJson)
-            }
-        }
-    }
+}
+
+extension Notification.Name {
+    static let DecodeError = Notification.Name("DecodeError")
 }

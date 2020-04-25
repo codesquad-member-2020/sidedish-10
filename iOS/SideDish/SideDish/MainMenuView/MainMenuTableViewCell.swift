@@ -28,14 +28,21 @@ class MainMenuTableViewCell: UITableViewCell {
     
     private func setImage(url: String) {
         NetworkManager().getResource(from: url, method: .get, headers: nil) {
-            self.menuImageView.image = UIImage(data: $0)
-            self.menuImageView?.layer.cornerRadius = (self.menuImageView?.frame.height)! / 2
+            switch $0 {
+            case .failure(let error):
+                switch error {
+                case .DataEmpty: break
+                case .InvalidStatusCode(let code): break
+                case .InvalidURL: break
+                case .requestError: break
+                }
+            case .success(let data):
+                DispatchQueue.main.async {
+                    self.menuImageView.image = UIImage(data: data)
+                    self.menuImageView?.layer.cornerRadius = (self.menuImageView?.frame.height)! / 2
+                }
+            }
         }
-        //        NetworkManager().getResource(from: url, method: .get, headers: nil) {
-        //            guard let data = $0.data else {return}
-        //            self.menuImageView.image = UIImage(data: data)
-        //            self.menuImageView?.layer.cornerRadius = (self.menuImageView?.frame.height)! / 2
-        //        }
     }
     
     private func setTitle(text title: String) {
