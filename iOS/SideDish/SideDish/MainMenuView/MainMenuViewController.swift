@@ -35,8 +35,8 @@ class MainMenuViewController: UIViewController {
     
     private func setupTableView() {
         mainMenuTableView.delegate = self
-        mainMenuTableView.dataSource = mainMenuDataSource
         mainMenuTableView.register(MainMenuHeader.self, forHeaderFooterViewReuseIdentifier: "MenuHeaderView")
+        mainMenuTableView.dataSource = mainMenuDataSource
     }
     
     private func configureUseCase() {
