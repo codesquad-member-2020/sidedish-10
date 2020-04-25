@@ -17,16 +17,7 @@ class MainMenuTableViewCell: UITableViewCell {
     @IBOutlet weak var specialPriceLabel: UILabel!
     @IBOutlet weak var eventStackView: UIStackView!
     
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(setImage(notification:)),
-                                               name: .ImageLoaded,
-                                               object: self)
-    }
-    
-    @objc func setImage(notification: Notification) {
-        guard let data = notification.userInfo?["data"] as? Data else {return}
+    func setImageFromData(data: Data) {
         DispatchQueue.main.async {
             self.menuImageView.image = UIImage(data: data)
             self.menuImageView?.layer.cornerRadius = (self.menuImageView?.frame.height)! / 2

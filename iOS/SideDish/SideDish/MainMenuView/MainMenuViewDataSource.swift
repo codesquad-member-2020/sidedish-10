@@ -27,9 +27,7 @@ class MainMenuViewDataSource: NSObject, UITableViewDataSource {
             "MainMenuCell", for: indexPath) as? MainMenuTableViewCell else {return UITableViewCell()}
         let url = sideDishManager.sideDish(indexPath: indexPath).imageUrl
         ImageUseCase.loadImage(with: NetworkManager(), url: url) {
-            NotificationCenter.default.post(name: .ImageLoaded,
-                                            object: cell,
-                                            userInfo: ["data" : $0])
+            cell.setImageFromData(data: $0)
         }
         cell.configuration(info: sideDishManager.sideDish(indexPath: indexPath))
         return cell
@@ -38,8 +36,4 @@ class MainMenuViewDataSource: NSObject, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return sideDishManager.sectionCount()
     }
-}
-
-extension Notification.Name {
-    static let ImageLoaded = Notification.Name("ImageLoaded")
 }
