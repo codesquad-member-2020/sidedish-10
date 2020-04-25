@@ -9,39 +9,53 @@
 import Foundation
 
 struct SideDishUseCase {
-    static func loadDishes(with manager: NetworkManager, completed: @escaping([SideDishInfo], Int) -> ()) {
+    
+    static func loadDishes(with manager: NetworkManager, failureHandler: @escaping (NetworkManager.NetworkError) -> () = {_ in}, completed: @escaping([SideDishInfo], Int) -> ()) {
+        
         manager.getMainDish {
-            guard let data = $0.data else {return}
-            do {
-                let model = try JSONDecoder().decode(SideDish.self, from: data)
-                completed(model.sideDishes, 0)
-            } catch {
-                NotificationCenter.default.post(name: .InvalidJson, object: nil)
+            switch $0 {
+            case .failure(let error):
+                failureHandler(error)
+            case .success(let data):
+                do {
+                    let model = try JSONDecoder().decode(SideDish.self, from: data)
+                    completed(model.sideDishes, 0)
+                } catch {
+                    NotificationCenter.default.post(name: .DecodeError, object: nil)
+                }
             }
         }
         
         manager.getSideDish {
-            guard let data = $0.data else {return}
-            do {
-                let model = try JSONDecoder().decode(SideDish.self, from: data)
-                completed(model.sideDishes, 1)
-            } catch {
-                NotificationCenter.default.post(name: .InvalidJson, object: nil)
+            switch $0 {
+            case .failure(let error):
+                failureHandler(error)
+            case .success(let data):
+                do {
+                    let model = try JSONDecoder().decode(SideDish.self, from: data)
+                    completed(model.sideDishes, 1)
+                } catch {
+                    NotificationCenter.default.post(name: .DecodeError, object: nil)
+                }
             }
         }
         
         manager.getSoupDish {
-            guard let data = $0.data else {return}
-            do {
-                let model = try JSONDecoder().decode(SideDish.self, from: data)
-                completed(model.sideDishes, 2)
-            } catch {
-                NotificationCenter.default.post(name: .InvalidJson, object: nil)
+            switch $0 {
+            case .failure(let error):
+                failureHandler(error)
+            case .success(let data):
+                do {
+                    let model = try JSONDecoder().decode(SideDish.self, from: data)
+                    completed(model.sideDishes, 2)
+                } catch {
+                    NotificationCenter.default.post(name: .DecodeError, object: nil)
+                }
             }
         }
     }
 }
 
 extension Notification.Name {
-    static let InvalidJson = Notification.Name("InvalidJson")
+    static let DecodeError = Notification.Name("DecodeError")
 }

@@ -17,6 +17,7 @@
 		A53BA05D244EA46A0023D27D /* BMYEONSUNG_otf.otf in Resources */ = {isa = PBXBuildFile; fileRef = A53BA05C244EA46A0023D27D /* BMYEONSUNG_otf.otf */; };
 		A53BA05F244EA6DE0023D27D /* MainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53BA05E244EA6DE0023D27D /* MainMenuViewController.swift */; };
 		A58FAEDF2452DF1200C9EDA3 /* MainMenuHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58FAEDE2452DF1200C9EDA3 /* MainMenuHeader.swift */; };
+		A59ACBDD2453F40700359A0A /* ImageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59ACBDC2453F40700359A0A /* ImageUseCase.swift */; };
 		A5A4DFE82451467700C734F1 /* SideDishUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A4DFE72451467700C734F1 /* SideDishUseCase.swift */; };
 		A5BD927E244DCAE600D6442F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BD927D244DCAE600D6442F /* AppDelegate.swift */; };
 		A5BD9282244DCAE600D6442F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BD9281244DCAE600D6442F /* LoginViewController.swift */; };
@@ -50,6 +51,7 @@
 		A53BA05C244EA46A0023D27D /* BMYEONSUNG_otf.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BMYEONSUNG_otf.otf; sourceTree = "<group>"; };
 		A53BA05E244EA6DE0023D27D /* MainMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuViewController.swift; sourceTree = "<group>"; };
 		A58FAEDE2452DF1200C9EDA3 /* MainMenuHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuHeader.swift; sourceTree = "<group>"; };
+		A59ACBDC2453F40700359A0A /* ImageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUseCase.swift; sourceTree = "<group>"; };
 		A5A4DFE72451467700C734F1 /* SideDishUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideDishUseCase.swift; sourceTree = "<group>"; };
 		A5BD927A244DCAE500D6442F /* SideDish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SideDish.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5BD927D244DCAE600D6442F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				A5A4DFE72451467700C734F1 /* SideDishUseCase.swift */,
+				A59ACBDC2453F40700359A0A /* ImageUseCase.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -350,6 +353,7 @@
 				A53BA05F244EA6DE0023D27D /* MainMenuViewController.swift in Sources */,
 				A5E4F581245176E1007AAA3D /* DetailViewController.swift in Sources */,
 				A5BD9282244DCAE600D6442F /* LoginViewController.swift in Sources */,
+				A59ACBDD2453F40700359A0A /* ImageUseCase.swift in Sources */,
 				A5A4DFE82451467700C734F1 /* SideDishUseCase.swift in Sources */,
 				A516CF18245060C100F96635 /* NetworkManager.swift in Sources */,
 				A516CF4224507C8D00F96635 /* SideDishManager.swift in Sources */,

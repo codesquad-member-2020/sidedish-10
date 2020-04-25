@@ -10,8 +10,10 @@ import Foundation
 import Alamofire
 
 protocol NetworkManageable {
-    func getResource(from: String, method: HTTPMethod, headers: HTTPHeaders?, handler: @escaping (AFDataResponse<Data>) -> ())
+    func getResource(from: String, method: HTTPMethod, headers: HTTPHeaders?, handler : @escaping Handler)
 }
+
+typealias Handler = (Result<Data, NetworkManager.NetworkError>) -> Void
 
 class NetworkManager: NetworkManageable {
     
@@ -22,27 +24,53 @@ class NetworkManager: NetworkManageable {
         static let side = "side"
     }
     
-    func getResource(from: String, method: HTTPMethod, headers: HTTPHeaders?, handler: @escaping (AFDataResponse<Data>) -> ()) {
-        AF.request(from, method: .get, parameters: nil, headers: headers, interceptor: nil, requestModifier: nil).responseData {
-            handler($0)
-        }
+    enum NetworkError: Error {
+        case InvalidURL
+        case requestError
+        case InvalidStatusCode(Int)
+        case DataEmpty
     }
     
-    func getMainDish(handler: @escaping (AFDataResponse<Data>) -> ()) {
-        getResource(from: EndPoints.serverURL + EndPoints.main, method: .get, headers: nil) {
-            handler($0)
+    func getResource(from: String, method: HTTPMethod, headers: HTTPHeaders?, handler : @escaping Handler) {
+        
+        guard let url = URL(string: from) else {
+            handler(.failure(.InvalidURL))
+            return
         }
+        
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            guard error == nil else {
+                handler(.failure(.requestError))
+                return
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse else {
+                return
+            }
+            
+            guard httpResponse.statusCode == 200 else {
+                handler(.failure(.InvalidStatusCode(httpResponse.statusCode)))
+                return
+            }
+            
+            guard let data = data else {
+                handler(.failure(.DataEmpty))
+                return
+            }
+            
+            handler(.success(data))
+        }.resume()
     }
     
-    func getSoupDish(handler: @escaping (AFDataResponse<Data>) -> ()) {
-        getResource(from: EndPoints.serverURL + EndPoints.soup, method: .get, headers: nil) {
-            handler($0)
-        }
+    func getMainDish(handler: @escaping Handler) {
+        getResource(from: EndPoints.serverURL + EndPoints.main, method: .get, headers: nil, handler: handler)
     }
     
-    func getSideDish(handler: @escaping (AFDataResponse<Data>) -> ()) {
-        getResource(from: EndPoints.serverURL + EndPoints.side, method: .get, headers: nil) {
-            handler($0)
-        }
+    func getSoupDish(handler: @escaping Handler) {
+        getResource(from: EndPoints.serverURL + EndPoints.soup, method: .get, headers: nil, handler: handler)
+    }
+    
+    func getSideDish(handler: @escaping Handler) {
+        getResource(from: EndPoints.serverURL + EndPoints.side, method: .get, headers: nil, handler: handler)
     }
 }
