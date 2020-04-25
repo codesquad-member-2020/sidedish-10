@@ -28,5 +28,5 @@ test {
 	useJUnitPlatform()
 }
 war {
-	baseName = 'spring-boot-war'
+	archiveFileName = 'sidedish-10'
 }
