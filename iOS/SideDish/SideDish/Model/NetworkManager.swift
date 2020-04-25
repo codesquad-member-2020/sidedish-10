@@ -29,6 +29,19 @@ class NetworkManager: NetworkManageable {
         case requestError
         case InvalidStatusCode(Int)
         case DataEmpty
+        
+        func message() -> String {
+            switch self {
+            case .DataEmpty:
+                return "데이터가 비었어요."
+            case .InvalidStatusCode(let code):
+                return "HTTP 응답 \(code) 에러 발생했어요."
+            case .InvalidURL:
+                return "URL이 유효하지 않아요."
+            case .requestError:
+                return "요청을 보내는 중에 오류가 발생했어요."
+            }
+        }
     }
     
     func getResource(from: String, method: HTTPMethod, headers: HTTPHeaders?, handler : @escaping Handler) {

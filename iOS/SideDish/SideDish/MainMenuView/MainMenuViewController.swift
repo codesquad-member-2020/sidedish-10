@@ -69,20 +69,7 @@ class MainMenuViewController: UIViewController {
     }
     
     private func errorHandling(error: NetworkManager.NetworkError) {
-        switch error {
-        case .DataEmpty:
-            alertError(message: "데이터가 비었어요.")
-            break
-        case .InvalidStatusCode(let code):
-            alertError(message: "\(code) 에러 발생했어요.")
-            break
-        case .InvalidURL:
-            alertError(message: "URL이 유효하지 않아요.")
-            break
-        case .requestError:
-            alertError(message: "요청을 보내는 중에 오류가 발생했어요.")
-            break
-        }
+        alertError(message: error.message())
     }
     
     @objc func reloadSection(_ notification: Notification) {
