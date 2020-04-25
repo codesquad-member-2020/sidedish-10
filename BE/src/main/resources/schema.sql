@@ -82,3 +82,10 @@ CREATE TABLE detail
     delivery_info       varchar(150),
     delivery_fee        varchar(150)
 );
+CREATE TABLE user
+(
+    id                  int auto_increment primary key,
+    userId              varchar(45),
+    name                varchar(45),
+    email               varchar(100)
+);
