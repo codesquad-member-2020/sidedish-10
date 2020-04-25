@@ -1,6 +1,6 @@
 package com.codesquad.sidedish10.getter.controller;
 
-import com.codesquad.sidedish10.getter.domain.BabChanItemResponseDto;
+import com.codesquad.sidedish10.getter.dto.BabChanItemResponseDto;
 import com.codesquad.sidedish10.getter.service.GetterService;
 import com.codesquad.sidedish10.getter.utils.ApiResponse;
 import com.codesquad.sidedish10.getter.utils.IndexCollection;

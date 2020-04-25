@@ -1,11 +1,9 @@
 package com.codesquad.sidedish10.getter.service;
 
-import com.codesquad.sidedish10.getter.domain.BabChanItemResponseDto;
-import com.codesquad.sidedish10.getter.domain.BabChanItemRepository;
-import com.codesquad.sidedish10.getter.utils.ApiResponse;
+import com.codesquad.sidedish10.getter.dto.BabChanItemResponseDto;
+import com.codesquad.sidedish10.getter.dto.BabChanItemRepository;
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 @Service

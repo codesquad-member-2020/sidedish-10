@@ -1,8 +1,13 @@
 package com.codesquad.sidedish10.getter.controller;
 
 import com.codesquad.sidedish10.getter.domain.GitHubToken;
-import com.codesquad.sidedish10.parser.service.LoginService;
-import com.codesquad.sidedish10.parser.utils.OAuth2SecurityInfo;
+import com.codesquad.sidedish10.getter.domain.User;
+import com.codesquad.sidedish10.getter.service.JwtService;
+import com.codesquad.sidedish10.getter.service.LoginService;
+import com.codesquad.sidedish10.getter.utils.ApiResponse;
+import com.codesquad.sidedish10.getter.utils.OAuth2SecurityInfo;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,18 +20,26 @@ import org.springframework.web.servlet.view.RedirectView;
 public class LoginController {
 
   private final LoginService loginService;
+  private final JwtService jwtService;
 
-  public LoginController(LoginService loginService) {
+  public LoginController(LoginService loginService,
+      JwtService jwtService) {
     this.loginService = loginService;
+    this.jwtService = jwtService;
   }
 
   @GetMapping("/login/github/request")
-  public ResponseEntity<String> GitHubLogin(@RequestParam("code") String code, HttpServletResponse response) {
-    GitHubToken accessToken = loginService.getAccessToken(code);
-    response.setStatus(HttpStatus.OK.value());
-    // response.setHeader("Authorization", accessToken.getToken_Response());
+  public ResponseEntity<ApiResponse> GitHubLogin(@RequestParam("code") String code, HttpServletResponse res) {
+    GitHubToken token = loginService.getAccessToken(code);
+    User nowUser = loginService.getUserInfo(token);
+    String jwtToken = jwtService.makeJwt(nowUser.getUserId(), nowUser.getName(), nowUser.getEmail());
+    Cookie cookie = new Cookie("jwtToken", jwtToken);
+    res.addCookie(cookie);
+    res.setStatus(HttpStatus.OK.value());
+    ApiResponse response = new ApiResponse();
+    response.setStatusCode(200);
 
-    return ResponseEntity.ok("logged in.");
+    return new ResponseEntity<>(response, HttpStatus.OK);
   }
 
   @GetMapping("/login/github")
