@@ -27,10 +27,6 @@ class MainMenuViewController: UIViewController {
                                                selector: #selector(reloadSection(_:)),
                                                name: .ModelInserted,
                                                object: nil)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(decodeError),
-                                               name: .DecodeError,
-                                               object: nil)
     }
     
     private func setupTableView() {
@@ -76,10 +72,6 @@ class MainMenuViewController: UIViewController {
         guard let index = notification.userInfo?["index"] as? Int else {return}
         mainMenuTableView.reloadSections(IndexSet(index...index), with: .automatic)
     }
-    
-    @objc func decodeError() {
-        alertError(message: "응답을 복호화 하는 도중 문제가 발생했어요.")
-    }
 }
 
 extension MainMenuViewController: UITableViewDelegate {
@@ -87,7 +79,8 @@ extension MainMenuViewController: UITableViewDelegate {
         guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "MenuHeaderView") as? MainMenuHeader else {return UIView()}
         let sectionInfo = mainMenuDataSource.sideDishManager.sectionName(at: section)
         let contents = sectionInfo.components(separatedBy: "/")
-        headerView.configureLabel(title: contents[0], content: contents[1])
+        headerView.setTitleLabel(text: contents[0])
+        headerView.setContentLabel(text: contents[1])
         headerView.index = section
         headerView.delegate = self
         return headerView

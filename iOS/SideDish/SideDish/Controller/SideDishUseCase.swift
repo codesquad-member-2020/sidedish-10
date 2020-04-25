@@ -21,7 +21,7 @@ struct SideDishUseCase {
                     let model = try JSONDecoder().decode(SideDish.self, from: data)
                     completed(model.sideDishes, 0)
                 } catch {
-                    NotificationCenter.default.post(name: .DecodeError, object: nil)
+                    failureHandler(.DecodeError)
                 }
             }
         }
@@ -38,7 +38,7 @@ struct SideDishUseCase {
                     let model = try JSONDecoder().decode(SideDish.self, from: data)
                     completed(model.sideDishes, 1)
                 } catch {
-                    NotificationCenter.default.post(name: .DecodeError, object: nil)
+                    failureHandler(.DecodeError)
                 }
             }
         }
@@ -55,13 +55,9 @@ struct SideDishUseCase {
                     let model = try JSONDecoder().decode(SideDish.self, from: data)
                     completed(model.sideDishes, 2)
                 } catch {
-                    NotificationCenter.default.post(name: .DecodeError, object: nil)
+                    failureHandler(.DecodeError)
                 }
             }
         }
     }
-}
-
-extension Notification.Name {
-    static let DecodeError = Notification.Name("DecodeError")
 }

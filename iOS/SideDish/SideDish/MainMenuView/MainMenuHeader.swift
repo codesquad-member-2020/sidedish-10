@@ -73,8 +73,11 @@ class MainMenuHeader: UITableViewHeaderFooterView {
         stackView.addArrangedSubview(contentLabel)
     }
     
-    func configureLabel(title: String, content: String) {
-        self.titleLabel.text = title
-        self.contentLabel.text = content
+    func setTitleLabel(text: String) {
+        self.titleLabel.text = text
+    }
+    
+    func setContentLabel(text: String) {
+        self.contentLabel.text = text
     }
 }

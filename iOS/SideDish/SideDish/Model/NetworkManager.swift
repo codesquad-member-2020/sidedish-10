@@ -29,6 +29,7 @@ class NetworkManager: NetworkManageable {
         case requestError
         case InvalidStatusCode(Int)
         case DataEmpty
+        case DecodeError
         
         func message() -> String {
             switch self {
@@ -40,6 +41,8 @@ class NetworkManager: NetworkManageable {
                 return "URL이 유효하지 않아요."
             case .requestError:
                 return "요청을 보내는 중에 오류가 발생했어요."
+            case .DecodeError:
+                return "응답을 복호화 하는 도중 문제가 발생했어요."
             }
         }
     }
