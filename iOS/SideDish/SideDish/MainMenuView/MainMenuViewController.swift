@@ -93,7 +93,8 @@ class MainMenuViewController: UIViewController {
 extension MainMenuViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let cell = tableView.dequeueReusableHeaderFooterView(withIdentifier: "MenuHeaderView") as? MainMenuHeader else {return UIView()}
-        cell.configureLabel(content: sectionName[section])
+        let contents = sectionName[section].components(separatedBy: "/")
+        cell.configureLabel(title: contents[0], content: contents[1])
         cell.index = section
         cell.delegate = self
         return cell
