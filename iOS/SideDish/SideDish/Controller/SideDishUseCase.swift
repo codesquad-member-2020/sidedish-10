@@ -9,39 +9,38 @@
 import Foundation
 
 struct SideDishUseCase {
-    static func loadDishes(with manager: NetworkManager, completed: @escaping([SideDishInfo], Int) -> ()) {
-        manager.getMainDish {
-            guard let data = $0.data else {return}
+    
+    enum JsonConvertError: Error {
+        case InvalidJson
+    }
+    
+    static func loadDishes(with manager: NetworkManager, failureHandler: @escaping (Error) -> () = {_ in}, completed: @escaping([SideDishInfo], Int) -> ()) {
+        
+        manager.getMainDish(failureHandler: failureHandler) {
             do {
-                let model = try JSONDecoder().decode(SideDish.self, from: data)
+                let model = try JSONDecoder().decode(SideDish.self, from: $0)
                 completed(model.sideDishes, 0)
             } catch {
-                NotificationCenter.default.post(name: .InvalidJson, object: nil)
+                failureHandler(JsonConvertError.InvalidJson)
             }
         }
         
-        manager.getSideDish {
-            guard let data = $0.data else {return}
+        manager.getSideDish(failureHandler: failureHandler) {
             do {
-                let model = try JSONDecoder().decode(SideDish.self, from: data)
+                let model = try JSONDecoder().decode(SideDish.self, from: $0)
                 completed(model.sideDishes, 1)
             } catch {
-                NotificationCenter.default.post(name: .InvalidJson, object: nil)
+                failureHandler(JsonConvertError.InvalidJson)
             }
         }
         
-        manager.getSoupDish {
-            guard let data = $0.data else {return}
+        manager.getSoupDish(failureHandler: failureHandler) {
             do {
-                let model = try JSONDecoder().decode(SideDish.self, from: data)
+                let model = try JSONDecoder().decode(SideDish.self, from: $0)
                 completed(model.sideDishes, 2)
             } catch {
-                NotificationCenter.default.post(name: .InvalidJson, object: nil)
+                failureHandler(JsonConvertError.InvalidJson)
             }
         }
     }
-}
-
-extension Notification.Name {
-    static let InvalidJson = Notification.Name("InvalidJson")
 }
