@@ -30,6 +30,6 @@ class MainMenuViewDataSource: NSObject, UITableViewDataSource {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return sideDishManager.sectionCount()
     }
 }

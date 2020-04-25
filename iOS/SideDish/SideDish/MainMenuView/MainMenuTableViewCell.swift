@@ -32,7 +32,7 @@ class MainMenuTableViewCell: UITableViewCell {
             case .failure(let error):
                 switch error {
                 case .DataEmpty: break
-                case .InvalidStatusCode(let code): break
+                case .InvalidStatusCode( _): break
                 case .InvalidURL: break
                 case .requestError: break
                 }

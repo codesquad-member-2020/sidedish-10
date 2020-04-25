@@ -14,11 +14,6 @@ class MainMenuViewController: UIViewController {
     @IBOutlet weak var mainMenuTableView: UITableView!
     
     private var mainMenuDataSource =  MainMenuViewDataSource()
-    private let sectionName = ["메인반찬 / 한그릇 뚝딱 메인 요리","국.찌개 / 김이 모락모락 국.찌개","밑반찬 / 언제 먹어도 든든한 밑반찬"]
-    
-    private func sectionName(at index: Int) -> String {
-        return sectionName[index]
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,7 +88,8 @@ class MainMenuViewController: UIViewController {
 extension MainMenuViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let cell = tableView.dequeueReusableHeaderFooterView(withIdentifier: "MenuHeaderView") as? MainMenuHeader else {return UIView()}
-        let contents = sectionName[section].components(separatedBy: "/")
+        let sectionInfo = mainMenuDataSource.sideDishManager.sectionName(at: section)
+        let contents = sectionInfo.components(separatedBy: "/")
         cell.configureLabel(title: contents[0], content: contents[1])
         cell.index = section
         cell.delegate = self
