@@ -27,22 +27,28 @@ class MainMenuViewController: UIViewController {
                                                selector: #selector(reloadSection(_:)),
                                                name: .ModelInserted,
                                                object: nil)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(decodeError),
-                                               name: .DecodeError,
-                                               object: nil)
     }
     
     private func setupTableView() {
         mainMenuTableView.delegate = self
-        mainMenuTableView.dataSource = mainMenuDataSource
         mainMenuTableView.register(MainMenuHeader.self, forHeaderFooterViewReuseIdentifier: "MenuHeaderView")
+        mainMenuTableView.dataSource = mainMenuDataSource
     }
     
     private func configureUseCase() {
-        SideDishUseCase.loadDishes(with: NetworkManager(), failureHandler: { error in
-            self.errorHandling(error: error)
-        }) {model, index in
+        SideDishUseCase.loadMainDish(with: NetworkManager(), failureHandler: {self.errorHandling(error: $0)}) {model, index in
+            DispatchQueue.main.async {
+                self.mainMenuDataSource.sideDishManager.insert(into: index, rows: model)
+            }
+        }
+        
+        SideDishUseCase.loadSideDish(with: NetworkManager(), failureHandler: {self.errorHandling(error: $0)}) {model, index in
+            DispatchQueue.main.async {
+                self.mainMenuDataSource.sideDishManager.insert(into: index, rows: model)
+            }
+        }
+        
+        SideDishUseCase.loadSoupDish(with: NetworkManager(), failureHandler: {self.errorHandling(error: $0)}) {model, index in
             DispatchQueue.main.async {
                 self.mainMenuDataSource.sideDishManager.insert(into: index, rows: model)
             }
@@ -59,41 +65,25 @@ class MainMenuViewController: UIViewController {
     }
     
     private func errorHandling(error: NetworkManager.NetworkError) {
-        switch error {
-        case .DataEmpty:
-            alertError(message: "데이터가 비었어요.")
-            break
-        case .InvalidStatusCode(let code):
-            alertError(message: "\(code) 에러 발생했어요.")
-            break
-        case .InvalidURL:
-            alertError(message: "URL이 유효하지 않아요.")
-            break
-        case .requestError:
-            alertError(message: "요청을 보내는 중에 오류가 발생했어요.")
-            break
-        }
+        alertError(message: error.message())
     }
     
     @objc func reloadSection(_ notification: Notification) {
         guard let index = notification.userInfo?["index"] as? Int else {return}
         mainMenuTableView.reloadSections(IndexSet(index...index), with: .automatic)
     }
-    
-    @objc func decodeError() {
-        alertError(message: "응답을 복호화 하는 도중 문제가 발생했어요.")
-    }
 }
 
 extension MainMenuViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let cell = tableView.dequeueReusableHeaderFooterView(withIdentifier: "MenuHeaderView") as? MainMenuHeader else {return UIView()}
+        guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "MenuHeaderView") as? MainMenuHeader else {return UIView()}
         let sectionInfo = mainMenuDataSource.sideDishManager.sectionName(at: section)
         let contents = sectionInfo.components(separatedBy: "/")
-        cell.configureLabel(title: contents[0], content: contents[1])
-        cell.index = section
-        cell.delegate = self
-        return cell
+        headerView.setTitleLabel(text: contents[0])
+        headerView.setContentLabel(text: contents[1])
+        headerView.index = section
+        headerView.delegate = self
+        return headerView
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -115,7 +105,7 @@ extension Notification.Name {
 }
 
 extension MainMenuViewController: SectionTapped {
-    func sectionTapped(at section: Int, title: String) {
+    func sectionTapped(headerView: MainMenuHeader, at section: Int, title: String) {
         let numOfRows = mainMenuDataSource.sideDishManager.numOfRows(at: section)
         Toast(text: "\(title): \(numOfRows)개").show()
     }

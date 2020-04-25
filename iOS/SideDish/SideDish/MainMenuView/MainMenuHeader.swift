@@ -9,7 +9,7 @@
 import UIKit
 
 protocol SectionTapped {
-    func sectionTapped(at section: Int, title: String)
+    func sectionTapped(headerView: MainMenuHeader, at section: Int, title: String)
 }
 
 class MainMenuHeader: UITableViewHeaderFooterView {
@@ -40,7 +40,7 @@ class MainMenuHeader: UITableViewHeaderFooterView {
     }()
     
     var index: Int!
-    var delegate: SectionTapped!
+    var delegate: SectionTapped?
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -50,7 +50,7 @@ class MainMenuHeader: UITableViewHeaderFooterView {
     
     @objc func tapped(_ recognizer: UITapGestureRecognizer) {
         guard let title = titleLabel.text else {return}
-        delegate.sectionTapped(at: index, title: title)
+        delegate?.sectionTapped(headerView: self, at: index, title: title)
     }
     
     override init(reuseIdentifier: String?) {
@@ -73,8 +73,11 @@ class MainMenuHeader: UITableViewHeaderFooterView {
         stackView.addArrangedSubview(contentLabel)
     }
     
-    func configureLabel(title: String, content: String) {
-        self.titleLabel.text = title
-        self.contentLabel.text = content
+    func setTitleLabel(text: String) {
+        self.titleLabel.text = text
+    }
+    
+    func setContentLabel(text: String) {
+        self.contentLabel.text = text
     }
 }
