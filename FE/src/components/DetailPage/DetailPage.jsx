@@ -12,6 +12,7 @@ class DetailPage extends React.Component {
     };
     this.buttonClickHandler = this.buttonClickHandler.bind(this);
     this.inputChangeHandler = this.inputChangeHandler.bind(this);
+    this.addCommaToPrice = this.addCommaToPrice.bind(this);
   }
 
   componentDidMount() {
@@ -33,12 +34,24 @@ class DetailPage extends React.Component {
     this.setState({ ...this.state, counts: value, totalSum });
   }
 
+  getProperRemainder(price) {
+    const remainder = price % 1000;
+    if (remainder >= 100) {
+      return `${remainder}`;
+    }
+    if (remainder >= 10) {
+      return `0${remainder}`;
+    }
+    return `00${remainder}`;
+  }
+
   addCommaToPrice(price) {
-    const quotient = price / 1000;
+    const quotient = Math.floor(price / 1000);
+    const remainder = this.getProperRemainder(price);
     if (quotient < 1) {
       return "0";
     }
-    return `${quotient},000`;
+    return `${quotient},${remainder}`;
   }
 
   render() {
