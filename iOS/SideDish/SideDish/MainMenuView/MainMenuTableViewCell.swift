@@ -8,10 +8,6 @@
 
 import UIKit
 
-protocol ImageDownloadDelegate {
-    func downloadImage(_ cell: MainMenuTableViewCell)
-}
-
 class MainMenuTableViewCell: UITableViewCell {
     
     @IBOutlet weak var menuImageView: UIImageView!
@@ -20,8 +16,6 @@ class MainMenuTableViewCell: UITableViewCell {
     @IBOutlet weak var originalPriceLabel: UILabel!
     @IBOutlet weak var specialPriceLabel: UILabel!
     @IBOutlet weak var eventStackView: UIStackView!
-    
-    var delegate: ImageDownloadDelegate?
     
     func setImageFromData(data: Data) {
         DispatchQueue.main.async {
@@ -36,11 +30,6 @@ class MainMenuTableViewCell: UITableViewCell {
         setOriginPriceLabel(text: info.originalPrice)
         setSpecialPriceLabel(text: info.specialPrice)
         setEventStackView(badges: info.badges)
-        setImage()
-    }
-    
-    private func setImage() {
-        delegate?.downloadImage(self)
     }
     
     private func setTitle(text title: String) {
