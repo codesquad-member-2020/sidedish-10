@@ -9,6 +9,7 @@ DROP TABLE IF EXISTS badge;
 DROP TABLE IF EXISTS item;
 DROP TABLE IF EXISTS detail;
 DROP TABLE IF EXISTS point;
+DROP TABLE IF EXISTS user;
 
 CREATE TABLE menu
 (
@@ -85,7 +86,7 @@ CREATE TABLE detail
 CREATE TABLE user
 (
     id                  int auto_increment primary key,
-    userId              varchar(45),
+    user_id              varchar(45),
     name                varchar(45),
     email               varchar(100)
 );
