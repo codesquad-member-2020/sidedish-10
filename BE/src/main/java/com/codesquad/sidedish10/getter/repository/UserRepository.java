@@ -1,5 +1,6 @@
-package com.codesquad.sidedish10.getter.domain;
+package com.codesquad.sidedish10.getter.repository;
 
+import com.codesquad.sidedish10.getter.domain.User;
 import org.springframework.data.jdbc.repository.query.Modifying;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.CrudRepository;

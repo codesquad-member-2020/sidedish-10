@@ -26,8 +26,9 @@ public interface ParserRepository extends CrudRepository<BabChanObject, Long> {
   void insert_n_price(@Param("n_price") String n_price, @Param("detail_hash") String detail_hash);
 
   @Modifying
-  @Query("INSERT INTO badge (title, detail_hash) VALUES (:title, :detail_hash)")
-  void insert_badge_title(@Param("title") String title, @Param("detail_hash") String detail_hash);
+  @Query("INSERT INTO badge (title, color, detail_hash) VALUES (:title, :color, :detail_hash)")
+  void insert_badge_info(@Param("title") String title, @Param("color") String color,
+      @Param("detail_hash") String detail_hash);
 
   @Modifying
   @Query("INSERT INTO delivery_type (title, detail_hash) VALUES (:title, :detail_hash)")

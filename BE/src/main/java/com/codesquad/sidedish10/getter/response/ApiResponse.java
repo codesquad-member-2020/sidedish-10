@@ -1,4 +1,4 @@
-package com.codesquad.sidedish10.getter.utils;
+package com.codesquad.sidedish10.getter.response;
 
 public class ApiResponse {
   private int statusCode;

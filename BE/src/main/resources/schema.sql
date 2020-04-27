@@ -13,8 +13,10 @@ DROP TABLE IF EXISTS user;
 
 CREATE TABLE menu
 (
-    id    int primary key auto_increment,
-    title varchar(45)
+    menu_id    int primary key auto_increment,
+    title varchar(45),
+    eng_name varchar(45),
+    info varchar(100)
 );
 CREATE TABLE best_category
 (
@@ -55,6 +57,7 @@ CREATE TABLE badge
 (
     id    int primary key auto_increment,
     title varchar(45),
+    color varchar(45),
     detail_hash varchar(45)
 );
 CREATE TABLE point

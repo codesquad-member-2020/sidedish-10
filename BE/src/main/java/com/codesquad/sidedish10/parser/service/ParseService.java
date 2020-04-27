@@ -63,8 +63,8 @@ public class ParseService {
       }
       if (babChanObject.getBadges() != null) {
         String finalDetail_hash = detail_hash;
-        babChanObject.getBadges().forEach(element -> parserRepository.insert_badge_title(element,
-            finalDetail_hash));
+        babChanObject.getBadges().forEach(element -> parserRepository.insert_badge_info(element,
+            insertBadgeColor(element), finalDetail_hash));
       }
       if (babChanObject.getN_price() != null) {
         n_price = babChanObject.getN_price() + "원";
@@ -126,5 +126,15 @@ public class ParseService {
           .insertDetailWithOutPrices(detail_hash, top_image, product_description, point,
               delivery_info, delivery_fee);
     }
+  }
+
+  public String insertBadgeColor(String badge) {
+    if (badge.equals("론칭특가")) {
+      return "#F46928";
+    }
+    if (badge.equals("이벤트특가")) {
+      return "#D1B3F5";
+    }
+    return "#000000";
   }
 }

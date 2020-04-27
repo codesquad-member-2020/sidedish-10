@@ -2,6 +2,7 @@ package com.codesquad.sidedish10.getter.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.List;
+import java.util.Map;
 
 public class BabChanItemResponseDto {
 
@@ -15,7 +16,7 @@ public class BabChanItemResponseDto {
   private String s_price;
   private int id;
   private int menu_id;
-  private List<String> badges;
+  private List<Map<String, String>> badges;
 
   private BabChanItemResponseDto(String detail_hash, String image, String alt, String title,
       String description, int id, int menu_id) {
@@ -105,11 +106,11 @@ public class BabChanItemResponseDto {
     this.menu_id = menu_id;
   }
 
-  public List<String> getBadges() {
+  public List<Map<String, String>> getBadges() {
     return badges;
   }
 
-  public void setBadges(List<String> badges) {
+  public void setBadges(List<Map<String, String>> badges) {
     this.badges = badges;
   }
 }
