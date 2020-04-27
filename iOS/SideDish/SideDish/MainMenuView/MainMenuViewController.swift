@@ -30,17 +30,27 @@ class MainMenuViewController: UIViewController {
             }
             let imageURL = self.localFilePath(for: requestURL)
             
-            ImageUseCase.loadImage(with: NetworkManager(), from: requestURL, failureHandler: {self.errorHandling(error: $0)}) { resultURL in
+            if FileManager.default.fileExists(atPath: imageURL.path) {
                 do {
-                    let data = try Data(contentsOf: resultURL)
+                    let data = try Data(contentsOf: imageURL)
                     DispatchQueue.main.async {
                         cell.setImageFromData(data: data)
                     }
                 } catch {
                     self.errorHandling(error: .DecodeError)
                 }
-                try? FileManager.default.moveItem(at: resultURL, to: imageURL)
-                
+            } else {
+                ImageUseCase.loadImage(with: NetworkManager(), from: requestURL, failureHandler: {self.errorHandling(error: $0)}) { resultURL in
+                    do {
+                        let data = try Data(contentsOf: resultURL)
+                        DispatchQueue.main.async {
+                            cell.setImageFromData(data: data)
+                        }
+                    } catch {
+                        self.errorHandling(error: .DecodeError)
+                    }
+                    try? FileManager.default.moveItem(at: resultURL, to: imageURL)
+                }
             }
         }
     }
