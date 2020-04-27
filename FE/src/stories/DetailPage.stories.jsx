@@ -6,6 +6,6 @@ import DetailPage from "../components/DetailPage/DetailPage";
 
 storiesOf("DetailPage", module).addWithJSX("기본 설정", () => (
   <DetailPage
-    target={{ s_price: 3800, title: "루다 포토 카드", image: luda }}
+    target={{ s_price: "3,800원", title: "루다 포토 카드", image: luda }}
   />
 ));
