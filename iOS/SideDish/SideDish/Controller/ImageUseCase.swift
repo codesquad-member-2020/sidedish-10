@@ -15,27 +15,26 @@ struct ImageUseCase {
         let imageURL = cachesDirectory.appendingPathComponent(from.lastPathComponent)
         
         if FileManager.default.fileExists(atPath: imageURL.path) {
-            do {
-                let data = try Data(contentsOf: imageURL)
-                completed(data)
-            } catch {
-                failureHandler(.DecodeError)
-            }
+            handleData(from: imageURL, failureHandler: failureHandler, completed: completed)
         } else {
             manager.downloadResource(from: from) {
                 switch $0 {
                 case .failure(let error):
                     failureHandler(error)
                 case .success(let url):
-                    do {
-                        let data = try Data(contentsOf: url)
-                        completed(data)
-                        try? FileManager.default.moveItem(at: url, to: imageURL)
-                    } catch {
-                        failureHandler(.DecodeError)
-                    }
+                    handleData(from: url, failureHandler: failureHandler, completed: completed)
+                    try? FileManager.default.moveItem(at: url, to: imageURL)
                 }
             }
+        }
+    }
+    
+    private static func handleData(from url: URL, failureHandler: @escaping (NetworkManager.NetworkError) -> (), completed: @escaping(Data) -> ()) {
+        do {
+            let data = try Data(contentsOf: url)
+            completed(data)
+        } catch {
+            failureHandler(.DecodeError)
         }
     }
 }
