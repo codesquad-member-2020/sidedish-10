@@ -38,6 +38,7 @@ public class LoginController {
     res.setStatus(HttpStatus.OK.value());
     ApiResponse response = new ApiResponse();
     response.setStatusCode(200);
+    response.setBody("check your JWT token in the responded cookie.");
 
     return new ResponseEntity<>(response, HttpStatus.OK);
   }

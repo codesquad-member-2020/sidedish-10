@@ -45,6 +45,9 @@ public class JwtService {
 
   public String findJwtTokenFromCookie(HttpServletRequest request) {
     Cookie[] cookies = request.getCookies();
+    if (cookies == null) {
+      throw new JwtMissingException();
+    }
     logger.info("cookie: {}", cookies);
     for (Cookie cookie : cookies) {
       logger.info("cookie: {}", cookie);
