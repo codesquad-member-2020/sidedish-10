@@ -1,11 +1,15 @@
 package com.codesquad.sidedish10.getter.domain;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.Table;
 
+@Table("user")
 public class User {
 
   @Id
   private Long id;
+  @Column("user_id")
   private String userId;
   private String name;
   private String email;

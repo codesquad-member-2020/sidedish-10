@@ -12,11 +12,9 @@ public interface UserRepository extends CrudRepository<User, Long> {
   void insertUser(@Param("userId") String userId, @Param("name") String name,
       @Param("email") String email);
 
-  @Modifying
-  @Query("SELECT EXISTS (SELECT * FROM user WHERE userId = :userId)")
-  int findUserExistenceByUserId(@Param("userId") String userId);
+  @Query("SELECT EXISTS (SELECT * FROM user WHERE user_id = :user_id)")
+  int findUserExistenceByUserId(@Param("user_id") String userId);
 
-  @Modifying
-  @Query("SELECT * FROM USER WHERE userId = :userId")
-  User findUserByUserId(@Param("userId") String userId);
+  @Query("SELECT * FROM user WHERE user_id = :user_id")
+  User findUserByUserId(@Param("user_id") String user_id);
 }
