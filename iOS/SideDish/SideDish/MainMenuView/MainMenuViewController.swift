@@ -15,12 +15,38 @@ class MainMenuViewController: UIViewController {
     
     private var mainMenuDataSource =  MainMenuViewDataSource()
     
+    let cachesDirectory = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.interactivePopGestureRecognizer?.delegate = nil
         popUpLoginView()
         setupTableView()
         setupObserver()
+        mainMenuDataSource.handler = { cell, urlString in
+            guard let requestURL = URL(string: urlString) else {
+                self.errorHandling(error: .InvalidURL)
+                return
+            }
+            let imageURL = self.localFilePath(for: requestURL)
+            
+            ImageUseCase.loadImage(with: NetworkManager(), from: requestURL, failureHandler: {self.errorHandling(error: $0)}) { resultURL in
+                do {
+                    let data = try Data(contentsOf: resultURL)
+                    DispatchQueue.main.async {
+                        cell.setImageFromData(data: data)
+                    }
+                } catch {
+                    self.errorHandling(error: .DecodeError)
+                }
+                try? FileManager.default.moveItem(at: resultURL, to: imageURL)
+                
+            }
+        }
+    }
+    
+    private func localFilePath(for url: URL) -> URL {
+        return cachesDirectory.appendingPathComponent(url.lastPathComponent)
     }
     
     private func popUpLoginView() {

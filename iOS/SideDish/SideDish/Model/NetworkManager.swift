@@ -51,13 +51,8 @@ class NetworkManager: NetworkManageable {
         }
     }
     
-    func downloadResource(from: String, handler: @escaping downloadHandler) {
-        guard let url = URL(string: from) else {
-            handler(.failure(.InvalidURL))
-            return
-        }
-        
-        URLSession.shared.downloadTask(with: url) { (url, response, error) in
+    func downloadResource(from: URL, handler: @escaping downloadHandler) {
+        URLSession.shared.downloadTask(with: from) { (url, response, error) in
             guard error == nil else {
                 handler(.failure(.requestError))
                 return
@@ -79,7 +74,7 @@ class NetworkManager: NetworkManageable {
             }
             
             handler(.success(url))
-        }
+        }.resume()
     }
     
     func getResource(from: String, method: HTTPMethod, headers: HTTPHeaders?, handler: @escaping dataHandler) {
@@ -125,7 +120,7 @@ class NetworkManager: NetworkManageable {
         getResource(from: EndPoints.serverURL + EndPoints.side, method: .get, headers: nil, handler: handler)
     }
     
-    func getImageURL(from: String, handler: @escaping downloadHandler) {
+    func getImageURL(from: URL, handler: @escaping downloadHandler) {
         downloadResource(from: from, handler: handler)
     }
 }

@@ -10,18 +10,7 @@ import Foundation
 
 struct ImageUseCase {
     
-    static func loadImage(with manager: NetworkManager, url: String, failureHandler: @escaping (NetworkManager.NetworkError) -> () = {_ in}, completed: @escaping(Data) -> ()) {
-        manager.getResource(from: url, method: .get, headers: nil) {
-            switch $0 {
-            case .failure(let error):
-                failureHandler(error)
-            case .success(let data):
-                completed(data)
-            }
-        }
-    }
-    
-    static func loadImage(with manager: NetworkManager, from: String, failureHandler: @escaping (NetworkManager.NetworkError) -> (), completed: @escaping(URL) -> ()) {
+    static func loadImage(with manager: NetworkManager, from: URL, failureHandler: @escaping (NetworkManager.NetworkError) -> (), completed: @escaping(URL) -> ()) {
         manager.downloadResource(from: from) {
             switch $0 {
             case .failure(let error):
