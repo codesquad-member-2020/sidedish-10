@@ -10,10 +10,11 @@ import Foundation
 import Alamofire
 
 protocol NetworkManageable {
-    func getResource(from: String, method: HTTPMethod, headers: HTTPHeaders?, handler : @escaping Handler)
+    func getResource(from: String, method: HTTPMethod, headers: HTTPHeaders?, handler : @escaping dataHandler)
 }
 
-typealias Handler = (Result<Data, NetworkManager.NetworkError>) -> Void
+typealias dataHandler = (Result<Data, NetworkManager.NetworkError>) -> Void
+typealias downloadHandler = (Result<URL, NetworkManager.NetworkError>) -> Void
 
 class NetworkManager: NetworkManageable {
     
@@ -50,8 +51,38 @@ class NetworkManager: NetworkManageable {
         }
     }
     
-    func getResource(from: String, method: HTTPMethod, headers: HTTPHeaders?, handler : @escaping Handler) {
+    func downloadResource(from: String, handler: @escaping downloadHandler) {
+        guard let url = URL(string: from) else {
+            handler(.failure(.InvalidURL))
+            return
+        }
         
+        URLSession.shared.downloadTask(with: url) { (url, response, error) in
+            guard error == nil else {
+                handler(.failure(.requestError))
+                return
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse else {
+                handler(.failure(.InvalidHTTPResonse))
+                return
+            }
+            
+            guard httpResponse.statusCode == 200 else {
+                handler(.failure(.InvalidStatusCode(httpResponse.statusCode)))
+                return
+            }
+            
+            guard let url = url else {
+                handler(.failure(.DataEmpty))
+                return
+            }
+            
+            handler(.success(url))
+        }
+    }
+    
+    func getResource(from: String, method: HTTPMethod, headers: HTTPHeaders?, handler: @escaping dataHandler) {
         guard let url = URL(string: from) else {
             handler(.failure(.InvalidURL))
             return
@@ -82,15 +113,19 @@ class NetworkManager: NetworkManageable {
         }.resume()
     }
     
-    func getMainDish(handler: @escaping Handler) {
+    func getMainDish(handler: @escaping dataHandler) {
         getResource(from: EndPoints.serverURL + EndPoints.main, method: .get, headers: nil, handler: handler)
     }
     
-    func getSoupDish(handler: @escaping Handler) {
+    func getSoupDish(handler: @escaping dataHandler) {
         getResource(from: EndPoints.serverURL + EndPoints.soup, method: .get, headers: nil, handler: handler)
     }
     
-    func getSideDish(handler: @escaping Handler) {
+    func getSideDish(handler: @escaping dataHandler) {
         getResource(from: EndPoints.serverURL + EndPoints.side, method: .get, headers: nil, handler: handler)
+    }
+    
+    func getImageURL(from: String, handler: @escaping downloadHandler) {
+        downloadResource(from: from, handler: handler)
     }
 }
