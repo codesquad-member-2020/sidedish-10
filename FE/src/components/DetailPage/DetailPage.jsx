@@ -1,8 +1,6 @@
 import React from "react";
 import MiniCarousel from "./MiniCarousel/MiniCarousel";
 
-import irene from "../../mockData/imgs/irene.jpg";
-
 import "./DetailPage.css";
 
 class DetailPage extends React.Component {
@@ -17,7 +15,9 @@ class DetailPage extends React.Component {
   }
 
   buttonClickHandler() {
-    const totalSum = this.state.counts * this.props.price;
+    const { s_price } = this.props.target;
+    const totalSum =
+      this.state.counts * parseInt(s_price.split("원")[0].replace(",", ""));
     this.setState({ ...this.state, totalSum });
   }
 
@@ -27,18 +27,21 @@ class DetailPage extends React.Component {
   }
 
   render() {
+    const { image, title, s_price } = this.props.target;
     return (
       <div className="detail-page">
         <div className="upper-page">
           <div
             className="banchan-picture"
-            style={{ backgroundImage: `url(${irene})` }}
+            style={{ backgroundImage: `url(${image})` }}
           ></div>
           <div className="explanation">
             <div className="explanation-header underline">
               <div className="explanation-title">
-                <span>[아이린]</span>
-                <span>엑스표</span>
+                <span>{title}</span>
+                <span className="close-button" onClick={this.props.closeModal}>
+                  X
+                </span>
               </div>
               <div className="explanation-memo">칼칼해서 더 좋아요</div>
             </div>
@@ -58,12 +61,16 @@ class DetailPage extends React.Component {
                   <li>2500원(40,000원) 이상 구매 시 무료</li>
                 </div>
               </div>
-              <div className="explanation-price">{this.props.price}원</div>
+              <div className="explanation-price">{s_price}</div>
             </div>
             <div className="shipment-count">
               <div className="counts">수량</div>
               <div className="counts-input">
-                <input type="number" onChange={this.inputChangeHandler} />
+                <input
+                  type="number"
+                  value={this.state.counts}
+                  onChange={this.inputChangeHandler}
+                />
               </div>
             </div>
             <div className="total-price">
@@ -76,7 +83,7 @@ class DetailPage extends React.Component {
           </div>
         </div>
         <div className="lower-page">
-          <div className="lower-title">함께 하면 좋은 아이돌</div>
+          <div className="lower-title">밥 같이 먹으면 좋은 아이돌</div>
           <MiniCarousel />
         </div>
       </div>

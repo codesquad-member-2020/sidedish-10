@@ -34,14 +34,17 @@
   transform: translateX(0%) translateZ(-40px) scale(0.9);
   background: coral;
 }
+
 .mini-panels:nth-child(2) {
   transform: translateX(-55%) translateZ(-20px) scale(0.95);
   background: coral;
 }
+
 .mini-panels:nth-child(3) {
   transform: translateX(0%) translateZ(0px) scale(1);
   background: chartreuse;
 }
+
 .mini-panels:nth-child(4) {
   transform: translateX(105%) translateZ(0px) scale(1);
   background: chartreuse;
@@ -55,11 +58,4 @@
 .mini-panels:nth-child(6) {
   transform: translateX(105%) translateZ(-40px) scale(0.9);
   background: chartreuse;
-}
-
-.mini-carousel-buttons {
-  display: flex;
-  justify-content: center;
-  width: 50%;
-  transform: translateY(200px);
 }
