@@ -30,16 +30,18 @@ public class LoginController {
 
   @GetMapping("/login/github/request")
   public ResponseEntity<ApiResponse> GitHubLogin(@RequestParam("code") String code, HttpServletResponse res) {
+
     GitHubToken token = loginService.getAccessToken(code);
     User nowUser = loginService.getUserInfo(token);
     String jwtToken = jwtService.makeJwt(nowUser.getUserId(), nowUser.getName(), nowUser.getEmail());
+
     Cookie cookie = new Cookie("jwtToken", jwtToken);
     res.addCookie(cookie);
     res.setStatus(HttpStatus.OK.value());
+
     ApiResponse response = new ApiResponse();
     response.setStatusCode(200);
     response.setBody("check your JWT token in the responded cookie.");
-
     return new ResponseEntity<>(response, HttpStatus.OK);
   }
 
