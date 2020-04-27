@@ -23,6 +23,10 @@ class MainMenuViewController: UIViewController {
         popUpLoginView()
         setupTableView()
         setupObserver()
+        setupDataSource()
+    }
+    
+    private func setupDataSource() {
         mainMenuDataSource.handler = { cell, urlString in
             guard let requestURL = URL(string: urlString) else {
                 self.errorHandling(error: .InvalidURL)
@@ -31,27 +35,24 @@ class MainMenuViewController: UIViewController {
             let imageURL = self.localFilePath(for: requestURL)
             
             if FileManager.default.fileExists(atPath: imageURL.path) {
-                do {
-                    let data = try Data(contentsOf: imageURL)
-                    DispatchQueue.main.async {
-                        cell.setImageFromData(data: data)
-                    }
-                } catch {
-                    self.errorHandling(error: .DecodeError)
-                }
+                self.setImage(into: cell, from: imageURL)
             } else {
                 ImageUseCase.loadImage(with: NetworkManager(), from: requestURL, failureHandler: {self.errorHandling(error: $0)}) { resultURL in
-                    do {
-                        let data = try Data(contentsOf: resultURL)
-                        DispatchQueue.main.async {
-                            cell.setImageFromData(data: data)
-                        }
-                    } catch {
-                        self.errorHandling(error: .DecodeError)
-                    }
+                    self.setImage(into: cell, from: resultURL)
                     try? FileManager.default.moveItem(at: resultURL, to: imageURL)
                 }
             }
+        }
+    }
+    
+    private func setImage(into cell: MainMenuTableViewCell, from url: URL) {
+        do {
+            let data = try Data(contentsOf: url)
+            DispatchQueue.main.async {
+                cell.setImageFromData(data: data)
+            }
+        } catch {
+            self.errorHandling(error: .DecodeError)
         }
     }
     
