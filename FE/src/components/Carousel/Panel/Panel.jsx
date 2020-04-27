@@ -4,8 +4,8 @@ import Profile from "./Profile/Profile";
 import "./Panel.css";
 
 class Panel extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
   }
 
   render() {
@@ -33,6 +33,7 @@ class Panel extends React.Component {
             s_price={profile.s_price}
             description={profile.description}
             badges={profile.badges}
+            key={profile.title}
           />
         </div>
         <div

@@ -1,5 +1,7 @@
 import React from "react";
 import MiniCarousel from "./MiniCarousel/MiniCarousel";
+import { openModal, closeModal } from "../../actions/modalAction";
+import { connect } from "react-redux";
 
 import "./DetailPage.css";
 
@@ -16,7 +18,7 @@ class DetailPage extends React.Component {
   }
 
   componentDidMount() {
-    const { s_price } = this.props.target;
+    const { s_price } = this.props.targetProfile;
     const priceValue = parseInt(s_price.split("원")[0].replace(",", ""));
     this.setState({ ...this.state, priceValue });
   }
@@ -30,6 +32,7 @@ class DetailPage extends React.Component {
     if (value < 0) {
       value = 0;
     }
+
     const totalSum = value * this.state.priceValue;
     this.setState({ ...this.state, counts: value, totalSum });
   }
@@ -55,7 +58,7 @@ class DetailPage extends React.Component {
   }
 
   render() {
-    const { image, title, s_price } = this.props.target;
+    const { image, title, s_price } = this.props.targetProfile;
     return (
       <div className="detail-page">
         <div className="upper-page">
@@ -121,4 +124,18 @@ class DetailPage extends React.Component {
   }
 }
 
-export default DetailPage;
+const mapStateToProps = (state, props) => {
+  return {
+    targetProfile: state.modal.targetProfile,
+    on: state.modal.on,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    openModal: () => dispatch(openModal()),
+    closeModal: () => dispatch(closeModal()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(DetailPage);

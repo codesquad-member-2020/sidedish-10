@@ -1,7 +1,11 @@
 import React from "react";
 import Panel from "./Panel/Panel";
-import Modal from "../Modal/Modal";
-import DetailPage from "../DetailPage/DetailPage";
+import {
+  openModal,
+  closeModal,
+  setTargetProfile,
+} from "../../actions/modalAction";
+import { connect } from "react-redux";
 
 import "./Carousel.css";
 
@@ -110,37 +114,27 @@ class Carousel extends React.Component {
         },
       ],
       panels: [false, false, false, false, false, false, false, false],
-      modalOn: false,
-      target: {
-        imgSrc: undefined,
-      },
     };
-    this.closeModal = this.closeModal.bind(this);
   }
 
   toggleCard(index) {
+    const { setTargetProfile, openModal, closeModal } = this.props;
     const newPanels = [...this.state.panels];
-    const { profiles } = this.state;
     newPanels[index] = !newPanels[index];
+    setTargetProfile(this.state.profiles[index]);
     if (newPanels[index] === true) {
       this.setState({
         ...this.state,
         panels: newPanels,
-        modalOn: false,
-        target: profiles[index],
       });
+      closeModal();
       return;
     }
     this.setState({
       ...this.state,
       panels: newPanels,
-      modalOn: true,
-      target: profiles[index],
     });
-  }
-
-  closeModal() {
-    this.setState({ ...this.state, modalOn: false });
+    openModal();
   }
 
   render() {
@@ -150,14 +144,6 @@ class Carousel extends React.Component {
 
     return (
       <div className="stage">
-        {this.state.modalOn ? (
-          <Modal>
-            <DetailPage
-              target={this.state.target}
-              closeModal={this.closeModal}
-            />
-          </Modal>
-        ) : null}
         <div className="carousel">
           <div className="carousel-title">
             <span>언제 먹어도</span>
@@ -181,4 +167,20 @@ class Carousel extends React.Component {
   }
 }
 
-export default Carousel;
+const mapStateToProps = (state, props) => {
+  return {
+    on: state.modal.on,
+    targetProfile: state.modal.targetProfile,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    openModal: () => dispatch(openModal()),
+    closeModal: () => dispatch(closeModal()),
+    setTargetProfile: (targetProfile) =>
+      dispatch(setTargetProfile(targetProfile)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Carousel);

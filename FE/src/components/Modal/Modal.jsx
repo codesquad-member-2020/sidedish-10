@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 
 import "./Modal.css";
 
@@ -8,9 +9,15 @@ class Modal extends React.Component {
   }
 
   render() {
-    const { children } = this.props;
-    return <div className="modal">{children}</div>;
+    const { children, on } = this.props;
+    return <>{on ? <div className="modal">{children}</div> : null}</>;
   }
 }
 
-export default Modal;
+const mapStateToProps = (state, props) => {
+  return {
+    on: state.modal.on,
+  };
+};
+
+export default connect(mapStateToProps)(Modal);
