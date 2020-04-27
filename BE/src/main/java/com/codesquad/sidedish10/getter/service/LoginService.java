@@ -7,7 +7,10 @@ import com.codesquad.sidedish10.getter.exception.JsonNotFoundException;
 import com.codesquad.sidedish10.getter.exception.RudimentaryException;
 import com.codesquad.sidedish10.getter.exception.UserNotFoundException;
 import com.codesquad.sidedish10.getter.utils.OAuth2SecurityInfo;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -49,42 +52,38 @@ public class LoginService {
 
     HttpEntity<?> request = new HttpEntity<>(requestPayloads, headers);
     ResponseEntity<?> response = new RestTemplate().postForEntity(url, request, GitHubToken.class);
-    //TODO 이거 캐스팅되는 거 원리 공부하자.
-    GitHubToken token = (GitHubToken) response.getBody();
-
-    return token;
+    return (GitHubToken) response.getBody();
   }
 
   public User getUserInfo(GitHubToken token) {
     HttpHeaders headers = new HttpHeaders();
-    headers.set(HttpHeaders.AUTHORIZATION, token.getAccess_token());
+    headers.set(HttpHeaders.AUTHORIZATION, token.getToken_Response());
 
     HttpEntity<?> request = new HttpEntity<>(headers);
 
-    ResponseEntity<JsonObject> responseObject = new RestTemplate()
+    ResponseEntity<Object> responseObject = new RestTemplate()
         .exchange(OAuth2SecurityInfo.USER_INFO_REQUEST_URL, HttpMethod.GET, request,
-            JsonObject.class);
+            Object.class);
 
-    JsonObject jsonObject = Optional.ofNullable(responseObject.getBody())
-        .orElseThrow(() -> new JsonNotFoundException());
+    String jsonString = new Gson().toJson(responseObject.getBody(), Map.class);
+    JsonElement jsonObject = new Gson().fromJson(jsonString, JsonElement.class);
 
-    String userId = Objects.requireNonNull(jsonObject).getAsJsonObject("login").toString();
-    String name = Objects.requireNonNull(jsonObject).getAsJsonObject("name").toString();
-    String email = Objects.requireNonNull(jsonObject).getAsJsonObject("email").toString();
+    String user_id = jsonObject.getAsJsonObject().get("login").toString().replaceAll("\"", "");
+    String name = jsonObject.getAsJsonObject().get("name").toString().replaceAll("\"", "");
+    String email = jsonObject.getAsJsonObject().get("email").toString().replaceAll("\"", "");
 
-    if (userRepository.findUserExistenceByUserId(userId) == OAuth2SecurityInfo.USER_NOT_EXISTS) {
-      return saveNewUser(userId, name, email);
+    if (userRepository.findUserExistenceByUserId(user_id) == OAuth2SecurityInfo.USER_NOT_EXISTS) {
+      return saveNewUser(user_id, name, email);
     }
-    if (userRepository.findUserExistenceByUserId(userId) == OAuth2SecurityInfo.USER_EXISTS) {
-      return userRepository.findUserByUserId(userId);
+    if (userRepository.findUserExistenceByUserId(user_id) == OAuth2SecurityInfo.USER_EXISTS) {
+      return userRepository.findUserByUserId(user_id);
     }
     throw new UserNotFoundException();
   }
 
-  public User saveNewUser(String userId, String name, String email) {
-    User newUser = User.create(userId, name, email);
+  public User saveNewUser(String user_id, String name, String email) {
+    User newUser = User.create(user_id, name, email);
     userRepository.save(newUser);
-
     return newUser;
   }
 }
