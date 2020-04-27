@@ -15,17 +15,64 @@ class MainMenuViewController: UIViewController {
     
     private var mainMenuDataSource =  MainMenuViewDataSource()
     
+    let cachesDirectory = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureUseCase()
+        navigationController?.interactivePopGestureRecognizer?.delegate = nil
+        popUpLoginView()
         setupTableView()
         setupObserver()
+        setupDataSource()
+    }
+    
+    private func setupDataSource() {
+        mainMenuDataSource.handler = { cell, urlString in
+            guard let requestURL = URL(string: urlString) else {
+                self.errorHandling(error: .InvalidURL)
+                return
+            }
+            let imageURL = self.localFilePath(for: requestURL)
+            
+            if FileManager.default.fileExists(atPath: imageURL.path) {
+                self.setImage(into: cell, from: imageURL)
+            } else {
+                ImageUseCase.loadImage(with: NetworkManager(), from: requestURL, failureHandler: {self.errorHandling(error: $0)}) { resultURL in
+                    self.setImage(into: cell, from: resultURL)
+                    try? FileManager.default.moveItem(at: resultURL, to: imageURL)
+                }
+            }
+        }
+    }
+    
+    private func setImage(into cell: MainMenuTableViewCell, from url: URL) {
+        do {
+            let data = try Data(contentsOf: url)
+            DispatchQueue.main.async {
+                cell.setImageFromData(data: data)
+            }
+        } catch {
+            self.errorHandling(error: .DecodeError)
+        }
+    }
+    
+    private func localFilePath(for url: URL) -> URL {
+        return cachesDirectory.appendingPathComponent(url.lastPathComponent)
+    }
+    
+    private func popUpLoginView() {
+        guard let loginViewController = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController else {return}
+        present(loginViewController, animated: true)
     }
     
     private func setupObserver() {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(reloadSection(_:)),
                                                name: .ModelInserted,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(loadData),
+                                               name: .LoginSuccess,
                                                object: nil)
     }
     
@@ -71,6 +118,10 @@ class MainMenuViewController: UIViewController {
     @objc func reloadSection(_ notification: Notification) {
         guard let index = notification.userInfo?["index"] as? Int else {return}
         mainMenuTableView.reloadSections(IndexSet(index...index), with: .automatic)
+    }
+    
+    @objc func loadData() {
+        configureUseCase()
     }
 }
 

@@ -10,9 +10,17 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
+    @IBAction func loginButtonPushed(_ sender: UIButton) {
+        dismiss(animated: true)
+        NotificationCenter.default.post(name: .LoginSuccess,
+                                        object: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.interactivePopGestureRecognizer?.delegate = nil
     }
 }
 
+extension Notification.Name {
+    static let LoginSuccess = Notification.Name("LoginSuccess")
+}

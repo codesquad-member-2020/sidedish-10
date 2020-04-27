@@ -11,11 +11,11 @@ import UIKit
 class MainMenuViewDataSource: NSObject, UITableViewDataSource {
     
     private(set) var sideDishManager: SideDishManager
+    public var handler: (MainMenuTableViewCell, String) -> () = {_, _ in}
     
     override init() {
         sideDishManager = SideDishManager()
         super.init()
-
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -25,10 +25,8 @@ class MainMenuViewDataSource: NSObject, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier:
             "MainMenuCell", for: indexPath) as? MainMenuTableViewCell else {return UITableViewCell()}
-        let url = sideDishManager.sideDish(indexPath: indexPath).imageUrl
-        ImageUseCase.loadImage(with: NetworkManager(), url: url) {
-            cell.setImageFromData(data: $0)
-        }
+        let urlString = sideDishManager.sideDish(indexPath: indexPath).imageUrl
+        handler(cell, urlString)
         cell.configuration(info: sideDishManager.sideDish(indexPath: indexPath))
         return cell
     }

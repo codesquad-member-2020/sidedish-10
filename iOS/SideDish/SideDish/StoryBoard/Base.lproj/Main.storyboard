@@ -17,7 +17,7 @@
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="LoginViewController" customModule="SideDish" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="LoginViewController" customModule="SideDish" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -113,7 +113,7 @@
                                             <color key="titleColor" name="PrimaryColor"/>
                                         </state>
                                         <connections>
-                                            <segue destination="qPn-pl-vDW" kind="show" id="bcL-on-c3B"/>
+                                            <action selector="loginButtonPushed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="UJZ-hf-ZI5"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -201,7 +201,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1633" y="126"/>
+            <point key="canvasLocation" x="1702" y="-537"/>
         </scene>
         <!--Main Menu View Controller-->
         <scene sceneID="35g-EQ-BHf">
@@ -342,7 +342,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n8N-sQ-S2A" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2365.5999999999999" y="125.61576354679804"/>
+            <point key="canvasLocation" x="1702" y="126"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="ICD-Kh-mga">
@@ -357,7 +357,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RnT-XR-7sI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3092" y="126"/>
+            <point key="canvasLocation" x="2527" y="126"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="eCI-H7-iIn">
@@ -369,7 +369,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="Fsz-TC-xvf"/>
+                        <segue destination="qPn-pl-vDW" kind="relationship" relationship="rootViewController" id="Vzu-Rs-HsL"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dh5-ht-ibj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
