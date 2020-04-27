@@ -1,6 +1,6 @@
 package com.codesquad.sidedish10.getter.exception;
 
-import com.codesquad.sidedish10.getter.utils.ApiResponse;
+import com.codesquad.sidedish10.getter.response.ApiResponse;
 
 public class RudimentaryException extends RuntimeException {
   private String errorMessage;
