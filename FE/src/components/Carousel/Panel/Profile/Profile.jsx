@@ -7,13 +7,19 @@ class Profile extends React.Component {
     super();
   }
   render() {
-    const { name, birthday, description, pay } = this.props;
+    const { title, description, n_price, s_price, badges } = this.props;
     return (
       <div className="profile">
-        <span>{name}</span>
-        <span>{birthday}</span>
-        <span>{description}</span>
-        <span>{pay}</span>
+        <div className="profile-title">{title}</div>
+        <div className="profile-description">{description}</div>
+        <div className="profile-prices">
+          {n_price && <p className="profile-n_price">{n_price}</p>}
+          <p className="profile-s_price">{s_price}</p>
+        </div>
+        {badges &&
+          badges.map((badge) => (
+            <span className="profile-badges">{badge}</span>
+          ))}
       </div>
     );
   }

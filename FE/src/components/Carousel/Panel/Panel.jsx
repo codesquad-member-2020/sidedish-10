@@ -27,10 +27,12 @@ class Panel extends React.Component {
       >
         <div className="panel-side panel-front">
           <Profile
-            birthday={profile.birthday}
+            title={profile.title}
             name={profile.name}
-            pay={profile.pay}
+            n_price={profile.n_price}
+            s_price={profile.s_price}
             description={profile.description}
+            badges={profile.badges}
           />
         </div>
         <div
@@ -38,7 +40,10 @@ class Panel extends React.Component {
             show ? "panel-side panel-back panel-hide" : "panel-side panel-back"
           }
         >
-          <img src={profile.imgSrc}></img>
+          <div
+            className="panel-img"
+            style={{ backgroundImage: `url(${profile.image})` }}
+          ></div>
         </div>
       </div>
     );

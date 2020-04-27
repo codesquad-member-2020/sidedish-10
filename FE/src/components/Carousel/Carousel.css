@@ -1,12 +1,10 @@
-div,
-span {
+div {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
 
 .stage {
-  background: powderblue;
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -18,11 +16,21 @@ span {
 
 .carousel {
   position: relative;
-  width: 150px;
-  height: 150px;
+  width: 170px;
+  height: 170px;
   transform-style: preserve-3d;
-  animation: bingle 10s infinite linear;
+  animation: bingle 13s infinite linear;
   animation-play-state: running;
+}
+
+.carousel-title {
+  text-align: center;
+  transform: translateY(-100px);
+  width: 200px;
+}
+
+.carousel-title-main {
+  font-weight: 600;
 }
 
 .carousel:hover {

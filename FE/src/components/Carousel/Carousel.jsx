@@ -1,17 +1,7 @@
 import React from "react";
 import Panel from "./Panel/Panel";
-
-import irene from "../../mockData/imgs/irene.jpg";
-import jisu from "../../mockData/imgs/jisu.jpg";
-import luda from "../../mockData/imgs/luda3.jpg";
-import nauen from "../../mockData/imgs/nauen.jpg";
-import rachel from "../../mockData/imgs/rachel.jpg";
-import seulgi from "../../mockData/imgs/seulgi.jpg";
-import joy from "../../mockData/imgs/joy.jpg";
-import bona from "../../mockData/imgs/bona.jpg";
-import minju from "../../mockData/imgs/minju.jpg";
-import seula from "../../mockData/imgs/seula.jpg";
-import jiae from "../../mockData/imgs/jiae.jpg";
+import Modal from "../Modal/Modal";
+import DetailPage from "../DetailPage/DetailPage";
 
 import "./Carousel.css";
 
@@ -21,124 +11,158 @@ class Carousel extends React.Component {
     this.state = {
       profiles: [
         {
-          imgSrc: irene,
-          name: "아이린",
-          birthday: "1991-03-29",
-          pay: "연봉 1억",
-          description:
-            "노래할 때 음색은 말할 때와 비슷하며 전체적으로 섬세하다. 라이브도 안정적으로 소화하기 때문에 신인 시절에 비보컬 멤버로 보였던 것에 비하면 파트의 비중을 많이 차지한다.",
+          image:
+            "http://public.codesquad.kr/jk/storeapp/data/2d3f99a9a35601f4e98837bc4d39b2c8.jpg",
+          alt: "[미노리키친] 규동 250g",
+          title: "[미노리키친] 규동 250g",
+          description: "일본인의 소울푸드! 한국인도 좋아하는 소고기덮밥",
+          n_price: "6,500원",
+          s_price: "7,000원",
+          id: 1,
+          menu_id: 1,
+          badges: ["이벤트특가"],
         },
         {
-          imgSrc: jisu,
-          name: "지수",
-          birthday: "1994-02-11",
-          pay: "연봉 2억",
-          description:
-            "항상 밝고 명랑한 성격으로 러블리즈의 웃음을 책임진다. 활동적인 에너지와 몸을 아끼지 않는 개인기로 방송 전면에 서며 이미주와 함께 러블리즈의 예능적 가치를 증명하는 재원이기도 하다.",
+          image:
+            "http://public.codesquad.kr/jk/storeapp/data/7674311a02ba7c88675f3186ddaeef9e.jpg",
+          alt: "[빅마마의밥친구] 아삭 고소한 연근고기조림 250g",
+          title: "[빅마마의밥친구] 아삭 고소한 연근고기조림 250g",
+          description: "편식하는 아이도 좋아하는 건강한 연근조림",
+          n_price: null,
+          s_price: "5,500원",
+          id: 2,
+          menu_id: 1,
+          badges: [],
         },
         {
-          imgSrc: luda,
-          name: "루다",
-          birthday: "1997-03-06",
-          pay: "연봉 2억",
-          description:
-            "우주소녀의 서브보컬로 여리여리한 체구 속에 노력과 끈기로 똘똘 뭉쳐진 연습벌레. 평소엔 수줍고 조용한 성격이나 무대에서만 서면 숨겨진 새로운 매력을 마음껏 보여주는 명랑소녀.",
+          image:
+            "http://public.codesquad.kr/jk/storeapp/data/cad8eee316cf7151e07638aa57b32a9d.jpg",
+          alt: "[소중한식사] 골뱅이무침 195g",
+          title: "[소중한식사] 골뱅이무침 195g",
+          description: "매콤새콤달콤, 반찬으로도 안주로도 좋은",
+          n_price: "7,000원",
+          s_price: "6,300원",
+          id: 3,
+          menu_id: 1,
+          badges: ["이벤트특가"],
         },
         {
-          imgSrc: nauen,
-          name: "나은",
-          birthday: "1995-05-05",
-          pay: "연봉 4억",
-          description:
-            "곡명인 예쁜 게 죄가 납득이 가는 얼굴로 자타공인 APRIL의 공식 비주얼 멤버.",
+          image:
+            "http://public.codesquad.kr/jk/storeapp/data/b6beada6b89af950289003d929936d9c.jpg",
+          alt: "[옹가솜씨] 꽁치간장조림 240g",
+          title: "[옹가솜씨] 꽁치간장조림 240g",
+          description: "생강 향이 산뜻한",
+          n_price: null,
+          s_price: "5,800원",
+          id: 4,
+          menu_id: 1,
+          badges: [],
         },
         {
-          imgSrc: rachel,
-          name: "레이첼",
-          birthday: "2000-08-28",
-          pay: "연봉 3억",
+          image:
+            "http://public.codesquad.kr/jk/storeapp/data/0221110ead70dfd455e40703bbdd6252.jpg",
+          alt: "[마더앤찬] 코다리구이 320g",
+          title: "[마더앤찬] 코다리구이 320g",
           description:
-            "웃을 때 생기는 보조개가 매력적이며, 본인도 자신의 매력으로 어필 중이다.",
+            "큼지막하고 살집 많은 동태 한 마리로 만든 코다리구이입니다.",
+          n_price: "7,500원",
+          s_price: "6,750원",
+          id: 5,
+          menu_id: 1,
+          badges: ["론칭특가"],
         },
         {
-          imgSrc: seulgi,
-          name: "슬기",
-          birthday: "1994-02-10",
-          pay: "연봉 5억",
-          description:
-            "본인은 팀에서 카리스마를 맡고 있다고 주장하지만, 팬들에게나 같은 팀 멤버들, 또는 무대 아래서 슬기의 모습은 순한 곰돌이다.",
+          image:
+            "http://public.codesquad.kr/jk/storeapp/data/385f4106ac26f6e4fe7c640714f405a5.jpg",
+          alt: "[남도애꽃] 반건조 문어조림 120g",
+          title: "[남도애꽃] 반건조 문어조림 120g",
+          description: "씹을수록 감칠맛나는 문어살의 쫄깃함",
+          n_price: null,
+          s_price: "4,600원",
+          id: 6,
+          menu_id: 1,
+          badges: [],
         },
         {
-          imgSrc: joy,
-          name: "조이",
-          birthday: "1996-09-03",
-          pay: "연봉 3억",
+          image:
+            "http://public.codesquad.kr/jk/storeapp/data/2455226945d52f5aefd51f35d663bb16.jpg",
+          alt: "[마샐미디쉬] 매콤마늘쫑 해산물볶음 180g",
+          title: "[마샐미디쉬] 매콤마늘쫑 해산물볶음 180g",
           description:
-            "레드벨벳 내에서 서브보컬 포지션을 맡고 있으며, 음색이 가장 돋보이는 보컬이며 비중이 상당히 많은 편.",
+            "탱글탱글한 새우와 오징어를 마늘쫑과 함께 매콤하게 볶아냈어요.",
+          n_price: "6,900원",
+          s_price: "6,210원",
+          id: 7,
+          menu_id: 1,
+          badges: ["론칭특가"],
         },
         {
-          imgSrc: bona,
-          name: "보나",
-          birthday: "1995-08-19",
-          pay: "연봉 2억",
-          description:
-            "우주소녀의 서브보컬, 리드댄서로 새침해 보이는 외모다. 대구 사투리를 구사하는 매력도 보여준다.",
-        },
-        {
-          imgSrc: minju,
-          name: "민주",
-          birthday: "2001-02-05",
-          pay: "연봉 2억",
-          description:
-            "얼반웍스이엔티 소속 연예인으로, 대한민국과 일본에서 활동하는 걸그룹 IZ*ONE의 멤버이다.",
-        },
-        {
-          imgSrc: jiae,
-          name: "지애",
-          birthday: "1993-05-21",
-          pay: "연봉 3.5억",
-          description:
-            "그리고 무엇보다도 수많은 앓이들을 양산해 낸, 러블리즈에서 귀여움과 미모면 1순위로 꼽히는 멤버다.",
-        },
-        {
-          imgSrc: seula,
-          name: "설아",
-          birthday: "1994-12-24",
-          pay: "연봉 4억",
-          description:
-            "우주소녀의 리드보컬로 새벽에 듣기 좋은 꿀성대의 소유자. 어려 보이는 외모와 달리 팀의 맏언니이기도 하다.",
+          image:
+            "http://public.codesquad.kr/jk/storeapp/data/bc3b777115e8377a48c7bd762fe5fdc9.jpg",
+          alt: "[빅마마의밥친구] 비빔오징어 150g",
+          title: "[빅마마의밥친구] 비빔오징어 150g",
+          description: "달콤한 신야초발효액이 포인트!",
+          n_price: null,
+          s_price: "5,000원",
+          id: 8,
+          menu_id: 1,
+          badges: [],
         },
       ],
-      panels: [
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-      ],
+      panels: [false, false, false, false, false, false, false, false],
+      modalOn: false,
+      target: {
+        imgSrc: undefined,
+      },
     };
+    this.closeModal = this.closeModal.bind(this);
   }
 
   toggleCard(index) {
     const newPanels = [...this.state.panels];
+    const { profiles } = this.state;
     newPanels[index] = !newPanels[index];
-    this.setState({ ...this.state, panels: newPanels });
+    if (newPanels[index] === true) {
+      this.setState({
+        ...this.state,
+        panels: newPanels,
+        modalOn: false,
+        target: profiles[index],
+      });
+      return;
+    }
+    this.setState({
+      ...this.state,
+      panels: newPanels,
+      modalOn: true,
+      target: profiles[index],
+    });
+  }
+
+  closeModal() {
+    this.setState({ ...this.state, modalOn: false });
   }
 
   render() {
     const oneUnitDeg = 360 / this.state.profiles.length;
     const oneUnitRadian = Math.PI / this.state.profiles.length;
-    const height = 150 / (2 * Math.tan(oneUnitRadian));
+    const height = 170 / (2 * Math.tan(oneUnitRadian));
 
     return (
       <div className="stage">
+        {this.state.modalOn ? (
+          <Modal>
+            <DetailPage
+              target={this.state.target}
+              closeModal={this.closeModal}
+            />
+          </Modal>
+        ) : null}
         <div className="carousel">
+          <div className="carousel-title">
+            <span>언제 먹어도</span>
+            <span className="carousel-title-main">든든한 밑반찬</span>
+          </div>
           {this.state.profiles.map((profile, index) => {
             return (
               <Panel
