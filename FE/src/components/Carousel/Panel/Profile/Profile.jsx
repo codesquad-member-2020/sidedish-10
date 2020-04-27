@@ -18,7 +18,7 @@ class Profile extends React.Component {
         </div>
         {badges &&
           badges.map((badge) => (
-            <span className="profile-badges">{badge}</span>
+            <span className="profile-badges">{badge.name}</span>
           ))}
       </div>
     );
