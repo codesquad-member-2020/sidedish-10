@@ -20,4 +20,15 @@ struct ImageUseCase {
             }
         }
     }
+    
+    static func loadImage(with manager: NetworkManager, from: String, failureHandler: @escaping (NetworkManager.NetworkError) -> (), completed: @escaping(URL) -> ()) {
+        manager.downloadResource(from: from) {
+            switch $0 {
+            case .failure(let error):
+                failureHandler(error)
+            case .success(let url):
+                completed(url)
+            }
+        }
+    }
 }
