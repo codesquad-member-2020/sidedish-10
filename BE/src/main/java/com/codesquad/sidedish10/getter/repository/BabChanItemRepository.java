@@ -1,6 +1,9 @@
-package com.codesquad.sidedish10.getter.dto;
+package com.codesquad.sidedish10.getter.repository;
 
+import com.codesquad.sidedish10.getter.dto.BabChanItemRequestDto;
+import com.codesquad.sidedish10.getter.dto.BabChanItemResponseDto;
 import java.util.List;
+import java.util.Map;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -26,5 +29,8 @@ public interface BabChanItemRepository extends CrudRepository<BabChanItemRespons
   String get_s_price_by_detail_hash(@Param("detail_hash") String hash);
 
   @Query("SELECT bd.title FROM badge bd WHERE bd.detail_hash = :detail_hash")
-  List<String> get_badge_by_detail_hash(@Param("detail_hash") String hash);
+  List<String> get_badge_title_by_detail_hash(@Param("detail_hash") String hash);
+
+  @Query("SELECT * FROM (SELECT color FROM badge WHERE title = :title) COLOR LIMIT 1")
+  String get_badge_color_by_title(@Param("title") String title);
 }
