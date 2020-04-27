@@ -14,16 +14,31 @@ class DetailPage extends React.Component {
     this.inputChangeHandler = this.inputChangeHandler.bind(this);
   }
 
-  buttonClickHandler() {
+  componentDidMount() {
     const { s_price } = this.props.target;
-    const totalSum =
-      this.state.counts * parseInt(s_price.split("원")[0].replace(",", ""));
-    this.setState({ ...this.state, totalSum });
+    const priceValue = parseInt(s_price.split("원")[0].replace(",", ""));
+    this.setState({ ...this.state, priceValue });
+  }
+
+  buttonClickHandler() {
+    this.props.closeModal();
   }
 
   inputChangeHandler(e) {
-    const { value } = e.target;
-    this.setState({ ...this.state, counts: value });
+    let { value } = e.target;
+    if (value < 0) {
+      value = 0;
+    }
+    const totalSum = value * this.state.priceValue;
+    this.setState({ ...this.state, counts: value, totalSum });
+  }
+
+  addCommaToPrice(price) {
+    const quotient = price / 1000;
+    if (quotient < 1) {
+      return "0";
+    }
+    return `${quotient},000`;
   }
 
   render() {
@@ -53,7 +68,7 @@ class DetailPage extends React.Component {
                   <li>배송비</li>
                 </div>
                 <div className="shipment-data">
-                  <li>42원</li>
+                  <li>{Math.floor(this.state.priceValue / 100)}원</li>
                   <li>
                     서울 경기(일부 지역) 택배배송 / 전국택배 (제주 및 도서산간
                     불가) [월 화 수 목 금 토] 수입 가능한 상품입니다.
@@ -75,7 +90,9 @@ class DetailPage extends React.Component {
             </div>
             <div className="total-price">
               <div className="total-price-label">총 상품금액</div>
-              <div className="total-price-data">{this.state.totalSum}원</div>
+              <div className="total-price-data">
+                {this.addCommaToPrice(this.state.totalSum)}원
+              </div>
             </div>
             <button className="add-button" onClick={this.buttonClickHandler}>
               담기
