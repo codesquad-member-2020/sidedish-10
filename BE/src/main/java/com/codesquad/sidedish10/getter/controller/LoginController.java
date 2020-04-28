@@ -39,7 +39,7 @@ public class LoginController {
     res.addCookie(cookie);
     res.setStatus(HttpStatus.OK.value());
 
-    return "redirect:/";
+    return "done";
   }
 
   @CrossOrigin("/**")
