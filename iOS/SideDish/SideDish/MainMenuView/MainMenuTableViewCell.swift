@@ -57,16 +57,16 @@ class MainMenuTableViewCell: UITableViewCell {
         specialPriceLabel.text = special
     }
     
-    private func setEventStackView(badges: [String]?) {
+    private func setEventStackView(badges: [Badge]?) {
         guard let badges = badges, badges.count > 0 else {return}
         
         badges.forEach {
             let label = PaddingLabel()
-            label.text = $0
+            label.text = $0.name
             label.font = UIFont.systemFont(ofSize: 12)
             label.textColor = .white
             label.textAlignment = .center
-            label.backgroundColor = UIColor(named: "SpecialPriceColor")
+            label.backgroundColor = UIColor(hex: $0.color)
             eventStackView.addArrangedSubview(label)
         }
     }

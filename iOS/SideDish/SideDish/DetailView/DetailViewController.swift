@@ -12,6 +12,10 @@ class DetailViewController: UIViewController {
     
     var id: Int!
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.isNavigationBarHidden = false

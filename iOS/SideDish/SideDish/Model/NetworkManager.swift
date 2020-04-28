@@ -19,7 +19,7 @@ typealias downloadHandler = (Result<URL, NetworkManager.NetworkError>) -> Void
 class NetworkManager: NetworkManageable {
     
     enum EndPoints {
-        static let serverURL = "http://15.165.138.17:8080/develop/baminchan/"
+        static let serverURL = "http://13.125.179.178:8080/develop/baminchan/"
         static let main = "main"
         static let soup = "soup"
         static let side = "side"
