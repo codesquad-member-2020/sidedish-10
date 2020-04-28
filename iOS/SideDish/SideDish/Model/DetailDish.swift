@@ -18,6 +18,7 @@ struct DishInfo: Codable {
     var product_description: String
     var point: String
     var delivery_info: String
+    var delivery_fee: String
     var s_price: String?
     var n_price: String?
     var detail_section: [String]
