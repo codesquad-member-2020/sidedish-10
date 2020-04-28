@@ -6,8 +6,20 @@
 //  Copyright © 2020 신한섭. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
-class DetailDish: NSObject {
+struct DetailDish: Codable {
+    var body: DishInfo
+}
 
+struct DishInfo: Codable {
+    var id: Int
+    var top_image: String
+    var product_description: String
+    var point: String
+    var delivery_info: String
+    var s_price: String?
+    var n_price: String?
+    var detail_section: [String]
+    var thumb_images: [String]
 }

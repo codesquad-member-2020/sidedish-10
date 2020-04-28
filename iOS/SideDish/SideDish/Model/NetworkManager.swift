@@ -23,6 +23,7 @@ class NetworkManager: NetworkManageable {
         static let main = "main"
         static let soup = "soup"
         static let side = "side"
+        static let detail = "detail"
     }
     
     enum NetworkError: Error {
@@ -118,6 +119,10 @@ class NetworkManager: NetworkManageable {
     
     func getSideDish(handler: @escaping dataHandler) {
         getResource(from: EndPoints.serverURL + EndPoints.side, method: .get, headers: nil, handler: handler)
+    }
+    
+    func getDetailDish(id: Int, handler: @escaping dataHandler) {
+        getResource(from: EndPoints.serverURL + EndPoints.detail + "/\(id)", method: .get, headers: nil, handler: handler)
     }
     
     func getImageURL(from: URL, handler: @escaping downloadHandler) {
