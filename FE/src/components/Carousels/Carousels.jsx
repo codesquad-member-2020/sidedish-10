@@ -1,5 +1,7 @@
 import React from "react";
 import Carousel from "../Carousel/Carousel";
+import MockCarousel from "./MockCarousel/MockCarousel";
+
 import axios from "axios";
 
 import "./Carousels.css";
@@ -7,6 +9,9 @@ import "./Carousels.css";
 class Carousels extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      loading: true,
+    };
     this.categories = [
       { menu_id: 1, menu_title: "든든한 밥찬" },
       { menu_id: 2, menu_title: "든든한 국물요리" },
@@ -30,21 +35,27 @@ class Carousels extends React.Component {
         },
       };
     }, {});
-    this.setState({ carousels });
+    this.setState({ carousels, loading: false });
   }
 
   render() {
     return (
       <div className="carousels">
-        {this.state
-          ? this.categories.map((category) => {
+        {this.state.loading
+          ? this.categories.map(() => <MockCarousel />)
+          : this.categories.map((category) => {
               const { menu_id } = category;
               const { carouselData, title } = this.state.carousels[
                 `${menu_id}`
               ];
-              return <Carousel carouselData={carouselData} title={title} />;
-            })
-          : null}
+              return (
+                <Carousel
+                  key={menu_id + title}
+                  carouselData={carouselData}
+                  title={title}
+                />
+              );
+            })}
       </div>
     );
   }

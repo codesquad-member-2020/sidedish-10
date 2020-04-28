@@ -5,3 +5,7 @@
   height: 100vh;
   position: relative;
 }
+
+.temp {
+  font-size: 6rem;
+}

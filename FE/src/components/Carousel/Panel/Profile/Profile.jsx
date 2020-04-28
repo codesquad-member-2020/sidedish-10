@@ -17,8 +17,10 @@ class Profile extends React.Component {
           <p className="profile-s_price">{s_price}</p>
         </div>
         {badges &&
-          badges.map((badge) => (
-            <span className="profile-badges">{badge.name}</span>
+          badges.map((badge, index) => (
+            <span key={badge.name + index} className="profile-badges">
+              {badge.name}
+            </span>
           ))}
       </div>
     );

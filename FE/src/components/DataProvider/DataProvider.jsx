@@ -3,7 +3,7 @@ import { Provider } from "react-redux";
 import configStore from "../../configStore";
 
 class DataProvider extends React.Component {
-  store = configStore({ modal: { on: false, targetProfile: {} } });
+  store = configStore();
   constructor(props) {
     super(props);
   }
