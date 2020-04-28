@@ -19,6 +19,7 @@
 		A58FAEDF2452DF1200C9EDA3 /* MainMenuHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58FAEDE2452DF1200C9EDA3 /* MainMenuHeader.swift */; };
 		A59ACBDD2453F40700359A0A /* ImageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59ACBDC2453F40700359A0A /* ImageUseCase.swift */; };
 		A5A4DFE82451467700C734F1 /* SideDishUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A4DFE72451467700C734F1 /* SideDishUseCase.swift */; };
+		A5AB37B52458510A0015A192 /* DetailDish.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AB37B42458510A0015A192 /* DetailDish.swift */; };
 		A5BD927E244DCAE600D6442F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BD927D244DCAE600D6442F /* AppDelegate.swift */; };
 		A5BD9282244DCAE600D6442F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BD9281244DCAE600D6442F /* LoginViewController.swift */; };
 		A5BD9285244DCAE600D6442F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5BD9283244DCAE600D6442F /* Main.storyboard */; };
@@ -54,6 +55,7 @@
 		A58FAEDE2452DF1200C9EDA3 /* MainMenuHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuHeader.swift; sourceTree = "<group>"; };
 		A59ACBDC2453F40700359A0A /* ImageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUseCase.swift; sourceTree = "<group>"; };
 		A5A4DFE72451467700C734F1 /* SideDishUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideDishUseCase.swift; sourceTree = "<group>"; };
+		A5AB37B42458510A0015A192 /* DetailDish.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailDish.swift; sourceTree = "<group>"; };
 		A5BD927A244DCAE500D6442F /* SideDish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SideDish.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5BD927D244DCAE600D6442F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A5BD9281244DCAE600D6442F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 				A516CF19245061E000F96635 /* SideDish.swift */,
 				A516CF4124507C8D00F96635 /* SideDishManager.swift */,
 				A5BF0E2724581CBF00222FF3 /* UIColorExtension.swift */,
+				A5AB37B42458510A0015A192 /* DetailDish.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -362,6 +365,7 @@
 				A516CF18245060C100F96635 /* NetworkManager.swift in Sources */,
 				A516CF4224507C8D00F96635 /* SideDishManager.swift in Sources */,
 				A5BD927E244DCAE600D6442F /* AppDelegate.swift in Sources */,
+				A5AB37B52458510A0015A192 /* DetailDish.swift in Sources */,
 				A52A3F07244ECFEC005795A4 /* MainMenuTableViewCell.swift in Sources */,
 				A516CF1A245061E000F96635 /* SideDish.swift in Sources */,
 				A508FC37244EDBDE009AC902 /* PaddingLabel.swift in Sources */,
