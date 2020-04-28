@@ -72,8 +72,10 @@ public class GetterService {
 
   public BabChanDetailDto getSpecificBabChanItemDetail(Long id) {
 
+    String nowDetailHash = babChanItemRepository.get_detail_hash_by_item_id(id);
+
     BabChanDetailReturnObject babChanDetailObject = babChanDetailRepository
-        .getBabChanItemDetailByHash(id);
+        .getBabChanItemDetailByHash(nowDetailHash);
 
     BabChanDetailDto dto = BabChanDetailDto.create(babChanDetailObject.getId(), babChanDetailObject.getDetail_hash(),
         babChanDetailObject.getTop_image(), babChanDetailObject.getProduct_description(),
@@ -81,13 +83,13 @@ public class GetterService {
         babChanDetailObject.getDelivery_fee());
 
     //TODO 진짜 최악의 코드인데 어떻게 해야 리팩토링할 수 있을 지 고민해본다.
-    if (babChanItemRepository.get_n_price_by_detail_hash(dto.getDetail_hash()) != null) {
+    if (babChanDetailRepository.get_n_price_by_detail_hash(dto.getDetail_hash()) != null) {
       dto.setN_price(
-          babChanItemRepository.get_n_price_by_detail_hash(dto.getDetail_hash()));
+          babChanDetailRepository.get_n_price_by_detail_hash(dto.getDetail_hash()));
     }
-    if (babChanItemRepository.get_s_price_by_detail_hash(dto.getDetail_hash()) != null) {
+    if (babChanDetailRepository.get_s_price_by_detail_hash(dto.getDetail_hash()) != null) {
       dto.setS_price(
-          babChanItemRepository.get_s_price_by_detail_hash(dto.getDetail_hash()));
+          babChanDetailRepository.get_s_price_by_detail_hash(dto.getDetail_hash()));
     }
     if (babChanDetailRepository.getBabChanThumbImages(dto.getDetail_hash()) != null) {
       dto.setThumb_images(

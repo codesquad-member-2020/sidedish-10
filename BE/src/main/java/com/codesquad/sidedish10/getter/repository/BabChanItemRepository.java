@@ -23,6 +23,9 @@ public interface BabChanItemRepository extends CrudRepository<BabChanItemRespons
   @Query("SELECT * FROM item")
   List<BabChanItemRequestDto> getItemBasicInfo();
 
+  @Query("SELECT detail_hash FROM item WHERE id = :id")
+  String get_detail_hash_by_item_id(@Param("id") Long id);
+
   @Query("SELECT np.n_price FROM n_price np WHERE np.detail_hash = :detail_hash")
   String get_n_price_by_detail_hash(@Param("detail_hash") String hash);
 
