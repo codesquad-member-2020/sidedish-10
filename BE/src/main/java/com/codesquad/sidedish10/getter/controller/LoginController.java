@@ -29,7 +29,7 @@ public class LoginController {
   }
 
   @GetMapping("/login/github/request")
-  public ResponseEntity<ApiResponse> GitHubLogin(@RequestParam("code") String code, HttpServletResponse res) {
+  public RedirectView GitHubLogin(@RequestParam("code") String code, HttpServletResponse res) {
 
     GitHubToken token = loginService.getAccessToken(code);
     User nowUser = loginService.getUserInfo(token);
@@ -39,10 +39,7 @@ public class LoginController {
     res.addCookie(cookie);
     res.setStatus(HttpStatus.OK.value());
 
-    ApiResponse response = new ApiResponse();
-    response.setStatusCode(200);
-    response.setBody("jwtToken=" + jwtToken);
-    return new ResponseEntity<>(response, HttpStatus.OK);
+    return new RedirectView(OAuth2SecurityInfo.LOGIN_AFTER_REDIRECT_URL);
   }
 
   @CrossOrigin("/**")
