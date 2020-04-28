@@ -10,6 +10,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,7 +29,7 @@ public class LoginController {
   }
 
   @GetMapping("/login/github/request")
-  public ResponseEntity<ApiResponse> GitHubLogin(@RequestParam("code") String code, HttpServletResponse res) {
+  public void GitHubLogin(@RequestParam("code") String code, HttpServletResponse res) {
 
     GitHubToken token = loginService.getAccessToken(code);
     User nowUser = loginService.getUserInfo(token);
@@ -36,14 +37,11 @@ public class LoginController {
 
     Cookie cookie = new Cookie("jwtToken", jwtToken);
     res.addCookie(cookie);
-    res.setStatus(HttpStatus.OK.value());
-
-    ApiResponse response = new ApiResponse();
-    response.setStatusCode(200);
-    response.setBody("check your JWT token in the responded cookie.");
-    return new ResponseEntity<>(response, HttpStatus.OK);
+    res.setStatus(HttpStatus.SEE_OTHER.value());
+    res.setHeader("Location", "http://13.125.179.178");
   }
 
+  @CrossOrigin("/**")
   @GetMapping("/login/github")
   public RedirectView redirectToGitHubPage() {
     return new RedirectView(OAuth2SecurityInfo.TEMP_CODE_REQUEST_URL);
