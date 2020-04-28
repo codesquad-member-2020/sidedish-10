@@ -18,7 +18,22 @@ class MiniCarousel extends React.Component {
     this.nextTransform = this.nextTransform.bind(this);
     this.prevTransform = this.prevTransform.bind(this);
     this.pictures = [seulgi, luda, luda1, jiae, yein, jisu];
-    this.refers = [];
+    this.refers = this.pictures.map((picture) => {
+      const pictureRef = React.createRef();
+      return {
+        pictureRef,
+        element: (
+          <div className="mini-panels" key={picture} ref={pictureRef}>
+            <div
+              className="panel-img"
+              style={{
+                backgroundImage: `url(${picture})`,
+              }}
+            ></div>
+          </div>
+        ),
+      };
+    });
     this.transforms = [
       { x: 0, z: "-40px", scale: 0.9, opacity: 0.8 },
       { x: "-55%", z: "-20px", scale: 0.95, opacity: 0.9 },
@@ -27,10 +42,6 @@ class MiniCarousel extends React.Component {
       { x: "155%", z: "-20px", scale: 0.95, opacity: 0.9 },
       { x: "105%", z: "-40px", scale: 0.9, opacity: 0.8 },
     ];
-  }
-
-  shouldComponentUpdate() {
-    return false;
   }
 
   nextTransform(x) {
@@ -49,12 +60,12 @@ class MiniCarousel extends React.Component {
 
   next() {
     for (let i = 0; i < this.refers.length; i++) {
-      this.refers[i].current.style.transform = `translateX(${
+      this.refers[i].pictureRef.current.style.transform = `translateX(${
         this.transforms[this.nextTransform(i)].x
       }) translateZ(${this.transforms[this.nextTransform(i)].z}) scale(${
         this.transforms[this.nextTransform(i)].scale
       })`;
-      this.refers[i].current.style.opacity = this.transforms[
+      this.refers[i].pictureRef.current.style.opacity = this.transforms[
         this.nextTransform(i)
       ].opacity;
     }
@@ -63,12 +74,12 @@ class MiniCarousel extends React.Component {
 
   prev() {
     for (let i = 0; i < this.refers.length; i++) {
-      this.refers[i].current.style.transform = `translateX(${
+      this.refers[i].pictureRef.current.style.transform = `translateX(${
         this.transforms[this.prevTransform(i)].x
       }) translateZ(${this.transforms[this.prevTransform(i)].z}) scale(${
         this.transforms[this.prevTransform(i)].scale
       })`;
-      this.refers[i].current.style.opacity = this.transforms[
+      this.refers[i].pictureRef.current.style.opacity = this.transforms[
         this.prevTransform(i)
       ].opacity;
     }
@@ -91,20 +102,7 @@ class MiniCarousel extends React.Component {
     return (
       <div className="mini-stage">
         <div className="mini-carousel" onClick={this.move}>
-          {this.pictures.map((picture) => {
-            const pictureRef = React.createRef();
-            this.refers.push(pictureRef);
-            return (
-              <div className="mini-panels" key={picture} ref={pictureRef}>
-                <div
-                  className="panel-img"
-                  style={{
-                    backgroundImage: `url(${picture})`,
-                  }}
-                ></div>
-              </div>
-            );
-          })}
+          {this.refers.map((refer) => refer.element)}
         </div>
       </div>
     );

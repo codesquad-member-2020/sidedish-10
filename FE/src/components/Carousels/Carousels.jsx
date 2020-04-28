@@ -20,29 +20,33 @@ class Carousels extends React.Component {
   }
 
   async componentDidMount() {
-    const {
-      data: { body },
-    } = await axios.get("http://13.125.179.178:8080/develop/baminchan/all");
-    const carousels = this.categories.reduce((acc, category) => {
-      const filteredBody = body.filter(
-        (bodyElement) => bodyElement.menu_id === category.menu_id
-      );
-      return {
-        ...acc,
-        [`${category.menu_id}`]: {
-          carouselData: filteredBody,
-          title: category.menu_title,
-        },
-      };
-    }, {});
-    this.setState({ carousels, loading: false });
+    try {
+      const {
+        data: { body },
+      } = await axios.get(process.env.REACT_APP_SERVER_URL);
+      const carousels = this.categories.reduce((acc, category) => {
+        const filteredBody = body.filter(
+          (bodyElement) => bodyElement.menu_id === category.menu_id
+        );
+        return {
+          ...acc,
+          [`${category.menu_id}`]: {
+            carouselData: filteredBody,
+            title: category.menu_title,
+          },
+        };
+      }, {});
+      this.setState({ carousels, loading: false });
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   render() {
     return (
       <div className="carousels">
         {this.state.loading
-          ? this.categories.map(() => <MockCarousel />)
+          ? this.categories.map((_, index) => <MockCarousel key={index} />)
           : this.categories.map((category) => {
               const { menu_id } = category;
               const { carouselData, title } = this.state.carousels[

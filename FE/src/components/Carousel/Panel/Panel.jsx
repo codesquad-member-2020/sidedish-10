@@ -4,10 +4,6 @@ import Profile from "./Profile/Profile";
 import "./Panel.css";
 
 class Panel extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const {
       rotateYDeg,

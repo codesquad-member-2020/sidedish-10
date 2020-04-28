@@ -42,7 +42,7 @@ class Carousel extends React.Component {
   render() {
     const oneUnitDeg = 360 / this.state.profiles.length;
     const oneUnitRadian = Math.PI / this.state.profiles.length;
-    const height = 170 / (2 * Math.tan(oneUnitRadian));
+    const height = 270 / (2 * Math.tan(oneUnitRadian));
     const { title } = this.props;
     return (
       <div className="stage">
@@ -51,6 +51,7 @@ class Carousel extends React.Component {
             <span>언제 먹어도</span>
             <span className="carousel-title-main">{title}</span>
           </div>
+          <div className="hidden-title">코드스쿼드</div>
           {this.state.profiles.map((profile, index) => {
             return (
               <Panel

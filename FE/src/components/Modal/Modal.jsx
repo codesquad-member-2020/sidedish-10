@@ -4,10 +4,6 @@ import { connect } from "react-redux";
 import "./Modal.css";
 
 class Modal extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const { children, on } = this.props;
     return <>{on ? <div className="modal">{children}</div> : null}</>;

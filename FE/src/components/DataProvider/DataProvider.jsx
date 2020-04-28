@@ -4,10 +4,6 @@ import configStore from "../../configStore";
 
 class DataProvider extends React.Component {
   store = configStore();
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return <Provider store={this.store}>{this.props.children}</Provider>;
   }
