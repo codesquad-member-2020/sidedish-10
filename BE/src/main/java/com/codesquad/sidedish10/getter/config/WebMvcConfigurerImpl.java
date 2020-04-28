@@ -22,13 +22,15 @@ public class WebMvcConfigurerImpl implements WebMvcConfigurer {
   public void addCorsMappings(CorsRegistry registry) {
     registry.addMapping("/**")
         .allowedOrigins("*")
-        .allowedMethods("GET", "POST");
+        .allowedHeaders("*")
+        .allowCredentials(true)
+        .allowedMethods("GET", "POST", "OPTION", "HEADER", "PUT", "DELETE");
   }
 
   @Override
   public void addInterceptors(InterceptorRegistry registry) {
     registry.addInterceptor(new HttpInterceptor(jwtService))
-        .addPathPatterns("/develop/**")
-        .excludePathPatterns("/login/**");
+  //      .addPathPatterns("/develop/**")
+        .excludePathPatterns("/**");
   }
 }
