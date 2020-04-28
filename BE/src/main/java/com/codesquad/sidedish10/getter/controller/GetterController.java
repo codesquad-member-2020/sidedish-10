@@ -1,5 +1,6 @@
 package com.codesquad.sidedish10.getter.controller;
 
+import com.codesquad.sidedish10.getter.dto.BabChanDetailDto;
 import com.codesquad.sidedish10.getter.dto.BabChanItemResponseDto;
 import com.codesquad.sidedish10.getter.dto.BabChanSectionInfoDto;
 import com.codesquad.sidedish10.getter.service.GetterService;
@@ -10,6 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -72,6 +74,15 @@ public class GetterController {
     response.setStatusCode(HttpStatus.OK.value());
     List<BabChanSectionInfoDto> infoMenu = getterService.getBabChanMenuList();
     response.setBody(infoMenu);
+    return response;
+  }
+
+  @GetMapping("/develop/baminchan/detail/{id}")
+  public ApiResponse getSpecificItem(@PathVariable Long id) {
+    ApiResponse response = new ApiResponse();
+    response.setStatusCode(HttpStatus.OK.value());
+    BabChanDetailDto babChanDetailDto = getterService.getSpecificBabChanItemDetail(id);
+    response.setBody(babChanDetailDto);
     return response;
   }
 }
