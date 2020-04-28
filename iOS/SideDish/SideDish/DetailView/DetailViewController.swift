@@ -80,9 +80,23 @@ class DetailViewController: UIViewController {
         
         for from in model.detail_section {
             let imageView = UIImageView()
+            imageView.contentMode = .scaleAspectFill
             detailImageViews.append(imageView)
             detailImageStackView.addArrangedSubview(imageView)
             imageView.widthAnchor.constraint(equalTo: contentScrollView.frameLayoutGuide.widthAnchor, multiplier: 1).isActive = true
+            
+            guard let url = URL(string: from) else {
+                errorHandling(error: .InvalidURL)
+                return
+            }
+            
+            ImageUseCase.loadImage(with: NetworkManager(), from: url, failureHandler: {self.errorHandling(error:$0)}) {
+                let image = UIImage(data: $0)
+                DispatchQueue.main.async {
+                    imageView.image = image
+                    imageView.heightAnchor.constraint(equalToConstant: imageView.frame.width * (image?.size.height ?? 1) / (image?.size.width ?? 1)).isActive = true
+                }
+            }
         }
     }
     
