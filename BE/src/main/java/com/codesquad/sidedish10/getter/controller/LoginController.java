@@ -29,7 +29,7 @@ public class LoginController {
   }
 
   @GetMapping("/login/github/request")
-  public RedirectView GitHubLogin(@RequestParam("code") String code, HttpServletResponse res) {
+  public String GitHubLogin(@RequestParam("code") String code, HttpServletResponse res) {
 
     GitHubToken token = loginService.getAccessToken(code);
     User nowUser = loginService.getUserInfo(token);
@@ -39,7 +39,7 @@ public class LoginController {
     res.addCookie(cookie);
     res.setStatus(HttpStatus.OK.value());
 
-    return new RedirectView(OAuth2SecurityInfo.LOGIN_AFTER_REDIRECT_URL);
+    return "redirect:/";
   }
 
   @CrossOrigin("/**")
