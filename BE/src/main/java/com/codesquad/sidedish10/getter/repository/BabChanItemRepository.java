@@ -2,6 +2,7 @@ package com.codesquad.sidedish10.getter.repository;
 
 import com.codesquad.sidedish10.getter.dto.BabChanItemRequestDto;
 import com.codesquad.sidedish10.getter.dto.BabChanItemResponseDto;
+import com.codesquad.sidedish10.parser.domain.BabChanDetailObject;
 import java.util.List;
 import java.util.Map;
 import org.springframework.data.jdbc.repository.query.Query;
