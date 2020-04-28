@@ -18,7 +18,7 @@ class MainMenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.interactivePopGestureRecognizer?.delegate = nil
-        popUpLoginView()
+        configureUseCase()
         setupTableView()
         setupObserver()
         setupDataSource()
@@ -37,19 +37,10 @@ class MainMenuViewController: UIViewController {
         }
     }
     
-    private func popUpLoginView() {
-        guard let loginViewController = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController else {return}
-        present(loginViewController, animated: true)
-    }
-    
     private func setupObserver() {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(reloadSection(_:)),
                                                name: .ModelInserted,
-                                               object: nil)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(loadData),
-                                               name: .LoginSuccess,
                                                object: nil)
     }
     
@@ -95,10 +86,6 @@ class MainMenuViewController: UIViewController {
     @objc func reloadSection(_ notification: Notification) {
         guard let index = notification.userInfo?["index"] as? Int else {return}
         mainMenuTableView.reloadSections(IndexSet(index...index), with: .automatic)
-    }
-    
-    @objc func loadData() {
-        configureUseCase()
     }
 }
 
