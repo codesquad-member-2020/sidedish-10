@@ -29,7 +29,7 @@ public class LoginController {
   }
 
   @GetMapping("/login/github/request")
-  public String GitHubLogin(@RequestParam("code") String code, HttpServletResponse res) {
+  public void GitHubLogin(@RequestParam("code") String code, HttpServletResponse res) {
 
     GitHubToken token = loginService.getAccessToken(code);
     User nowUser = loginService.getUserInfo(token);
@@ -37,9 +37,8 @@ public class LoginController {
 
     Cookie cookie = new Cookie("jwtToken", jwtToken);
     res.addCookie(cookie);
-    res.setStatus(HttpStatus.OK.value());
-
-    return "done";
+    res.setStatus(HttpStatus.SEE_OTHER.value());
+    res.setHeader("Location", "http://13.125.179.178");
   }
 
   @CrossOrigin("/**")
