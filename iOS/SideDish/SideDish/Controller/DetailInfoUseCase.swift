@@ -9,7 +9,7 @@
 import Foundation
 
 struct DetailInfoUseCase {
-    static func loadMainDish(with manager: NetworkManager, id: Int , failureHandler: @escaping (NetworkManager.NetworkError) -> () = {_ in}, completed: @escaping(DishInfo, Int) -> ()) {
+    static func loadDetailDish(with manager: NetworkManager, id: Int , failureHandler: @escaping (NetworkManager.NetworkError) -> () = {_ in}, completed: @escaping(DishInfo) -> ()) {
         manager.getDetailDish(id: id) {
             switch $0 {
             case .failure(let error):
@@ -17,7 +17,7 @@ struct DetailInfoUseCase {
             case .success(let data):
                 do {
                     let model = try JSONDecoder().decode(DetailDish.self, from: data)
-                    completed(model.body, 0)
+                    completed(model.body)
                 } catch {
                     failureHandler(.DecodeError)
                 }
