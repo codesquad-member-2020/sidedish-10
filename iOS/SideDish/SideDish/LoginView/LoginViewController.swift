@@ -11,6 +11,8 @@ import UIKit
 class LoginViewController: UIViewController {
     
     @IBAction func loginButtonPushed(_ sender: UIButton) {
+        guard let OAuthViewController = storyboard?.instantiateViewController(withIdentifier: "OAuthViewController") as? OAuthViewController else {return}
+        present(OAuthViewController, animated: true)
     }
     
     override func viewDidLoad() {
