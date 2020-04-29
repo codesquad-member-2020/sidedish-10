@@ -24,7 +24,14 @@ class DetailViewController: UIViewController {
     
     @IBAction func orderButtonPushed(_ sender: UIButton) {
         StockUseCase.isSoldOut(with: NetworkManager(), id: id, failureHandler: {self.errorHandling(error: $0)}) {
-            print($0)
+            if $0 {
+                DispatchQueue.main.async {
+                    self.navigationController?.popViewController(animated: true)
+                    self.alert(title: "주문 성공!", message: self.titleText, confirmMessage: "넵!")
+                }
+            } else {
+                self.alert(title: "품절 입니다ㅠㅠ", message: "죄송합니다 흑흑", confirmMessage: "넵ㅠㅠ")
+            }
         }
     }
     
@@ -124,13 +131,17 @@ class DetailViewController: UIViewController {
         imageView.widthAnchor.constraint(equalTo: constraintAnchor.frameLayoutGuide.widthAnchor, multiplier: 1).isActive = true
     }
     
-    private func alertError(message: String) {
+    private func alert(title: String, message: String, confirmMessage: String) {
         DispatchQueue.main.async {
-            let alert = UIAlertController(title: "문제가 생겼어요", message: message, preferredStyle: .alert)
-            let ok = UIAlertAction(title: "넵...", style: .default)
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            let ok = UIAlertAction(title: confirmMessage, style: .default)
             alert.addAction(ok)
             self.present(alert, animated: true)
         }
+    }
+    
+    private func alertError(message: String) {
+        self.alert(title: "문제가 생겼어요", message: message, confirmMessage: "넵...")
     }
     
     private func errorHandling(error: NetworkManager.NetworkError) {
