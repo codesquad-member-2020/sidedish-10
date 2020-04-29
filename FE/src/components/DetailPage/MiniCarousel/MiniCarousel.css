@@ -1,0 +1,63 @@
+.panel-img {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+}
+
+.mini-stage {
+  position: relative;
+  perspective: 400px;
+  min-height: 100px;
+  height: 500px;
+  max-height: 500px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mini-carousel {
+  transform-style: preserve-3d;
+  width: 70%;
+  height: 100%;
+}
+
+.mini-panels {
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  transform-style: preserve-3d;
+  transition: 1s;
+}
+.mini-panels:nth-child(1) {
+  transform: translateX(0%) translateZ(-40px) scale(0.9);
+  background: coral;
+}
+
+.mini-panels:nth-child(2) {
+  transform: translateX(-55%) translateZ(-20px) scale(0.95);
+  background: coral;
+}
+
+.mini-panels:nth-child(3) {
+  transform: translateX(0%) translateZ(0px) scale(1);
+  background: chartreuse;
+}
+
+.mini-panels:nth-child(4) {
+  transform: translateX(105%) translateZ(0px) scale(1);
+  background: chartreuse;
+}
+
+.mini-panels:nth-child(5) {
+  transform: translateX(155%) translateZ(-20px) scale(0.95);
+  background: chartreuse;
+}
+
+.mini-panels:nth-child(6) {
+  transform: translateX(105%) translateZ(-40px) scale(0.9);
+  background: chartreuse;
+}

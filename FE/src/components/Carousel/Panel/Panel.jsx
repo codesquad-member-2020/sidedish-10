@@ -4,10 +4,6 @@ import Profile from "./Profile/Profile";
 import "./Panel.css";
 
 class Panel extends React.Component {
-  constructor() {
-    super();
-  }
-
   render() {
     const {
       rotateYDeg,
@@ -27,10 +23,13 @@ class Panel extends React.Component {
       >
         <div className="panel-side panel-front">
           <Profile
-            birthday={profile.birthday}
+            title={profile.title}
             name={profile.name}
-            pay={profile.pay}
+            n_price={profile.n_price}
+            s_price={profile.s_price}
             description={profile.description}
+            badges={profile.badges}
+            key={profile.title}
           />
         </div>
         <div
@@ -38,7 +37,10 @@ class Panel extends React.Component {
             show ? "panel-side panel-back panel-hide" : "panel-side panel-back"
           }
         >
-          <img src={profile.imgSrc}></img>
+          <div
+            className="panel-img"
+            style={{ backgroundImage: `url(${profile.image})` }}
+          ></div>
         </div>
       </div>
     );

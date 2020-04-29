@@ -1,11 +1,42 @@
 .profile {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
+  align-items: flex-start;
   height: 100%;
+  padding: 0.5rem;
 }
 
-.profile span {
-  font-size: 0.1rem;
-  display: block;
+.profile-title {
+  font-weight: 900;
+  font-size: 1.2rem;
+}
+
+.profile-description {
+  font-size: 0.8rem;
+}
+
+.profile-prices p {
+  display: inline-block;
+}
+
+.profile-n_price {
+  text-decoration: line-through;
+  font-size: 0.8rem;
+}
+
+.profile-s_price {
+  color: #43c8c4;
+  font-size: 1.2rem;
+}
+
+.profile-badge-section {
+  display: flex;
+}
+
+.profile-badges {
+  background-color: #ac78c0;
+  color: #fff;
+  margin-right: 0.3rem;
+  font-size: 1.2rem;
 }
