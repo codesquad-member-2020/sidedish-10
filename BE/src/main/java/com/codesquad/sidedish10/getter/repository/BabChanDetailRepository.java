@@ -28,4 +28,6 @@ public interface BabChanDetailRepository extends CrudRepository<BabChanDetailObj
   @Query("SELECT sp.s_price FROM s_price sp WHERE sp.detail_hash = :detail_hash")
   String get_s_price_by_detail_hash(@Param("detail_hash") String hash);
 
+  @Query("SELECT availability FROM detail WHERE detail_hash = :detail_hash")
+  int getAvailabilityByDetailHash(String detail_hash);
 }
