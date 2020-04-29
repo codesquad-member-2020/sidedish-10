@@ -17,6 +17,16 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(presentMainMenuViewController),
+                                               name: .receiveCookie,
+                                               object: nil)
+    }
+    
+    @objc func presentMainMenuViewController() {
+        guard let navigationController = storyboard?.instantiateViewController(withIdentifier: "NavigationController") as? UINavigationController else {return}
+        navigationController.modalPresentationStyle = .fullScreen
+        present(navigationController, animated: true)
     }
 }
 

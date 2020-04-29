@@ -17,6 +17,7 @@ typealias dataHandler = (Result<Data, NetworkManager.NetworkError>) -> Void
 typealias downloadHandler = (Result<URL, NetworkManager.NetworkError>) -> Void
 
 class NetworkManager: NetworkManageable {
+    static var jwtToken: String?
     
     enum EndPoints {
         static let serverURL = "http://13.125.179.178:8080/develop/baminchan/"
