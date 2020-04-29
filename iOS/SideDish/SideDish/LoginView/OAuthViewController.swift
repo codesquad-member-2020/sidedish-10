@@ -15,6 +15,11 @@ class OAuthViewController: UIViewController {
     
     override func loadView() {
         super.loadView()
+        WKWebsiteDataStore.default().httpCookieStore.getAllCookies {
+            for cookie in $0 {
+                WKWebsiteDataStore.default().httpCookieStore.delete(cookie)
+            }
+        }
         webView.navigationDelegate = self
         self.view = self.webView
     }
