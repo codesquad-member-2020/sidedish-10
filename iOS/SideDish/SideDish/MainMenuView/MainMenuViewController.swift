@@ -18,10 +18,16 @@ class MainMenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.interactivePopGestureRecognizer?.delegate = nil
-        configureUseCase()
+        loadDishSection()
         setupTableView()
         setupObserver()
         setupDataSource()
+    }
+    
+    private func loadDishSection() {
+        DishSectionUseCase.loadSectionHeaders(with: NetworkManager(), failureHandler: {self.errorHandling(error: $0)}) {
+            self.mainMenuDataSource.sideDishManager.insertSection(sections: $0)
+        }
     }
     
     private func setupDataSource() {
@@ -41,6 +47,10 @@ class MainMenuViewController: UIViewController {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(reloadSection(_:)),
                                                name: .ModelInserted,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(setupSection),
+                                               name: .SectionInserted,
                                                object: nil)
     }
     
@@ -87,15 +97,22 @@ class MainMenuViewController: UIViewController {
         guard let index = notification.userInfo?["index"] as? Int else {return}
         mainMenuTableView.reloadSections(IndexSet(index...index), with: .automatic)
     }
+    
+    @objc func setupSection() {
+        DispatchQueue.main.async {
+            self.mainMenuTableView.reloadData()
+        }
+        configureUseCase()
+    }
 }
 
 extension MainMenuViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "MenuHeaderView") as? MainMenuHeader else {return UIView()}
-        let sectionInfo = mainMenuDataSource.sideDishManager.sectionName(at: section)
-        let contents = sectionInfo.components(separatedBy: "/")
-        headerView.setTitleLabel(text: contents[0])
-        headerView.setContentLabel(text: contents[1])
+        let sectionName = mainMenuDataSource.sideDishManager.sectionName(at: section)
+        let sectionInfo = mainMenuDataSource.sideDishManager.sectionDescription(at: section)
+        headerView.setTitleLabel(text: sectionName)
+        headerView.setContentLabel(text: sectionInfo)
         headerView.index = section
         headerView.delegate = self
         return headerView
