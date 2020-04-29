@@ -30,7 +30,7 @@ public class WebMvcConfigurerImpl implements WebMvcConfigurer {
   @Override
   public void addInterceptors(InterceptorRegistry registry) {
     registry.addInterceptor(new HttpInterceptor(jwtService))
-  //      .addPathPatterns("/develop/**")
-        .excludePathPatterns("/**");
+        .addPathPatterns("/**")
+        .excludePathPatterns("/login/github");
   }
 }
