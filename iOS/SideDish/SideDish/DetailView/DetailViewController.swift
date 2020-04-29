@@ -19,9 +19,6 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var detailImageStackView: UIStackView!
     @IBOutlet weak var contentScrollView: UIScrollView!
     
-    private var thumnailImageViews = [UIImageView]()
-    private var detailImageViews = [UIImageView]()
-    
     var id: Int!
     private var model: DishInfo? {
         didSet {
@@ -61,9 +58,7 @@ class DetailViewController: UIViewController {
         
         for from in model.thumb_images {
             let imageView = UIImageView()
-            thumbnailStackView.addArrangedSubview(imageView)
-            imageView.widthAnchor.constraint(equalTo: thumbnailScrollView.frameLayoutGuide.widthAnchor, multiplier: 1).isActive = true
-            imageView.contentMode = .scaleAspectFill
+            InsertImageView(into: thumbnailStackView, imageView: imageView, constraintAnchor: thumbnailScrollView)
             
             guard let url = URL(string: from) else {
                 errorHandling(error: .InvalidURL)
@@ -80,10 +75,7 @@ class DetailViewController: UIViewController {
         
         for from in model.detail_section {
             let imageView = UIImageView()
-            imageView.contentMode = .scaleAspectFill
-            detailImageViews.append(imageView)
-            detailImageStackView.addArrangedSubview(imageView)
-            imageView.widthAnchor.constraint(equalTo: contentScrollView.frameLayoutGuide.widthAnchor, multiplier: 1).isActive = true
+            InsertImageView(into: detailImageStackView, imageView: imageView, constraintAnchor: contentScrollView)
             
             guard let url = URL(string: from) else {
                 errorHandling(error: .InvalidURL)
@@ -100,6 +92,12 @@ class DetailViewController: UIViewController {
         }
     }
     
+    private func InsertImageView(into stackView: UIStackView, imageView: UIImageView, constraintAnchor: UIScrollView) {
+        imageView.contentMode = .scaleAspectFill
+        stackView.addArrangedSubview(imageView)
+        imageView.widthAnchor.constraint(equalTo: constraintAnchor.frameLayoutGuide.widthAnchor, multiplier: 1).isActive = true
+    }
+    
     private func alertError(message: String) {
         DispatchQueue.main.async {
             let alert = UIAlertController(title: "문제가 생겼어요", message: message, preferredStyle: .alert)
@@ -112,8 +110,4 @@ class DetailViewController: UIViewController {
     private func errorHandling(error: NetworkManager.NetworkError) {
         alertError(message: error.message())
     }
-}
-
-extension Notification.Name {
-    static let p = Notification.Name("p")
 }
