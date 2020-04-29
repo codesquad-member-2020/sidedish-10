@@ -22,6 +22,12 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var originalPriceLabel: UILabel!
     @IBOutlet weak var specialPriceLabel: UILabel!
     
+    @IBAction func orderButtonPushed(_ sender: UIButton) {
+        StockUseCase.isSoldOut(with: NetworkManager(), id: id, failureHandler: {self.errorHandling(error: $0)}) {
+            print($0)
+        }
+    }
+    
     var id: Int!
     var titleText: String!
     private var model: DishInfo? {

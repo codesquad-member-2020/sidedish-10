@@ -25,6 +25,7 @@ class NetworkManager: NetworkManageable {
         static let side = "side"
         static let detail = "detail"
         static let menuinfo = "menuinfo"
+        static let order = "order"
     }
     
     enum NetworkError: Error {
@@ -108,6 +109,10 @@ class NetworkManager: NetworkManageable {
             
             handler(.success(data))
         }.resume()
+    }
+    
+    func getStock(id: Int, handler: @escaping dataHandler) {
+        getResource(from: EndPoints.serverURL + EndPoints.order + "/\(id)", method: .get, headers: nil, handler: handler)
     }
     
     func getSectionHeader(handler: @escaping dataHandler) {

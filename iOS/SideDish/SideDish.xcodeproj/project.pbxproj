@@ -31,6 +31,7 @@
 		A5E4F581245176E1007AAA3D /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E4F580245176E1007AAA3D /* DetailViewController.swift */; };
 		A5F4755E2459146000237E1E /* DishSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F4755D2459146000237E1E /* DishSection.swift */; };
 		A5F47560245917E100237E1E /* DishSectionUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F4755F245917E100237E1E /* DishSectionUseCase.swift */; };
+		A5F4756224593C0900237E1E /* StockUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F4756124593C0900237E1E /* StockUseCase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +75,7 @@
 		A5E4F580245176E1007AAA3D /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		A5F4755D2459146000237E1E /* DishSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishSection.swift; sourceTree = "<group>"; };
 		A5F4755F245917E100237E1E /* DishSectionUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishSectionUseCase.swift; sourceTree = "<group>"; };
+		A5F4756124593C0900237E1E /* StockUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockUseCase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,6 +172,7 @@
 				A59ACBDC2453F40700359A0A /* ImageUseCase.swift */,
 				A5AB37B6245851E60015A192 /* DetailInfoUseCase.swift */,
 				A5F4755F245917E100237E1E /* DishSectionUseCase.swift */,
+				A5F4756124593C0900237E1E /* StockUseCase.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -373,6 +376,7 @@
 				A5BD9282244DCAE600D6442F /* LoginViewController.swift in Sources */,
 				A59ACBDD2453F40700359A0A /* ImageUseCase.swift in Sources */,
 				A5A4DFE82451467700C734F1 /* SideDishUseCase.swift in Sources */,
+				A5F4756224593C0900237E1E /* StockUseCase.swift in Sources */,
 				A516CF18245060C100F96635 /* NetworkManager.swift in Sources */,
 				A516CF4224507C8D00F96635 /* SideDishManager.swift in Sources */,
 				A5AB37B7245851E60015A192 /* DetailInfoUseCase.swift in Sources */,
