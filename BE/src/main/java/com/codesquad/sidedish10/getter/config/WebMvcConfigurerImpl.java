@@ -27,10 +27,10 @@ public class WebMvcConfigurerImpl implements WebMvcConfigurer {
         .allowedMethods("GET", "POST", "OPTION", "HEADER", "PUT", "DELETE");
   }
 
-  @Override
-  public void addInterceptors(InterceptorRegistry registry) {
-    registry.addInterceptor(new HttpInterceptor(jwtService))
-        .addPathPatterns("/develop/**")
-        .excludePathPatterns("/login/github");
-  }
+//  @Override
+//  public void addInterceptors(InterceptorRegistry registry) {
+//    registry.addInterceptor(new HttpInterceptor(jwtService))
+//        .addPathPatterns("/develop/**")
+//        .excludePathPatterns("/login/github");
+//  }
 }
