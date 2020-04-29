@@ -8,6 +8,7 @@
 
 import UIKit
 import Toaster
+import Floaty
 
 class MainMenuViewController: UIViewController {
     
@@ -18,10 +19,25 @@ class MainMenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.interactivePopGestureRecognizer?.delegate = nil
+        setupFloatingButton()
         loadDishSection()
         setupTableView()
         setupObserver()
         setupDataSource()
+    }
+    
+    private func setupFloatingButton() {
+        let floaty = Floaty()
+        floaty.buttonColor = UIColor(named: "PrimaryColor") ?? UIColor.cyan
+        floaty.itemTitleColor = UIColor(named: "divisionColor") ?? UIColor.black
+        floaty.addItem("로그아웃", icon: UIImage(named: "person")) { _ in
+            guard let loginViewController = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController else {return}
+            loginViewController.modalPresentationStyle = .fullScreen
+            NetworkManager.jwtToken = nil
+            self.present(loginViewController, animated: true)
+            floaty.close()
+        }
+        self.view.addSubview(floaty)
     }
     
     private func loadDishSection() {

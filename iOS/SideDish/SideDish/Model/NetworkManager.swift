@@ -17,6 +17,7 @@ typealias dataHandler = (Result<Data, NetworkManager.NetworkError>) -> Void
 typealias downloadHandler = (Result<URL, NetworkManager.NetworkError>) -> Void
 
 class NetworkManager: NetworkManageable {
+    static var jwtToken: String?
     
     enum EndPoints {
         static let serverURL = "http://13.125.179.178:8080/develop/baminchan/"
@@ -55,7 +56,9 @@ class NetworkManager: NetworkManageable {
     }
     
     func downloadResource(from: URL, handler: @escaping downloadHandler) {
-        URLSession.shared.downloadTask(with: from) { (url, response, error) in
+        var urlRequest = URLRequest(url: from)
+        urlRequest.addValue("jwtToken=" + (NetworkManager.jwtToken ?? ""), forHTTPHeaderField: "Cookie")
+        URLSession.shared.downloadTask(with: urlRequest) { (url, response, error) in
             guard error == nil else {
                 handler(.failure(.requestError))
                 return
@@ -86,7 +89,9 @@ class NetworkManager: NetworkManageable {
             return
         }
         
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
+        var urlRequest = URLRequest(url: url)
+        urlRequest.addValue("jwtToken=" + (NetworkManager.jwtToken ?? ""), forHTTPHeaderField: "Cookie")
+        URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
             guard error == nil else {
                 handler(.failure(.requestError))
                 return

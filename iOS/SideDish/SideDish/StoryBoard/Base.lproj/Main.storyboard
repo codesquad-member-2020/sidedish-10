@@ -114,7 +114,6 @@
                                         </state>
                                         <connections>
                                             <action selector="loginButtonPushed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="UJZ-hf-ZI5"/>
-                                            <segue destination="4Oz-7T-9hJ" kind="presentation" modalPresentationStyle="fullScreen" id="g6t-2V-Y4x"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -202,7 +201,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="446" y="115"/>
+            <point key="canvasLocation" x="402" y="-546"/>
         </scene>
         <!--Main Menu View Controller-->
         <scene sceneID="35g-EQ-BHf">
@@ -575,10 +574,44 @@
             </objects>
             <point key="canvasLocation" x="2778" y="115"/>
         </scene>
+        <!--Auth View Controller-->
+        <scene sceneID="4do-Kc-29r">
+            <objects>
+                <viewController storyboardIdentifier="OAuthViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="JzX-xz-k3y" customClass="OAuthViewController" customModule="SideDish" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="xAX-vB-w1e">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NMe-0G-KgD">
+                                <rect key="frame" x="0.0" y="44" width="375" height="768"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="NMe-0G-KgD" firstAttribute="leading" secondItem="1Ig-3b-yGK" secondAttribute="leading" id="BUG-cA-dYb"/>
+                            <constraint firstItem="NMe-0G-KgD" firstAttribute="top" secondItem="1Ig-3b-yGK" secondAttribute="top" id="MLs-C5-1S4"/>
+                            <constraint firstAttribute="bottom" secondItem="NMe-0G-KgD" secondAttribute="bottom" id="cBF-Hk-0k3"/>
+                            <constraint firstItem="1Ig-3b-yGK" firstAttribute="trailing" secondItem="NMe-0G-KgD" secondAttribute="trailing" id="ijZ-gp-6ac"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="1Ig-3b-yGK"/>
+                    </view>
+                    <connections>
+                        <outlet property="webView" destination="NMe-0G-KgD" id="qZM-FG-WVJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4xo-FV-82c" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1167" y="-546"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="eCI-H7-iIn">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="4Oz-7T-9hJ" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="NavigationController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" navigationBarHidden="YES" id="4Oz-7T-9hJ" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Gf8-ef-hag">
                         <autoresizingMask key="autoresizingMask"/>
