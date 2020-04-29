@@ -13,7 +13,7 @@ DROP TABLE IF EXISTS user;
 
 CREATE TABLE menu
 (
-    menu_id    int primary key auto_increment,
+    menu_id int primary key auto_increment,
     title varchar(45),
     eng_name varchar(45),
     info varchar(100)
@@ -84,7 +84,8 @@ CREATE TABLE detail
     product_description varchar(150),
     point               varchar(45),
     delivery_info       varchar(150),
-    delivery_fee        varchar(150)
+    delivery_fee        varchar(150),
+    availability        int
 );
 CREATE TABLE user
 (

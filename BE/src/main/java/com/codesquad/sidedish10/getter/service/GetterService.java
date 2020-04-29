@@ -3,6 +3,7 @@ package com.codesquad.sidedish10.getter.service;
 import com.codesquad.sidedish10.getter.domain.BabChanDetailReturnObject;
 import com.codesquad.sidedish10.getter.dto.BabChanDetailDto;
 import com.codesquad.sidedish10.getter.dto.BabChanItemResponseDto;
+import com.codesquad.sidedish10.getter.dto.BabChanOrderDto;
 import com.codesquad.sidedish10.getter.repository.BabChanDetailRepository;
 import com.codesquad.sidedish10.getter.repository.BabChanItemRepository;
 import com.codesquad.sidedish10.getter.dto.BabChanSectionInfoDto;
@@ -99,6 +100,17 @@ public class GetterService {
       dto.setDetail_section(
           babChanDetailRepository.getBabChanDetailSectionByHash(dto.getDetail_hash()));
     }
+
+    return dto;
+  }
+
+  public BabChanOrderDto checkOrderAvailability(Long id) {
+    String nowHash = babChanItemRepository.get_detail_hash_by_item_id(id);
+    BabChanDetailReturnObject object = babChanDetailRepository.getBabChanItemDetailByHash(nowHash);
+    int stock = babChanDetailRepository.getAvailabilityByDetailHash(nowHash);
+    BabChanOrderDto dto = new BabChanOrderDto();
+    dto.setId(object.getId());
+    dto.setStock(stock);
 
     return dto;
   }

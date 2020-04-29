@@ -2,6 +2,7 @@ package com.codesquad.sidedish10.getter.controller;
 
 import com.codesquad.sidedish10.getter.dto.BabChanDetailDto;
 import com.codesquad.sidedish10.getter.dto.BabChanItemResponseDto;
+import com.codesquad.sidedish10.getter.dto.BabChanOrderDto;
 import com.codesquad.sidedish10.getter.dto.BabChanSectionInfoDto;
 import com.codesquad.sidedish10.getter.service.GetterService;
 import com.codesquad.sidedish10.getter.response.ApiResponse;
@@ -83,6 +84,16 @@ public class GetterController {
     response.setStatusCode(HttpStatus.OK.value());
     BabChanDetailDto babChanDetailDto = getterService.getSpecificBabChanItemDetail(id);
     response.setBody(babChanDetailDto);
+    return response;
+  }
+
+  @GetMapping("/develop/baminchan/order/{id}")
+  public ApiResponse orderSpecificItem(@PathVariable Long id) {
+    ApiResponse response = new ApiResponse();
+    response.setStatusCode(HttpStatus.OK.value());
+    BabChanOrderDto dto = getterService.checkOrderAvailability(id);
+    response.setBody(dto);
+
     return response;
   }
 }
