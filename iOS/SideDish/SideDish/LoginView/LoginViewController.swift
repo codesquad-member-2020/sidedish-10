@@ -11,9 +11,6 @@ import UIKit
 class LoginViewController: UIViewController {
     
     @IBAction func loginButtonPushed(_ sender: UIButton) {
-        dismiss(animated: true)
-        NotificationCenter.default.post(name: .LoginSuccess,
-                                        object: nil)
     }
     
     override func viewDidLoad() {
