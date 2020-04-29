@@ -10,7 +10,7 @@ import Foundation
 
 class SideDishManager {
     private var sideDish: [[SideDishInfo]]
-    private let sectionName = ["메인반찬 / 한그릇 뚝딱 메인 요리","국.찌개 / 김이 모락모락 국.찌개","밑반찬 / 언제 먹어도 든든한 밑반찬"]
+    private var sections: [Section] = []
     
     init() {
         sideDish = [[SideDishInfo]]()
@@ -26,12 +26,22 @@ class SideDishManager {
                                         userInfo: ["index" : section])
     }
     
+    func insertSection(sections: [Section]) {
+        self.sections = sections
+        NotificationCenter.default.post(name: .SectionInserted,
+                                        object: nil)
+    }
+    
     func sectionName(at index: Int) -> String{
-        return sectionName[index]
+        return sections[index].title
+    }
+    
+    func sectionDescription(at index: Int) -> String {
+        return sections[index].info
     }
     
     func sectionCount() -> Int {
-        return sectionName.count
+        return sections.count
     }
     
     func sideDish(indexPath: IndexPath) -> SideDishInfo {
@@ -45,4 +55,5 @@ class SideDishManager {
 
 extension Notification.Name {
     static let ModelInserted = Notification.Name("ModelInserted")
+    static let SectionInserted = Notification.Name("SectionInserted")
 }

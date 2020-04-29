@@ -19,6 +19,21 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var deliveryInfoLabel: UILabel!
     @IBOutlet weak var detailImageStackView: UIStackView!
     @IBOutlet weak var contentScrollView: UIScrollView!
+    @IBOutlet weak var originalPriceLabel: UILabel!
+    @IBOutlet weak var specialPriceLabel: UILabel!
+    
+    @IBAction func orderButtonPushed(_ sender: UIButton) {
+        StockUseCase.isSoldOut(with: NetworkManager(), id: id, failureHandler: {self.errorHandling(error: $0)}) {
+            if $0 {
+                DispatchQueue.main.async {
+                    self.navigationController?.popViewController(animated: true)
+                    self.alert(title: "주문 성공!", message: self.titleText, confirmMessage: "넵!")
+                }
+            } else {
+                self.alert(title: "품절 입니다ㅠㅠ", message: "죄송합니다 흑흑", confirmMessage: "넵ㅠㅠ")
+            }
+        }
+    }
     
     var id: Int!
     var titleText: String!
@@ -51,6 +66,19 @@ class DetailViewController: UIViewController {
         }
     }
     
+    private func setOriginPriceLabel(text original: String?) {
+        if let original = original {
+            let originPrice = original
+            let attributedString = NSMutableAttributedString(string: originPrice)
+            attributedString.addAttribute(.baselineOffset, value: 0, range: (originPrice as NSString).range(of: originPrice))
+            attributedString.addAttribute(.strikethroughStyle, value: 1, range: (originPrice as NSString).range(of: originPrice))
+            
+            self.originalPriceLabel.attributedText = attributedString
+        } else {
+            originalPriceLabel.alpha = 0
+        }
+    }
+    
     private func setupUI() {
         guard let model = model else {return}
         titleLabel.text = titleText
@@ -58,6 +86,8 @@ class DetailViewController: UIViewController {
         mileageLabel.text = model.point
         deliveryFeeLabel.text = model.delivery_fee
         deliveryInfoLabel.text = model.delivery_info
+        setOriginPriceLabel(text: model.n_price)
+        specialPriceLabel.text = model.s_price
         
         for from in model.thumb_images {
             let imageView = UIImageView()
@@ -101,13 +131,17 @@ class DetailViewController: UIViewController {
         imageView.widthAnchor.constraint(equalTo: constraintAnchor.frameLayoutGuide.widthAnchor, multiplier: 1).isActive = true
     }
     
-    private func alertError(message: String) {
+    private func alert(title: String, message: String, confirmMessage: String) {
         DispatchQueue.main.async {
-            let alert = UIAlertController(title: "문제가 생겼어요", message: message, preferredStyle: .alert)
-            let ok = UIAlertAction(title: "넵...", style: .default)
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            let ok = UIAlertAction(title: confirmMessage, style: .default)
             alert.addAction(ok)
             self.present(alert, animated: true)
         }
+    }
+    
+    private func alertError(message: String) {
+        self.alert(title: "문제가 생겼어요", message: message, confirmMessage: "넵...")
     }
     
     private func errorHandling(error: NetworkManager.NetworkError) {

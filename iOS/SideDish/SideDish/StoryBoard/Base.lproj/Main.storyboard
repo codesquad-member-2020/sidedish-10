@@ -539,6 +539,9 @@
                                 <state key="normal" title="주문하기">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="orderButtonPushed:" destination="zP7-pS-LQX" eventType="touchUpInside" id="aCc-ma-3Dg"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -561,6 +564,8 @@
                         <outlet property="descriptionLabel" destination="din-Ai-fRc" id="7In-Gi-3q7"/>
                         <outlet property="detailImageStackView" destination="Wrf-Me-EJX" id="hvB-wC-WL3"/>
                         <outlet property="mileageLabel" destination="GJx-wA-RDs" id="BpZ-iR-riq"/>
+                        <outlet property="originalPriceLabel" destination="8Ao-Yf-CIr" id="gqH-GT-xfF"/>
+                        <outlet property="specialPriceLabel" destination="fNg-Si-ZWN" id="yvw-l9-Neq"/>
                         <outlet property="thumbnailScrollView" destination="pEl-4t-h4D" id="l8V-QT-Qe5"/>
                         <outlet property="thumbnailStackView" destination="ZVb-d1-dud" id="Zx5-iE-HxZ"/>
                         <outlet property="titleLabel" destination="4fG-oy-fpg" id="C25-W7-ZDL"/>

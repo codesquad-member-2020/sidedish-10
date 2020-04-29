@@ -29,6 +29,9 @@
 		A5BD9295244DCAE900D6442F /* SideDishTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BD9294244DCAE900D6442F /* SideDishTests.swift */; };
 		A5BF0E2824581CBF00222FF3 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BF0E2724581CBF00222FF3 /* UIColorExtension.swift */; };
 		A5E4F581245176E1007AAA3D /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E4F580245176E1007AAA3D /* DetailViewController.swift */; };
+		A5F4755E2459146000237E1E /* DishSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F4755D2459146000237E1E /* DishSection.swift */; };
+		A5F47560245917E100237E1E /* DishSectionUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F4755F245917E100237E1E /* DishSectionUseCase.swift */; };
+		A5F4756224593C0900237E1E /* StockUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F4756124593C0900237E1E /* StockUseCase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +73,9 @@
 		A5BD9296244DCAE900D6442F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A5BF0E2724581CBF00222FF3 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		A5E4F580245176E1007AAA3D /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		A5F4755D2459146000237E1E /* DishSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishSection.swift; sourceTree = "<group>"; };
+		A5F4755F245917E100237E1E /* DishSectionUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishSectionUseCase.swift; sourceTree = "<group>"; };
+		A5F4756124593C0900237E1E /* StockUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockUseCase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +114,7 @@
 				A516CF4124507C8D00F96635 /* SideDishManager.swift */,
 				A5BF0E2724581CBF00222FF3 /* UIColorExtension.swift */,
 				A5AB37B42458510A0015A192 /* DetailDish.swift */,
+				A5F4755D2459146000237E1E /* DishSection.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -164,6 +171,8 @@
 				A5A4DFE72451467700C734F1 /* SideDishUseCase.swift */,
 				A59ACBDC2453F40700359A0A /* ImageUseCase.swift */,
 				A5AB37B6245851E60015A192 /* DetailInfoUseCase.swift */,
+				A5F4755F245917E100237E1E /* DishSectionUseCase.swift */,
+				A5F4756124593C0900237E1E /* StockUseCase.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -358,6 +367,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				A516CF3D2450684500F96635 /* MainMenuViewDataSource.swift in Sources */,
+				A5F47560245917E100237E1E /* DishSectionUseCase.swift in Sources */,
+				A5F4755E2459146000237E1E /* DishSection.swift in Sources */,
 				A5BF0E2824581CBF00222FF3 /* UIColorExtension.swift in Sources */,
 				A58FAEDF2452DF1200C9EDA3 /* MainMenuHeader.swift in Sources */,
 				A53BA05F244EA6DE0023D27D /* MainMenuViewController.swift in Sources */,
@@ -365,6 +376,7 @@
 				A5BD9282244DCAE600D6442F /* LoginViewController.swift in Sources */,
 				A59ACBDD2453F40700359A0A /* ImageUseCase.swift in Sources */,
 				A5A4DFE82451467700C734F1 /* SideDishUseCase.swift in Sources */,
+				A5F4756224593C0900237E1E /* StockUseCase.swift in Sources */,
 				A516CF18245060C100F96635 /* NetworkManager.swift in Sources */,
 				A516CF4224507C8D00F96635 /* SideDishManager.swift in Sources */,
 				A5AB37B7245851E60015A192 /* DetailInfoUseCase.swift in Sources */,
