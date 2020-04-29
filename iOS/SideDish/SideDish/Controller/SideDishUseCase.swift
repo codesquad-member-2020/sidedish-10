@@ -12,48 +12,32 @@ struct SideDishUseCase {
     
     static func loadMainDish(with manager: NetworkManager, failureHandler: @escaping (NetworkManager.NetworkError) -> () = {_ in}, completed: @escaping([SideDishInfo], Int) -> ()) {
         manager.getMainDish {
-            switch $0 {
-            case .failure(let error):
-                failureHandler(error)
-            case .success(let data):
-                do {
-                    let model = try JSONDecoder().decode(SideDish.self, from: data)
-                    completed(model.sideDishes, 0)
-                } catch {
-                    failureHandler(.DecodeError)
-                }
-            }
+            handleImage(result: $0, failureHandler: failureHandler, completed: completed)
         }
     }
     
     static func loadSideDish(with manager: NetworkManager, failureHandler: @escaping (NetworkManager.NetworkError) -> () = {_ in}, completed: @escaping([SideDishInfo], Int) -> ()) {
         manager.getSideDish {
-            switch $0 {
-            case .failure(let error):
-                failureHandler(error)
-            case .success(let data):
-                do {
-                    let model = try JSONDecoder().decode(SideDish.self, from: data)
-                    completed(model.sideDishes, 1)
-                } catch {
-                    failureHandler(.DecodeError)
-                }
-            }
+            handleImage(result: $0, failureHandler: failureHandler, completed: completed)
         }
     }
     
     static func loadSoupDish(with manager: NetworkManager, failureHandler: @escaping (NetworkManager.NetworkError) -> () = {_ in}, completed: @escaping([SideDishInfo], Int) -> ()) {
         manager.getSoupDish {
-            switch $0 {
-            case .failure(let error):
-                failureHandler(error)
-            case .success(let data):
-                do {
-                    let model = try JSONDecoder().decode(SideDish.self, from: data)
-                    completed(model.sideDishes, 2)
-                } catch {
-                    failureHandler(.DecodeError)
-                }
+            handleImage(result: $0, failureHandler: failureHandler, completed: completed)
+        }
+    }
+    
+    static func handleImage (result: Result<Data, NetworkManager.NetworkError>, failureHandler: @escaping (NetworkManager.NetworkError) -> () = {_ in}, completed: @escaping([SideDishInfo], Int) -> ()) {
+        switch result{
+        case .failure(let error):
+            failureHandler(error)
+        case .success(let data):
+            do {
+                let model = try JSONDecoder().decode(SideDish.self, from: data)
+                completed(model.sideDishes, model.menuId - 1)
+            } catch {
+                failureHandler(.DecodeError)
             }
         }
     }
