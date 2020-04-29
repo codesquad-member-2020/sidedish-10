@@ -7,7 +7,9 @@
 //
 
 import UIKit
+import Floaty
 
+@available(iOS 13.0, *)
 class LoginViewController: UIViewController {
     
     @IBAction func loginButtonPushed(_ sender: UIButton) {
@@ -17,6 +19,8 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        Floaty.global.button.addItem(icon: UIImage(systemName: "person"))
+        Floaty.global.show()
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(presentMainMenuViewController),
                                                name: .receiveCookie,

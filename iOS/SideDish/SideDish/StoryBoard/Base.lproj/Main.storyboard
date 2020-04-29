@@ -583,7 +583,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NMe-0G-KgD">
-                                <rect key="frame" x="0.0" y="44" width="375" height="734"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="768"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <wkWebViewConfiguration key="configuration">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
@@ -595,7 +595,7 @@
                         <constraints>
                             <constraint firstItem="NMe-0G-KgD" firstAttribute="leading" secondItem="1Ig-3b-yGK" secondAttribute="leading" id="BUG-cA-dYb"/>
                             <constraint firstItem="NMe-0G-KgD" firstAttribute="top" secondItem="1Ig-3b-yGK" secondAttribute="top" id="MLs-C5-1S4"/>
-                            <constraint firstItem="1Ig-3b-yGK" firstAttribute="bottom" secondItem="NMe-0G-KgD" secondAttribute="bottom" id="cBF-Hk-0k3"/>
+                            <constraint firstAttribute="bottom" secondItem="NMe-0G-KgD" secondAttribute="bottom" id="cBF-Hk-0k3"/>
                             <constraint firstItem="1Ig-3b-yGK" firstAttribute="trailing" secondItem="NMe-0G-KgD" secondAttribute="trailing" id="ijZ-gp-6ac"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="1Ig-3b-yGK"/>

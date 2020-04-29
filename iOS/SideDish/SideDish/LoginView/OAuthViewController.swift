@@ -21,7 +21,7 @@ class OAuthViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let url = URL(string: "https://github.com/login/oauth/authorize?client_id=6c72dbbb9ff995db580a&redirect_uri=http://13.125.179.178:8080/login/github/request")
+        let url = URL(string: "http://13.125.179.178:8080/login/github")
         let request = URLRequest(url: url!)
         webView.load(request)
     }
