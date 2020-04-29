@@ -19,6 +19,8 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var deliveryInfoLabel: UILabel!
     @IBOutlet weak var detailImageStackView: UIStackView!
     @IBOutlet weak var contentScrollView: UIScrollView!
+    @IBOutlet weak var originalPriceLabel: UILabel!
+    @IBOutlet weak var specialPriceLabel: UILabel!
     
     var id: Int!
     var titleText: String!
@@ -51,6 +53,19 @@ class DetailViewController: UIViewController {
         }
     }
     
+    private func setOriginPriceLabel(text original: String?) {
+        if let original = original {
+            let originPrice = original
+            let attributedString = NSMutableAttributedString(string: originPrice)
+            attributedString.addAttribute(.baselineOffset, value: 0, range: (originPrice as NSString).range(of: originPrice))
+            attributedString.addAttribute(.strikethroughStyle, value: 1, range: (originPrice as NSString).range(of: originPrice))
+            
+            self.originalPriceLabel.attributedText = attributedString
+        } else {
+            originalPriceLabel.alpha = 0
+        }
+    }
+    
     private func setupUI() {
         guard let model = model else {return}
         titleLabel.text = titleText
@@ -58,6 +73,8 @@ class DetailViewController: UIViewController {
         mileageLabel.text = model.point
         deliveryFeeLabel.text = model.delivery_fee
         deliveryInfoLabel.text = model.delivery_info
+        setOriginPriceLabel(text: model.n_price)
+        specialPriceLabel.text = model.s_price
         
         for from in model.thumb_images {
             let imageView = UIImageView()
