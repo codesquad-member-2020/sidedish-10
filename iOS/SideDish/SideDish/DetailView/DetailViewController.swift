@@ -12,6 +12,7 @@ class DetailViewController: UIViewController {
     
     @IBOutlet weak var thumbnailScrollView: UIScrollView!
     @IBOutlet weak var thumbnailStackView: UIStackView!
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var mileageLabel: UILabel!
     @IBOutlet weak var deliveryFeeLabel: UILabel!
@@ -20,6 +21,7 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var contentScrollView: UIScrollView!
     
     var id: Int!
+    var titleText: String!
     private var model: DishInfo? {
         didSet {
             DispatchQueue.main.async {
@@ -51,6 +53,7 @@ class DetailViewController: UIViewController {
     
     private func setupUI() {
         guard let model = model else {return}
+        titleLabel.text = titleText
         descriptionLabel.text = model.product_description
         mileageLabel.text = model.point
         deliveryFeeLabel.text = model.delivery_fee
