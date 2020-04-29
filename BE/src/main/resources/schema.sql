@@ -84,7 +84,8 @@ CREATE TABLE detail
     product_description varchar(150),
     point               varchar(45),
     delivery_info       varchar(150),
-    delivery_fee        varchar(150)
+    delivery_fee        varchar(150),
+    availability        int
 );
 CREATE TABLE user
 (
