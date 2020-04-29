@@ -30,6 +30,7 @@
 		A5BF0E2824581CBF00222FF3 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BF0E2724581CBF00222FF3 /* UIColorExtension.swift */; };
 		A5E4F581245176E1007AAA3D /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E4F580245176E1007AAA3D /* DetailViewController.swift */; };
 		A5F4755E2459146000237E1E /* DishSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F4755D2459146000237E1E /* DishSection.swift */; };
+		A5F47560245917E100237E1E /* DishSectionUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F4755F245917E100237E1E /* DishSectionUseCase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +73,7 @@
 		A5BF0E2724581CBF00222FF3 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		A5E4F580245176E1007AAA3D /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		A5F4755D2459146000237E1E /* DishSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishSection.swift; sourceTree = "<group>"; };
+		A5F4755F245917E100237E1E /* DishSectionUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishSectionUseCase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +169,7 @@
 				A5A4DFE72451467700C734F1 /* SideDishUseCase.swift */,
 				A59ACBDC2453F40700359A0A /* ImageUseCase.swift */,
 				A5AB37B6245851E60015A192 /* DetailInfoUseCase.swift */,
+				A5F4755F245917E100237E1E /* DishSectionUseCase.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -361,6 +364,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A516CF3D2450684500F96635 /* MainMenuViewDataSource.swift in Sources */,
+				A5F47560245917E100237E1E /* DishSectionUseCase.swift in Sources */,
 				A5F4755E2459146000237E1E /* DishSection.swift in Sources */,
 				A5BF0E2824581CBF00222FF3 /* UIColorExtension.swift in Sources */,
 				A58FAEDF2452DF1200C9EDA3 /* MainMenuHeader.swift in Sources */,
