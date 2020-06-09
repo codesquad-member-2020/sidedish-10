@@ -13,11 +13,4 @@ public class Sidedish10Application extends SpringBootServletInitializer {
 	public static void main(String[] args) throws ParseException {
 		SpringApplication.run(Sidedish10Application.class, args);
 	}
-
-	@Override
-	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-		return builder.sources(Sidedish10Application.class);
-	}
-
-
 }
