@@ -9,7 +9,8 @@
 import Foundation
 
 struct StockUseCase {
-    static func isSoldOut(with manager: NetworkManager, id: Int, failureHandler: @escaping (NetworkManager.NetworkError) -> () = {_ in}, completed: @escaping (Bool) -> ()) {
+    
+    static func isSoldOut(with manager: NetworkManager, id: Int, failureHandler: @escaping (NetworkManager.NetworkError) -> () = { _ in }, completed: @escaping (Bool) -> ()) {
         manager.getStock(id: id){
             switch $0 {
             case .failure(let error):

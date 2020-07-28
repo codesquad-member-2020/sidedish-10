@@ -46,7 +46,6 @@ class MainMenuTableViewCell: UITableViewCell {
             let attributedString = NSMutableAttributedString(string: originPrice)
             attributedString.addAttribute(.baselineOffset, value: 0, range: (originPrice as NSString).range(of: originPrice))
             attributedString.addAttribute(.strikethroughStyle, value: 1, range: (originPrice as NSString).range(of: originPrice))
-            
             self.originalPriceLabel.attributedText = attributedString
         } else {
             originalPriceLabel.isHidden = true
@@ -58,7 +57,7 @@ class MainMenuTableViewCell: UITableViewCell {
     }
     
     private func setEventStackView(badges: [Badge]?) {
-        guard let badges = badges, badges.count > 0 else {return}
+        guard let badges = badges, badges.count > 0 else { return }
         
         badges.forEach {
             let label = PaddingLabel()
