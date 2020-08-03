@@ -10,19 +10,19 @@ import Foundation
 
 struct SideDishUseCase {
     
-    static func loadMainDish(with manager: NetworkManager, failureHandler: @escaping (NetworkManager.NetworkError) -> () = { _ in }, completed: @escaping([SideDishInfo], Int) -> ()) {
+    static func loadMainDish(with manager: NetworkManager, failureHandler: @escaping (NetworkManager.NetworkError) -> Void = { _ in }, completed: @escaping([SideDishInfo], Int) -> Void) {
         manager.getMainDish {
             handleImage(result: $0, failureHandler: failureHandler, completed: completed)
         }
     }
     
-    static func loadSideDish(with manager: NetworkManager, failureHandler: @escaping (NetworkManager.NetworkError) -> () = { _ in }, completed: @escaping([SideDishInfo], Int) -> ()) {
+    static func loadSideDish(with manager: NetworkManager, failureHandler: @escaping (NetworkManager.NetworkError) -> Void = { _ in }, completed: @escaping([SideDishInfo], Int) -> Void) {
         manager.getSideDish {
             handleImage(result: $0, failureHandler: failureHandler, completed: completed)
         }
     }
     
-    static func loadSoupDish(with manager: NetworkManager, failureHandler: @escaping (NetworkManager.NetworkError) -> () = { _ in }, completed: @escaping([SideDishInfo], Int) -> ()) {
+    static func loadSoupDish(with manager: NetworkManager, failureHandler: @escaping (NetworkManager.NetworkError) -> Void = { _ in }, completed: @escaping([SideDishInfo], Int) -> Void) {
         manager.getSoupDish {
             handleImage(result: $0, failureHandler: failureHandler, completed: completed)
         }
@@ -30,8 +30,8 @@ struct SideDishUseCase {
     
     static func handleImage(
         result: Result<Data, NetworkManager.NetworkError>,
-        failureHandler: @escaping (NetworkManager.NetworkError) -> () = { _ in },
-        completed: @escaping([SideDishInfo], Int) -> ()
+        failureHandler: @escaping (NetworkManager.NetworkError) -> Void = { _ in },
+        completed: @escaping([SideDishInfo], Int) -> Void
     ) {
         switch result {
         case .failure(let error):

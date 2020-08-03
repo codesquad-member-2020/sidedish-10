@@ -11,7 +11,7 @@ import UIKit
 class MainMenuViewDataSource: NSObject, UITableViewDataSource {
     
     private(set) var sideDishManager: SideDishManager
-    public var handler: (MainMenuTableViewCell, String) -> () = { _, _ in }
+    public var handler: (MainMenuTableViewCell, String) -> Void = { _, _ in }
     
     override init() {
         sideDishManager = SideDishManager()

@@ -11,7 +11,7 @@ import Foundation
 struct ImageUseCase {
     
     static let cachesDirectory = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first
-    static func loadImage(with manager: NetworkManager, from: URL, failureHandler: @escaping (NetworkManager.NetworkError) -> (), completed: @escaping(Data) -> ()) {
+    static func loadImage(with manager: NetworkManager, from: URL, failureHandler: @escaping (NetworkManager.NetworkError) -> Void, completed: @escaping(Data) -> Void) {
         guard let cacheDir = cachesDirectory else { return }
         let imageURL = cacheDir.appendingPathComponent(from.lastPathComponent)
         
@@ -31,7 +31,7 @@ struct ImageUseCase {
         }
     }
     
-    private static func handleData(from url: URL, failureHandler: @escaping (NetworkManager.NetworkError) -> (), completed: @escaping(Data) -> ()) {
+    private static func handleData(from url: URL, failureHandler: @escaping (NetworkManager.NetworkError) -> Void, completed: @escaping(Data) -> Void) {
         do {
             let data = try Data(contentsOf: url)
             completed(data)

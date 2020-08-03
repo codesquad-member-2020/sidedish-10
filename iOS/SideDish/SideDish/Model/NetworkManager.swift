@@ -13,8 +13,8 @@ protocol NetworkManageable {
     func getResource(from: String, method: HTTPMethod, headers: HTTPHeaders?, handler : @escaping DataHandler)
 }
 
-typealias DataHandler = (Result<Data, NetworkManager.NetworkError>) -> ()
-typealias DownloadHandler = (Result<URL, NetworkManager.NetworkError>) -> ()
+typealias DataHandler = (Result<Data, NetworkManager.NetworkError>) -> Void
+typealias DownloadHandler = (Result<URL, NetworkManager.NetworkError>) -> Void
 
 class NetworkManager: NetworkManageable {
     static var jwtToken: String?
