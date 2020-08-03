@@ -10,7 +10,7 @@ import UIKit
 
 class PaddingLabel: UILabel {
     
-    @IBInspectable var padding: UIEdgeInsets = UIEdgeInsets(top: 0, left: 7, bottom: 0, right: 7)
+    var padding: UIEdgeInsets = UIEdgeInsets(top: 0, left: 7, bottom: 0, right: 7)
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)

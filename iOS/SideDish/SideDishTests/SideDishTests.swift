@@ -6,8 +6,8 @@
 //  Copyright © 2020 신한섭. All rights reserved.
 //
 
-import XCTest
 @testable import SideDish
+import XCTest
 
 class SideDishTests: XCTestCase {
 
@@ -30,5 +30,4 @@ class SideDishTests: XCTestCase {
             // Put the code you want to measure the time of here.
         }
     }
-
 }

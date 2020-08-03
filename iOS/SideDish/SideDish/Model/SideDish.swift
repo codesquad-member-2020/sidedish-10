@@ -41,5 +41,3 @@ struct Badge: Codable {
     var color: String
     var name: String
 }
-
-

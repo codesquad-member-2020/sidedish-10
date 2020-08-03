@@ -10,17 +10,18 @@ import Foundation
 
 struct DishSectionUseCase {
     
-    static func loadSectionHeaders(with manager: NetworkManager, failureHandler: @escaping (NetworkManager.NetworkError) -> () = { _ in }, completed: @escaping([Section]) -> ()) {
+    static func loadSectionHeaders(with manager: NetworkManager, failureHandler: @escaping (NetworkManager.NetworkError) -> Void = { _ in }, completed: @escaping([Section]) -> Void) {
         manager.getSectionHeader {
             switch $0 {
             case .failure(let error):
                 failureHandler(error)
+                
             case .success(let data):
                 do {
                     let model = try JSONDecoder().decode(DishSection.self, from: data)
                     completed(model.body)
                 } catch {
-                    failureHandler(.DecodeError)
+                    failureHandler(.decodeError)
                 }
             }
         }
