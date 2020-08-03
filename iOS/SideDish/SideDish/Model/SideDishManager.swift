@@ -23,7 +23,7 @@ class SideDishManager {
         sideDish[section] = rows
         NotificationCenter.default.post(name: .ModelInserted,
                                         object: nil,
-                                        userInfo: ["index" : section])
+                                        userInfo: ["index": section])
     }
     
     func insertSection(sections: [Section]) {
@@ -32,7 +32,7 @@ class SideDishManager {
                                         object: nil)
     }
     
-    func sectionName(at index: Int) -> String{
+    func sectionName(at index: Int) -> String {
         return sections[index].title
     }
     

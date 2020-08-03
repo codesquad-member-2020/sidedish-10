@@ -2,6 +2,9 @@ disabled_rules:
 - notification_center_detachment
 - nsobject_prefer_isequal
 - void_return
+- trailing_whitespace
+- closure_end_indentation
+- multiline_arguments_brackets
 
 opt_in_rules:
 - closure_spacing
@@ -22,7 +25,6 @@ opt_in_rules:
 - sorted_imports
 - toggle_bool
 - unused_import
-- vertical_parameter_alignment_on_call
 - vertical_whitespace_between_cases
 - vertical_whitespace_closing_braces
 - yoda_condition
@@ -33,7 +35,10 @@ excluded:
 
 identifier_name:
     min_length:
-        error: 4
+        error: 3
     excluded:
         - id
         - URL
+        - URL
+
+line_length: 200

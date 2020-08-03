@@ -15,12 +15,13 @@ struct DishSectionUseCase {
             switch $0 {
             case .failure(let error):
                 failureHandler(error)
+                
             case .success(let data):
                 do {
                     let model = try JSONDecoder().decode(DishSection.self, from: data)
                     completed(model.body)
                 } catch {
-                    failureHandler(.DecodeError)
+                    failureHandler(.decodeError)
                 }
             }
         }

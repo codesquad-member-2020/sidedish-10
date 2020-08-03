@@ -10,9 +10,10 @@ import Foundation
 
 struct ImageUseCase {
     
-    static let cachesDirectory = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!
+    static let cachesDirectory = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first
     static func loadImage(with manager: NetworkManager, from: URL, failureHandler: @escaping (NetworkManager.NetworkError) -> (), completed: @escaping(Data) -> ()) {
-        let imageURL = cachesDirectory.appendingPathComponent(from.lastPathComponent)
+        guard let cacheDir = cachesDirectory else { return }
+        let imageURL = cacheDir.appendingPathComponent(from.lastPathComponent)
         
         if FileManager.default.fileExists(atPath: imageURL.path) {
             handleData(from: imageURL, failureHandler: failureHandler, completed: completed)
@@ -21,6 +22,7 @@ struct ImageUseCase {
                 switch $0 {
                 case .failure(let error):
                     failureHandler(error)
+                    
                 case .success(let url):
                     handleData(from: url, failureHandler: failureHandler, completed: completed)
                     try? FileManager.default.moveItem(at: url, to: imageURL)
@@ -34,7 +36,7 @@ struct ImageUseCase {
             let data = try Data(contentsOf: url)
             completed(data)
         } catch {
-            failureHandler(.DecodeError)
+            failureHandler(.decodeError)
         }
     }
 }

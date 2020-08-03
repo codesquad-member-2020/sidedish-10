@@ -28,16 +28,21 @@ struct SideDishUseCase {
         }
     }
     
-    static func handleImage (result: Result<Data, NetworkManager.NetworkError>, failureHandler: @escaping (NetworkManager.NetworkError) -> () = { _ in }, completed: @escaping([SideDishInfo], Int) -> ()) {
-        switch result{
+    static func handleImage(
+        result: Result<Data, NetworkManager.NetworkError>,
+        failureHandler: @escaping (NetworkManager.NetworkError) -> () = { _ in },
+        completed: @escaping([SideDishInfo], Int) -> ()
+    ) {
+        switch result {
         case .failure(let error):
             failureHandler(error)
+            
         case .success(let data):
             do {
                 let model = try JSONDecoder().decode(SideDish.self, from: data)
                 completed(model.sideDishes, model.menuId - 1)
             } catch {
-                failureHandler(.DecodeError)
+                failureHandler(.decodeError)
             }
         }
     }

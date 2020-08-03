@@ -13,7 +13,13 @@ struct DishSection: Codable {
 }
 
 struct Section: Codable {
-    var menu_id: Int
+    var id: Int
     var title: String
     var info: String
+    
+    enum CodingKeys: String, CodingKey {
+        case id = "menu_id"
+        case title
+        case info
+    }
 }
