@@ -9,6 +9,7 @@
 import Foundation
 
 struct ImageUseCase {
+    
     static let cachesDirectory = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!
     static func loadImage(with manager: NetworkManager, from: URL, failureHandler: @escaping (NetworkManager.NetworkError) -> (), completed: @escaping(Data) -> ()) {
         let imageURL = cachesDirectory.appendingPathComponent(from.lastPathComponent)

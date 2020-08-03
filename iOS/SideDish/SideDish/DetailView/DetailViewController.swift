@@ -8,6 +8,7 @@
 
 import UIKit
 import Toaster
+
 class DetailViewController: UIViewController {
     
     @IBOutlet weak var thumbnailScrollView: UIScrollView!
@@ -23,16 +24,19 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var specialPriceLabel: UILabel!
     
     @IBAction func orderButtonPushed(_ sender: UIButton) {
-        StockUseCase.isSoldOut(with: NetworkManager(), id: id, failureHandler: {self.errorHandling(error: $0)}) {
-            if $0 {
-                DispatchQueue.main.async {
-                    self.navigationController?.popViewController(animated: true)
-                    self.alert(title: "주문 성공!", message: self.titleText, confirmMessage: "넵!")
-                }
-            } else {
-                self.alert(title: "품절 입니다ㅠㅠ", message: "죄송합니다 흑흑", confirmMessage: "넵ㅠㅠ")
-            }
-        }
+        StockUseCase.isSoldOut(with: NetworkManager(),
+                               id: id,
+                               failureHandler: { self.errorHandling(error: $0) },
+                               completed: {
+                                if $0 {
+                                    DispatchQueue.main.async {
+                                        self.navigationController?.popViewController(animated: true)
+                                        self.alert(title: "주문 성공!", message: self.titleText, confirmMessage: "넵!")
+                                    }
+                                } else {
+                                    self.alert(title: "품절 입니다ㅠㅠ", message: "죄송합니다 흑흑", confirmMessage: "넵ㅠㅠ")
+                                }
+        })
     }
     
     var id: Int!
@@ -61,9 +65,9 @@ class DetailViewController: UIViewController {
     }
     
     private func configureUseCase(id: Int) {
-        DetailInfoUseCase.loadDetailDish(with: NetworkManager(), id: id, failureHandler: {self.errorHandling(error: $0)}) {
-            self.model = $0
-        }
+        DetailInfoUseCase.loadDetailDish(with: NetworkManager(),
+                                         id: id,
+                                         failureHandler: { self.errorHandling(error: $0) }, completed: { self.model = $0 })
     }
     
     private func setOriginPriceLabel(text original: String?) {
@@ -72,7 +76,6 @@ class DetailViewController: UIViewController {
             let attributedString = NSMutableAttributedString(string: originPrice)
             attributedString.addAttribute(.baselineOffset, value: 0, range: (originPrice as NSString).range(of: originPrice))
             attributedString.addAttribute(.strikethroughStyle, value: 1, range: (originPrice as NSString).range(of: originPrice))
-            
             self.originalPriceLabel.attributedText = attributedString
         } else {
             originalPriceLabel.alpha = 0
@@ -80,7 +83,7 @@ class DetailViewController: UIViewController {
     }
     
     private func setupUI() {
-        guard let model = model else {return}
+        guard let model = model else { return }
         titleLabel.text = titleText
         descriptionLabel.text = model.product_description
         mileageLabel.text = model.point
@@ -98,12 +101,15 @@ class DetailViewController: UIViewController {
                 return
             }
             
-            ImageUseCase.loadImage(with: NetworkManager(), from: url, failureHandler: {self.errorHandling(error:$0)}) {
-                let image = UIImage(data: $0)
-                DispatchQueue.main.async {
-                    imageView.image = image
-                }
-            }
+            ImageUseCase.loadImage(with: NetworkManager(),
+                                   from: url,
+                                   failureHandler: { self.errorHandling(error:$0) },
+                                   completed: {
+                                    let image = UIImage(data: $0)
+                                    DispatchQueue.main.async {
+                                        imageView.image = image
+                                    }
+            })
         }
         
         for from in model.detail_section {
@@ -115,13 +121,16 @@ class DetailViewController: UIViewController {
                 return
             }
             
-            ImageUseCase.loadImage(with: NetworkManager(), from: url, failureHandler: {self.errorHandling(error:$0)}) {
-                let image = UIImage(data: $0)
-                DispatchQueue.main.async {
-                    imageView.image = image
-                    imageView.heightAnchor.constraint(equalToConstant: imageView.frame.width * (image?.size.height ?? 1) / (image?.size.width ?? 1)).isActive = true
-                }
-            }
+            ImageUseCase.loadImage(with: NetworkManager(),
+                                   from: url,
+                                   failureHandler: { self.errorHandling(error:$0) },
+                                   completed: {
+                                    let image = UIImage(data: $0)
+                                    DispatchQueue.main.async {
+                                        imageView.image = image
+                                        imageView.heightAnchor.constraint(equalToConstant: imageView.frame.width * (image?.size.height ?? 1) / (image?.size.width ?? 1)).isActive = true
+                                    }
+            })
         }
     }
     

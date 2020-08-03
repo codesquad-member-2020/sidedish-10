@@ -1,5 +1,5 @@
 PODS:
-  - Alamofire (5.1.0)
+  - Alamofire (5.2.2)
   - Floaty (4.2.0)
   - Toaster (2.3.0)
 
@@ -24,10 +24,10 @@ CHECKOUT OPTIONS:
     :git: https://github.com/devxoul/Toaster.git
 
 SPEC CHECKSUMS:
-  Alamofire: 9d5c5f602928e512395b30950c5984eca840093c
+  Alamofire: 814429acc853c6c54ff123fc3d2ef66803823ce0
   Floaty: e2bd5a0f6f7f70899e26ff2da31081c8bee8d1b0
   Toaster: 33d27524fb6829cdb6b247c924beab0cfa001b3e
 
 PODFILE CHECKSUM: 38ed1de5b3db8749a03163e8ad675cf4b348d16e
 
-COCOAPODS: 1.9.1
+COCOAPODS: 1.9.3

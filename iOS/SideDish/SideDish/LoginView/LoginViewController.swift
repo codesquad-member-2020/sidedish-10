@@ -11,7 +11,7 @@ import UIKit
 class LoginViewController: UIViewController {
     
     @IBAction func loginButtonPushed(_ sender: UIButton) {
-        guard let OAuthViewController = storyboard?.instantiateViewController(withIdentifier: "OAuthViewController") as? OAuthViewController else {return}
+        guard let OAuthViewController = storyboard?.instantiateViewController(withIdentifier: "OAuthViewController") as? OAuthViewController else { return }
         present(OAuthViewController, animated: true)
     }
     
@@ -24,7 +24,7 @@ class LoginViewController: UIViewController {
     }
     
     @objc func presentMainMenuViewController() {
-        guard let navigationController = storyboard?.instantiateViewController(withIdentifier: "NavigationController") as? UINavigationController else {return}
+        guard let navigationController = storyboard?.instantiateViewController(withIdentifier: "NavigationController") as? UINavigationController else { return }
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated: true)
     }

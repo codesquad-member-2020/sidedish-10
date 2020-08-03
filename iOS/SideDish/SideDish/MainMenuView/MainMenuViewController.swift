@@ -31,7 +31,7 @@ class MainMenuViewController: UIViewController {
         floaty.buttonColor = UIColor(named: "PrimaryColor") ?? UIColor.cyan
         floaty.itemTitleColor = UIColor(named: "divisionColor") ?? UIColor.black
         floaty.addItem("로그아웃", icon: UIImage(named: "person")) { _ in
-            guard let loginViewController = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController else {return}
+            guard let loginViewController = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController else { return }
             loginViewController.modalPresentationStyle = .fullScreen
             NetworkManager.jwtToken = nil
             self.present(loginViewController, animated: true)
@@ -41,9 +41,9 @@ class MainMenuViewController: UIViewController {
     }
     
     private func loadDishSection() {
-        DishSectionUseCase.loadSectionHeaders(with: NetworkManager(), failureHandler: {self.errorHandling(error: $0)}) {
-            self.mainMenuDataSource.sideDishManager.insertSection(sections: $0)
-        }
+        DishSectionUseCase.loadSectionHeaders(with: NetworkManager(),
+                                              failureHandler: { self.errorHandling(error: $0) },
+                                              completed: { self.mainMenuDataSource.sideDishManager.insertSection(sections: $0) })
     }
     
     private func setupDataSource() {
@@ -53,9 +53,10 @@ class MainMenuViewController: UIViewController {
                 return
             }
             
-            ImageUseCase.loadImage(with: NetworkManager(), from: requestURL, failureHandler: {self.errorHandling(error: $0)}) {
-                cell.setImageFromData(data: $0)
-            }
+            ImageUseCase.loadImage(with: NetworkManager(),
+                                   from: requestURL,
+                                   failureHandler: { self.errorHandling(error: $0) },
+                                   completed: { cell.setImageFromData(data: $0) })
         }
     }
     
@@ -77,23 +78,29 @@ class MainMenuViewController: UIViewController {
     }
     
     private func configureUseCase() {
-        SideDishUseCase.loadMainDish(with: NetworkManager(), failureHandler: {self.errorHandling(error: $0)}) {model, index in
-            DispatchQueue.main.async {
-                self.mainMenuDataSource.sideDishManager.insert(into: index, rows: model)
-            }
-        }
+        SideDishUseCase.loadMainDish(with: NetworkManager(),
+                                     failureHandler: { self.errorHandling(error: $0) },
+                                     completed: { model, index in
+                                        DispatchQueue.main.async {
+                                            self.mainMenuDataSource.sideDishManager.insert(into: index, rows: model)
+                                        }
+        })
         
-        SideDishUseCase.loadSideDish(with: NetworkManager(), failureHandler: {self.errorHandling(error: $0)}) {model, index in
-            DispatchQueue.main.async {
-                self.mainMenuDataSource.sideDishManager.insert(into: index, rows: model)
-            }
-        }
+        SideDishUseCase.loadSideDish(with: NetworkManager(),
+                                     failureHandler: { self.errorHandling(error: $0) },
+                                     completed: { model, index in
+                                        DispatchQueue.main.async {
+                                            self.mainMenuDataSource.sideDishManager.insert(into: index, rows: model)
+                                        }
+        })
         
-        SideDishUseCase.loadSoupDish(with: NetworkManager(), failureHandler: {self.errorHandling(error: $0)}) {model, index in
-            DispatchQueue.main.async {
-                self.mainMenuDataSource.sideDishManager.insert(into: index, rows: model)
-            }
-        }
+        SideDishUseCase.loadSoupDish(with: NetworkManager(),
+                                     failureHandler: { self.errorHandling(error: $0) },
+                                     completed: { model, index in
+                                        DispatchQueue.main.async {
+                                            self.mainMenuDataSource.sideDishManager.insert(into: index, rows: model)
+                                        }
+        })
     }
     
     private func alertError(message: String) {
@@ -124,13 +131,14 @@ class MainMenuViewController: UIViewController {
 
 extension MainMenuViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "MenuHeaderView") as? MainMenuHeader else {return UIView()}
+        guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "MenuHeaderView") as? MainMenuHeader else { return UIView() }
         let sectionName = mainMenuDataSource.sideDishManager.sectionName(at: section)
         let sectionInfo = mainMenuDataSource.sideDishManager.sectionDescription(at: section)
         headerView.setTitleLabel(text: sectionName)
         headerView.setContentLabel(text: sectionInfo)
         headerView.index = section
         headerView.delegate = self
+        
         return headerView
     }
     
@@ -140,7 +148,7 @@ extension MainMenuViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let dish = mainMenuDataSource.sideDishManager.sideDish(indexPath: indexPath)
-        guard let detailViewController = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else {return}
+        guard let detailViewController = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else { return }
         detailViewController.id = dish.id
         detailViewController.titleText = dish.title
         let text = "타이틀 메뉴 : \(dish.title)\n\(dish.specialPrice)"

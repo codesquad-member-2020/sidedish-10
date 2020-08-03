@@ -33,7 +33,6 @@ class OAuthViewController: UIViewController {
 }
 
 extension OAuthViewController: WKNavigationDelegate {
-
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         decisionHandler(.allow)
         WKWebsiteDataStore.default().httpCookieStore.getAllCookies {
@@ -49,7 +48,6 @@ extension OAuthViewController: WKNavigationDelegate {
 }
 
 extension WKWebView {
-    
     private var httpCookieStore: WKHTTPCookieStore  { return WKWebsiteDataStore.default().httpCookieStore }
     
     func getCookies(for domain: String? = nil, completion: @escaping ([String : Any])->())  {

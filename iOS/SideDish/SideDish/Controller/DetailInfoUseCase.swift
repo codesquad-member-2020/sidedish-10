@@ -9,7 +9,8 @@
 import Foundation
 
 struct DetailInfoUseCase {
-    static func loadDetailDish(with manager: NetworkManager, id: Int , failureHandler: @escaping (NetworkManager.NetworkError) -> () = {_ in}, completed: @escaping(DishInfo) -> ()) {
+    
+    static func loadDetailDish(with manager: NetworkManager, id: Int , failureHandler: @escaping (NetworkManager.NetworkError) -> () = { _ in }, completed: @escaping(DishInfo) -> ()) {
         manager.getDetailDish(id: id) {
             switch $0 {
             case .failure(let error):
