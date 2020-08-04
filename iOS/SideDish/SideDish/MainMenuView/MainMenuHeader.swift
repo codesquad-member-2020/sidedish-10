@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol SectionTapped {
+protocol SectionTapped: class {
     func sectionTapped(headerView: MainMenuHeader, at section: Int, title: String)
 }
 
@@ -40,7 +40,7 @@ class MainMenuHeader: UITableViewHeaderFooterView {
     }()
     
     var index: Int!
-    var delegate: SectionTapped?
+    weak var delegate: SectionTapped?
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -49,7 +49,7 @@ class MainMenuHeader: UITableViewHeaderFooterView {
     }
     
     @objc func tapped(_ recognizer: UITapGestureRecognizer) {
-        guard let title = titleLabel.text else {return}
+        guard let title = titleLabel.text else { return }
         delegate?.sectionTapped(headerView: self, at: index, title: title)
     }
     

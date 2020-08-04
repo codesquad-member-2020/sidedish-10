@@ -6,8 +6,8 @@
 //  Copyright © 2020 신한섭. All rights reserved.
 //
 
-import UIKit
 import Toaster
+import UIKit
 
 class DetailViewController: UIViewController {
     
@@ -67,7 +67,9 @@ class DetailViewController: UIViewController {
     private func configureUseCase(id: Int) {
         DetailInfoUseCase.loadDetailDish(with: NetworkManager(),
                                          id: id,
-                                         failureHandler: { self.errorHandling(error: $0) }, completed: { self.model = $0 })
+                                         failureHandler: { self.errorHandling(error: $0) },
+                                         completed: { self.model = $0 }
+        )
     }
     
     private func setOriginPriceLabel(text original: String?) {
@@ -85,25 +87,25 @@ class DetailViewController: UIViewController {
     private func setupUI() {
         guard let model = model else { return }
         titleLabel.text = titleText
-        descriptionLabel.text = model.product_description
+        descriptionLabel.text = model.productDescription
         mileageLabel.text = model.point
-        deliveryFeeLabel.text = model.delivery_fee
-        deliveryInfoLabel.text = model.delivery_info
-        setOriginPriceLabel(text: model.n_price)
-        specialPriceLabel.text = model.s_price
+        deliveryFeeLabel.text = model.deliveryFee
+        deliveryInfoLabel.text = model.deliveryInfo
+        setOriginPriceLabel(text: model.originalPrice)
+        specialPriceLabel.text = model.specialPrice
         
-        for from in model.thumb_images {
+        for from in model.thumbImages {
             let imageView = UIImageView()
-            InsertImageView(into: thumbnailStackView, imageView: imageView, constraintAnchor: thumbnailScrollView)
+            insertImageView(into: thumbnailStackView, imageView: imageView, constraintAnchor: thumbnailScrollView)
             
             guard let url = URL(string: from) else {
-                errorHandling(error: .InvalidURL)
+                errorHandling(error: .invalidURL)
                 return
             }
             
             ImageUseCase.loadImage(with: NetworkManager(),
                                    from: url,
-                                   failureHandler: { self.errorHandling(error:$0) },
+                                   failureHandler: { self.errorHandling(error: $0) },
                                    completed: {
                                     let image = UIImage(data: $0)
                                     DispatchQueue.main.async {
@@ -112,18 +114,18 @@ class DetailViewController: UIViewController {
             })
         }
         
-        for from in model.detail_section {
+        for from in model.detailSection {
             let imageView = UIImageView()
-            InsertImageView(into: detailImageStackView, imageView: imageView, constraintAnchor: contentScrollView)
+            insertImageView(into: detailImageStackView, imageView: imageView, constraintAnchor: contentScrollView)
             
             guard let url = URL(string: from) else {
-                errorHandling(error: .InvalidURL)
+                errorHandling(error: .invalidURL)
                 return
             }
             
             ImageUseCase.loadImage(with: NetworkManager(),
                                    from: url,
-                                   failureHandler: { self.errorHandling(error:$0) },
+                                   failureHandler: { self.errorHandling(error: $0) },
                                    completed: {
                                     let image = UIImage(data: $0)
                                     DispatchQueue.main.async {
@@ -134,7 +136,7 @@ class DetailViewController: UIViewController {
         }
     }
     
-    private func InsertImageView(into stackView: UIStackView, imageView: UIImageView, constraintAnchor: UIScrollView) {
+    private func insertImageView(into stackView: UIStackView, imageView: UIImageView, constraintAnchor: UIScrollView) {
         imageView.contentMode = .scaleAspectFill
         stackView.addArrangedSubview(imageView)
         imageView.widthAnchor.constraint(equalTo: constraintAnchor.frameLayoutGuide.widthAnchor, multiplier: 1).isActive = true
@@ -143,8 +145,8 @@ class DetailViewController: UIViewController {
     private func alert(title: String, message: String, confirmMessage: String) {
         DispatchQueue.main.async {
             let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-            let ok = UIAlertAction(title: confirmMessage, style: .default)
-            alert.addAction(ok)
+            let confirm = UIAlertAction(title: confirmMessage, style: .default)
+            alert.addAction(confirm)
             self.present(alert, animated: true)
         }
     }

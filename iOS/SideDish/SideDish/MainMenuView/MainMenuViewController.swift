@@ -6,15 +6,15 @@
 //  Copyright © 2020 신한섭. All rights reserved.
 //
 
-import UIKit
-import Toaster
 import Floaty
+import Toaster
+import UIKit
 
 class MainMenuViewController: UIViewController {
     
     @IBOutlet weak var mainMenuTableView: UITableView!
     
-    private var mainMenuDataSource =  MainMenuViewDataSource()
+    private var mainMenuDataSource = MainMenuViewDataSource()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,7 +49,7 @@ class MainMenuViewController: UIViewController {
     private func setupDataSource() {
         mainMenuDataSource.handler = { cell, urlString in
             guard let requestURL = URL(string: urlString) else {
-                self.errorHandling(error: .InvalidURL)
+                self.errorHandling(error: .invalidURL)
                 return
             }
             
@@ -106,8 +106,8 @@ class MainMenuViewController: UIViewController {
     private func alertError(message: String) {
         DispatchQueue.main.async {
             let alert = UIAlertController(title: "문제가 생겼어요", message: message, preferredStyle: .alert)
-            let ok = UIAlertAction(title: "넵...", style: .default)
-            alert.addAction(ok)
+            let confirm = UIAlertAction(title: "넵...", style: .default)
+            alert.addAction(confirm)
             self.present(alert, animated: true)
         }
     }
@@ -117,7 +117,7 @@ class MainMenuViewController: UIViewController {
     }
     
     @objc func reloadSection(_ notification: Notification) {
-        guard let index = notification.userInfo?["index"] as? Int else {return}
+        guard let index = notification.userInfo?["index"] as? Int else { return }
         mainMenuTableView.reloadSections(IndexSet(index...index), with: .automatic)
     }
     

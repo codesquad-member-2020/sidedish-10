@@ -14,13 +14,26 @@ struct DetailDish: Codable {
 
 struct DishInfo: Codable {
     var id: Int
-    var top_image: String
-    var product_description: String
+    var topImage: String
+    var productDescription: String
     var point: String
-    var delivery_info: String
-    var delivery_fee: String
-    var s_price: String?
-    var n_price: String?
-    var detail_section: [String]
-    var thumb_images: [String]
+    var deliveryInfo: String
+    var deliveryFee: String
+    var specialPrice: String?
+    var originalPrice: String?
+    var detailSection: [String]
+    var thumbImages: [String]
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case topImage = "top_image"
+        case productDescription = "product_description"
+        case point
+        case deliveryInfo = "delivery_info"
+        case deliveryFee = "delivery_fee"
+        case specialPrice = "special_price"
+        case originalPrice = "n_price"
+        case detailSection = "detail_section"
+        case thumbImages = "thumb_images"
+    }
 }
