@@ -22,7 +22,6 @@
 		A5AB37B52458510A0015A192 /* DetailDish.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AB37B42458510A0015A192 /* DetailDish.swift */; };
 		A5AB37B7245851E60015A192 /* DetailInfoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AB37B6245851E60015A192 /* DetailInfoUseCase.swift */; };
 		A5BD927E244DCAE600D6442F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BD927D244DCAE600D6442F /* AppDelegate.swift */; };
-		A5BD9282244DCAE600D6442F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BD9281244DCAE600D6442F /* LoginViewController.swift */; };
 		A5BD9285244DCAE600D6442F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5BD9283244DCAE600D6442F /* Main.storyboard */; };
 		A5BD9287244DCAE900D6442F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5BD9286244DCAE900D6442F /* Assets.xcassets */; };
 		A5BD928A244DCAE900D6442F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5BD9288244DCAE900D6442F /* LaunchScreen.storyboard */; };
@@ -33,7 +32,6 @@
 		A5F4755E2459146000237E1E /* DishSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F4755D2459146000237E1E /* DishSection.swift */; };
 		A5F47560245917E100237E1E /* DishSectionUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F4755F245917E100237E1E /* DishSectionUseCase.swift */; };
 		A5F4756224593C0900237E1E /* StockUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F4756124593C0900237E1E /* StockUseCase.swift */; };
-		A5F4756424594F5B00237E1E /* OAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F4756324594F5B00237E1E /* OAuthViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,7 +63,6 @@
 		A5AB37B6245851E60015A192 /* DetailInfoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInfoUseCase.swift; sourceTree = "<group>"; };
 		A5BD927A244DCAE500D6442F /* SideDish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SideDish.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5BD927D244DCAE600D6442F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A5BD9281244DCAE600D6442F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A5BD9284244DCAE600D6442F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A5BD9286244DCAE900D6442F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A5BD9289244DCAE900D6442F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -79,7 +76,6 @@
 		A5F4755D2459146000237E1E /* DishSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishSection.swift; sourceTree = "<group>"; };
 		A5F4755F245917E100237E1E /* DishSectionUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishSectionUseCase.swift; sourceTree = "<group>"; };
 		A5F4756124593C0900237E1E /* StockUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockUseCase.swift; sourceTree = "<group>"; };
-		A5F4756324594F5B00237E1E /* OAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,15 +139,6 @@
 			path = MainMenuView;
 			sourceTree = "<group>";
 		};
-		A52A3F03244ECC65005795A4 /* LoginView */ = {
-			isa = PBXGroup;
-			children = (
-				A5BD9281244DCAE600D6442F /* LoginViewController.swift */,
-				A5F4756324594F5B00237E1E /* OAuthViewController.swift */,
-			);
-			path = LoginView;
-			sourceTree = "<group>";
-		};
 		A52A3F04244ECC69005795A4 /* StoryBoard */ = {
 			isa = PBXGroup;
 			children = (
@@ -210,7 +197,6 @@
 				A5A4DFE6245133A200C734F1 /* Controller */,
 				A516CF162450609600F96635 /* Model */,
 				A52A3F01244ECC1F005795A4 /* Delegate */,
-				A52A3F03244ECC65005795A4 /* LoginView */,
 				A52A3F02244ECC56005795A4 /* MainMenuView */,
 				A52A3F05244ECC70005795A4 /* Resource */,
 				A52A3F04244ECC69005795A4 /* StoryBoard */,
@@ -395,11 +381,9 @@
 				A5F47560245917E100237E1E /* DishSectionUseCase.swift in Sources */,
 				A5F4755E2459146000237E1E /* DishSection.swift in Sources */,
 				A5BF0E2824581CBF00222FF3 /* UIColorExtension.swift in Sources */,
-				A5F4756424594F5B00237E1E /* OAuthViewController.swift in Sources */,
 				A58FAEDF2452DF1200C9EDA3 /* MainMenuHeader.swift in Sources */,
 				A53BA05F244EA6DE0023D27D /* MainMenuViewController.swift in Sources */,
 				A5E4F581245176E1007AAA3D /* DetailViewController.swift in Sources */,
-				A5BD9282244DCAE600D6442F /* LoginViewController.swift in Sources */,
 				A59ACBDD2453F40700359A0A /* ImageUseCase.swift in Sources */,
 				A5A4DFE82451467700C734F1 /* SideDishUseCase.swift in Sources */,
 				A5F4756224593C0900237E1E /* StockUseCase.swift in Sources */,
