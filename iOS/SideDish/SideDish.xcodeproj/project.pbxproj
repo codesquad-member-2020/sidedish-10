@@ -16,6 +16,10 @@
 		A52A3F07244ECFEC005795A4 /* MainMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52A3F06244ECFEC005795A4 /* MainMenuTableViewCell.swift */; };
 		A53BA05D244EA46A0023D27D /* BMYEONSUNG_otf.otf in Resources */ = {isa = PBXBuildFile; fileRef = A53BA05C244EA46A0023D27D /* BMYEONSUNG_otf.otf */; };
 		A53BA05F244EA6DE0023D27D /* MainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53BA05E244EA6DE0023D27D /* MainMenuViewController.swift */; };
+		A58A350524DAF34000E0E39F /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58A350424DAF34000E0E39F /* HTTPMethod.swift */; };
+		A58A350724DAF35B00E0E39F /* HTTPHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58A350624DAF35B00E0E39F /* HTTPHeaders.swift */; };
+		A58A350924DAF3D500E0E39F /* NetworkManageable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58A350824DAF3D500E0E39F /* NetworkManageable.swift */; };
+		A58A350B24DAF64400E0E39F /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58A350A24DAF64400E0E39F /* NetworkError.swift */; };
 		A58FAEDF2452DF1200C9EDA3 /* MainMenuHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58FAEDE2452DF1200C9EDA3 /* MainMenuHeader.swift */; };
 		A59ACBDD2453F40700359A0A /* ImageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59ACBDC2453F40700359A0A /* ImageUseCase.swift */; };
 		A5A4DFE82451467700C734F1 /* SideDishUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A4DFE72451467700C734F1 /* SideDishUseCase.swift */; };
@@ -29,6 +33,7 @@
 		A5BD9295244DCAE900D6442F /* SideDishTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BD9294244DCAE900D6442F /* SideDishTests.swift */; };
 		A5E4F581245176E1007AAA3D /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E4F580245176E1007AAA3D /* DetailViewController.swift */; };
 		A5ED948F24D80932008BDFFA /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = A5ED948E24D80932008BDFFA /* .swiftlint.yml */; };
+		A5F9D8E524D99C890093435E /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F9D8E424D99C890093435E /* EndPoint.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +58,10 @@
 		A52A3F06244ECFEC005795A4 /* MainMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuTableViewCell.swift; sourceTree = "<group>"; };
 		A53BA05C244EA46A0023D27D /* BMYEONSUNG_otf.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BMYEONSUNG_otf.otf; sourceTree = "<group>"; };
 		A53BA05E244EA6DE0023D27D /* MainMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuViewController.swift; sourceTree = "<group>"; };
+		A58A350424DAF34000E0E39F /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
+		A58A350624DAF35B00E0E39F /* HTTPHeaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPHeaders.swift; sourceTree = "<group>"; };
+		A58A350824DAF3D500E0E39F /* NetworkManageable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManageable.swift; sourceTree = "<group>"; };
+		A58A350A24DAF64400E0E39F /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		A58FAEDE2452DF1200C9EDA3 /* MainMenuHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuHeader.swift; sourceTree = "<group>"; };
 		A59ACBDC2453F40700359A0A /* ImageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUseCase.swift; sourceTree = "<group>"; };
 		A5A4DFE72451467700C734F1 /* SideDishUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideDishUseCase.swift; sourceTree = "<group>"; };
@@ -70,6 +79,7 @@
 		A5BD9296244DCAE900D6442F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A5E4F580245176E1007AAA3D /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		A5ED948E24D80932008BDFFA /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		A5F9D8E424D99C890093435E /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,7 +113,7 @@
 		A516CF162450609600F96635 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				A516CF17245060C100F96635 /* NetworkManager.swift */,
+				A5F9D8E324D99C760093435E /* Network */,
 				A516CF19245061E000F96635 /* SideDish.swift */,
 				A516CF4124507C8D00F96635 /* SideDishManager.swift */,
 				A5AB37B42458510A0015A192 /* DetailDish.swift */,
@@ -211,6 +221,19 @@
 				A5E4F580245176E1007AAA3D /* DetailViewController.swift */,
 			);
 			path = DetailView;
+			sourceTree = "<group>";
+		};
+		A5F9D8E324D99C760093435E /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				A516CF17245060C100F96635 /* NetworkManager.swift */,
+				A5F9D8E424D99C890093435E /* EndPoint.swift */,
+				A58A350424DAF34000E0E39F /* HTTPMethod.swift */,
+				A58A350624DAF35B00E0E39F /* HTTPHeaders.swift */,
+				A58A350824DAF3D500E0E39F /* NetworkManageable.swift */,
+				A58A350A24DAF64400E0E39F /* NetworkError.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 		D0503BEE24127367757CA086 /* Frameworks */ = {
@@ -373,13 +396,18 @@
 				A53BA05F244EA6DE0023D27D /* MainMenuViewController.swift in Sources */,
 				A5E4F581245176E1007AAA3D /* DetailViewController.swift in Sources */,
 				A59ACBDD2453F40700359A0A /* ImageUseCase.swift in Sources */,
+				A58A350924DAF3D500E0E39F /* NetworkManageable.swift in Sources */,
 				A5A4DFE82451467700C734F1 /* SideDishUseCase.swift in Sources */,
 				A5A8693A24DAA88F005CEE6C /* ColorBinder.swift in Sources */,
+				A58A350724DAF35B00E0E39F /* HTTPHeaders.swift in Sources */,
+				A58A350B24DAF64400E0E39F /* NetworkError.swift in Sources */,
 				A516CF18245060C100F96635 /* NetworkManager.swift in Sources */,
+				A5F9D8E524D99C890093435E /* EndPoint.swift in Sources */,
 				A516CF4224507C8D00F96635 /* SideDishManager.swift in Sources */,
 				A5AB37B7245851E60015A192 /* DetailInfoUseCase.swift in Sources */,
 				A5BD927E244DCAE600D6442F /* AppDelegate.swift in Sources */,
 				A5AB37B52458510A0015A192 /* DetailDish.swift in Sources */,
+				A58A350524DAF34000E0E39F /* HTTPMethod.swift in Sources */,
 				A52A3F07244ECFEC005795A4 /* MainMenuTableViewCell.swift in Sources */,
 				A516CF1A245061E000F96635 /* SideDish.swift in Sources */,
 				A508FC37244EDBDE009AC902 /* PaddingLabel.swift in Sources */,
