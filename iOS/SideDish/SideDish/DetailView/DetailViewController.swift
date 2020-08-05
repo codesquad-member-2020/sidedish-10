@@ -23,23 +23,7 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var originalPriceLabel: UILabel!
     @IBOutlet weak var specialPriceLabel: UILabel!
     
-    @IBAction func orderButtonPushed(_ sender: UIButton) {
-        StockUseCase.isSoldOut(with: NetworkManager(),
-                               id: id,
-                               failureHandler: { self.errorHandling(error: $0) },
-                               completed: {
-                                if $0 {
-                                    DispatchQueue.main.async {
-                                        self.navigationController?.popViewController(animated: true)
-                                        self.alert(title: "주문 성공!", message: self.titleText, confirmMessage: "넵!")
-                                    }
-                                } else {
-                                    self.alert(title: "품절 입니다ㅠㅠ", message: "죄송합니다 흑흑", confirmMessage: "넵ㅠㅠ")
-                                }
-        })
-    }
-    
-    var id: Int!
+    var id: String?
     var titleText: String!
     private var model: DishInfo? {
         didSet {
@@ -51,6 +35,7 @@ class DetailViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        guard let id = id else { return }
         configureUseCase(id: id)
     }
     
@@ -64,7 +49,7 @@ class DetailViewController: UIViewController {
         navigationController?.isNavigationBarHidden = true
     }
     
-    private func configureUseCase(id: Int) {
+    private func configureUseCase(id: String) {
         DetailInfoUseCase.loadDetailDish(with: NetworkManager(),
                                          id: id,
                                          failureHandler: { self.errorHandling(error: $0) },
@@ -153,7 +138,7 @@ class DetailViewController: UIViewController {
         self.alert(title: "문제가 생겼어요", message: message, confirmMessage: "넵...")
     }
     
-    private func errorHandling(error: NetworkManager.NetworkError) {
+    private func errorHandling(error: NetworkError) {
         alertError(message: error.message())
     }
 }

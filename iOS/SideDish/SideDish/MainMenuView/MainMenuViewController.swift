@@ -97,7 +97,7 @@ class MainMenuViewController: UIViewController {
         }
     }
     
-    private func errorHandling(error: NetworkManager.NetworkError) {
+    private func errorHandling(error: NetworkError) {
         alertError(message: error.message())
     }
     

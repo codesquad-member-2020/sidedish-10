@@ -344,9 +344,6 @@
                                 <state key="normal" title="주문하기">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
-                                <connections>
-                                    <action selector="orderButtonPushed:" destination="zP7-pS-LQX" eventType="touchUpInside" id="aCc-ma-3Dg"/>
-                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>

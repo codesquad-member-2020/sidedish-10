@@ -10,27 +10,39 @@ import Foundation
 
 struct SideDishUseCase {
     
-    static func loadMainDish(with manager: NetworkManager, failureHandler: @escaping (NetworkManager.NetworkError) -> Void = { _ in }, completed: @escaping([SideDishInfo], Int) -> Void) {
-        manager.getMainDish {
-            handleImage(result: $0, failureHandler: failureHandler, completed: completed)
-        }
+    static func loadMainDish(with manager: NetworkManager, failureHandler: @escaping (NetworkError) -> Void = { _ in }, completed: @escaping([SideDishInfo], Int) -> Void) {
+        manager.getResource(
+            url: EndPoint(path: .main).url,
+            method: .get,
+            headers: nil,
+            handler: {
+                handleImage(result: $0, failureHandler: failureHandler, completed: completed)
+        })
     }
     
-    static func loadSideDish(with manager: NetworkManager, failureHandler: @escaping (NetworkManager.NetworkError) -> Void = { _ in }, completed: @escaping([SideDishInfo], Int) -> Void) {
-        manager.getSideDish {
-            handleImage(result: $0, failureHandler: failureHandler, completed: completed)
-        }
+    static func loadSideDish(with manager: NetworkManager, failureHandler: @escaping (NetworkError) -> Void = { _ in }, completed: @escaping([SideDishInfo], Int) -> Void) {
+        manager.getResource(
+            url: EndPoint(path: .side).url,
+            method: .get,
+            headers: nil,
+            handler: {
+                handleImage(result: $0, failureHandler: failureHandler, completed: completed)
+        })
     }
     
-    static func loadSoupDish(with manager: NetworkManager, failureHandler: @escaping (NetworkManager.NetworkError) -> Void = { _ in }, completed: @escaping([SideDishInfo], Int) -> Void) {
-        manager.getSoupDish {
-            handleImage(result: $0, failureHandler: failureHandler, completed: completed)
-        }
+    static func loadSoupDish(with manager: NetworkManager, failureHandler: @escaping (NetworkError) -> Void = { _ in }, completed: @escaping([SideDishInfo], Int) -> Void) {
+        manager.getResource(
+            url: EndPoint(path: .soup).url,
+            method: .get,
+            headers: nil,
+            handler: {
+                handleImage(result: $0, failureHandler: failureHandler, completed: completed)
+        })
     }
     
     static func handleImage(
-        result: Result<Data, NetworkManager.NetworkError>,
-        failureHandler: @escaping (NetworkManager.NetworkError) -> Void = { _ in },
+        result: Result<Data, NetworkError>,
+        failureHandler: @escaping (NetworkError) -> Void = { _ in },
         completed: @escaping([SideDishInfo], Int) -> Void
     ) {
         switch result {
