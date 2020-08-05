@@ -9,8 +9,10 @@
 import Foundation
 
 struct SideDish: Codable {
-    var sideDishes: [SideDishInfo]
-    var menuId: Int
+    
+    let sideDishes: [SideDishInfo]
+    let menuId: Int
+    
     enum CodingKeys: String, CodingKey {
         case sideDishes = "body"
         case menuId
@@ -18,26 +20,24 @@ struct SideDish: Codable {
 }
 
 struct SideDishInfo: Codable {
-    var id: Int
-    var imageUrl: String
-    var title: String
-    var description: String
-    var originalPrice: String?
-    var specialPrice: String
-    var badges: [Badge]?
+    
+    let id: String
+    let imageUrl: String
+    let deliveryType: [String]
+    let title: String
+    let subTitle: String
+    let originalPrice: String?
+    let specialPrice: String
+    let badges: [String]?
     
     enum CodingKeys: String, CodingKey {
-        case id
+        case id = "detail_hash"
         case imageUrl = "image"
+        case deliveryType = "delivery_type"
         case title
-        case description
+        case subTitle = "description"
         case originalPrice = "n_price"
         case specialPrice = "s_price"
         case badges
     }
-}
-
-struct Badge: Codable {
-    var color: String
-    var name: String
 }

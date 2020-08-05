@@ -91,8 +91,6 @@ class DetailViewController: UIViewController {
         mileageLabel.text = model.point
         deliveryFeeLabel.text = model.deliveryFee
         deliveryInfoLabel.text = model.deliveryInfo
-        setOriginPriceLabel(text: model.originalPrice)
-        specialPriceLabel.text = model.specialPrice
         
         for from in model.thumbImages {
             let imageView = UIImageView()

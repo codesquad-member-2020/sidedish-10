@@ -9,8 +9,6 @@
 import Foundation
 
 class SideDishManager {
-    private var sideDish: [[SideDishInfo]]
-    private var sections: [Section] = []
     
     init() {
         sideDish = [[SideDishInfo]]()
@@ -19,25 +17,18 @@ class SideDishManager {
         }
     }
     
+    private var sideDish: [[SideDishInfo]]
+    private let sections: [String] = [
+        "메인반찬/한그릇 뚝딱 메인 요리",
+        "국.찌개/김이 모락모락 국.찌개",
+        "밑반찬/언제 먹어도 든든한 밑반찬"
+    ]
+    
     func insert(into section: Int, rows: [SideDishInfo]) {
         sideDish[section] = rows
         NotificationCenter.default.post(name: .ModelInserted,
                                         object: nil,
                                         userInfo: ["index": section])
-    }
-    
-    func insertSection(sections: [Section]) {
-        self.sections = sections
-        NotificationCenter.default.post(name: .SectionInserted,
-                                        object: nil)
-    }
-    
-    func sectionName(at index: Int) -> String {
-        return sections[index].title
-    }
-    
-    func sectionDescription(at index: Int) -> String {
-        return sections[index].info
     }
     
     func sectionCount() -> Int {

@@ -9,31 +9,29 @@
 import Foundation
 
 struct DetailDish: Codable {
-    var body: DishInfo
+    
+    let body: DishInfo
 }
 
 struct DishInfo: Codable {
-    var id: Int
-    var topImage: String
-    var productDescription: String
-    var point: String
-    var deliveryInfo: String
-    var deliveryFee: String
-    var specialPrice: String?
-    var originalPrice: String?
-    var detailSection: [String]
-    var thumbImages: [String]
+    
+    let id: String
+    let thumbImages: [String]
+    let productDescription: String
+    let point: String
+    let deliveryInfo: String
+    let deliveryFee: String
+    let prices: [String]
+    let detailSection: [String]
     
     enum CodingKeys: String, CodingKey {
-        case id
-        case topImage = "top_image"
+        case id = "hash"
+        case thumbImages = "thumb_images"
         case productDescription = "product_description"
         case point
         case deliveryInfo = "delivery_info"
         case deliveryFee = "delivery_fee"
-        case specialPrice = "special_price"
-        case originalPrice = "n_price"
+        case prices = "prices"
         case detailSection = "detail_section"
-        case thumbImages = "thumb_images"
     }
 }

@@ -20,7 +20,6 @@ class MainMenuViewController: UIViewController {
         super.viewDidLoad()
         navigationController?.interactivePopGestureRecognizer?.delegate = nil
         setupFloatingButton()
-        loadDishSection()
         setupTableView()
         setupObserver()
         setupDataSource()
@@ -31,12 +30,6 @@ class MainMenuViewController: UIViewController {
         floaty.buttonColor = UIColor(named: "PrimaryColor") ?? UIColor.cyan
         floaty.itemTitleColor = UIColor(named: "divisionColor") ?? UIColor.black
         self.view.addSubview(floaty)
-    }
-    
-    private func loadDishSection() {
-        DishSectionUseCase.loadSectionHeaders(with: NetworkManager(),
-                                              failureHandler: { self.errorHandling(error: $0) },
-                                              completed: { self.mainMenuDataSource.sideDishManager.insertSection(sections: $0) })
     }
     
     private func setupDataSource() {
@@ -65,7 +58,6 @@ class MainMenuViewController: UIViewController {
     }
     
     private func setupTableView() {
-        mainMenuTableView.delegate = self
         mainMenuTableView.register(MainMenuHeader.self, forHeaderFooterViewReuseIdentifier: "MenuHeaderView")
         mainMenuTableView.dataSource = mainMenuDataSource
     }
@@ -120,38 +112,6 @@ class MainMenuViewController: UIViewController {
         }
         configureUseCase()
     }
-}
-
-extension MainMenuViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "MenuHeaderView") as? MainMenuHeader else { return UIView() }
-        let sectionName = mainMenuDataSource.sideDishManager.sectionName(at: section)
-        let sectionInfo = mainMenuDataSource.sideDishManager.sectionDescription(at: section)
-        headerView.setTitleLabel(text: sectionName)
-        headerView.setContentLabel(text: sectionInfo)
-        headerView.index = section
-        headerView.delegate = self
-        
-        return headerView
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 80
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let dish = mainMenuDataSource.sideDishManager.sideDish(indexPath: indexPath)
-        guard let detailViewController = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else { return }
-        detailViewController.id = dish.id
-        detailViewController.titleText = dish.title
-        let text = "타이틀 메뉴 : \(dish.title)\n\(dish.specialPrice)"
-        Toast(text: text).show()
-        self.navigationController?.pushViewController(detailViewController, animated: true)
-    }
-}
-
-extension Notification.Name {
-    static let InjectionModel = Notification.Name("InjectionModel")
 }
 
 extension MainMenuViewController: SectionTapped {
