@@ -19,6 +19,7 @@
 		A58FAEDF2452DF1200C9EDA3 /* MainMenuHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58FAEDE2452DF1200C9EDA3 /* MainMenuHeader.swift */; };
 		A59ACBDD2453F40700359A0A /* ImageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59ACBDC2453F40700359A0A /* ImageUseCase.swift */; };
 		A5A4DFE82451467700C734F1 /* SideDishUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A4DFE72451467700C734F1 /* SideDishUseCase.swift */; };
+		A5A8693A24DAA88F005CEE6C /* ColorBinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A8693924DAA88F005CEE6C /* ColorBinder.swift */; };
 		A5AB37B52458510A0015A192 /* DetailDish.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AB37B42458510A0015A192 /* DetailDish.swift */; };
 		A5AB37B7245851E60015A192 /* DetailInfoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AB37B6245851E60015A192 /* DetailInfoUseCase.swift */; };
 		A5BD927E244DCAE600D6442F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BD927D244DCAE600D6442F /* AppDelegate.swift */; };
@@ -59,6 +60,7 @@
 		A58FAEDE2452DF1200C9EDA3 /* MainMenuHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuHeader.swift; sourceTree = "<group>"; };
 		A59ACBDC2453F40700359A0A /* ImageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUseCase.swift; sourceTree = "<group>"; };
 		A5A4DFE72451467700C734F1 /* SideDishUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideDishUseCase.swift; sourceTree = "<group>"; };
+		A5A8693924DAA88F005CEE6C /* ColorBinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorBinder.swift; sourceTree = "<group>"; };
 		A5AB37B42458510A0015A192 /* DetailDish.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailDish.swift; sourceTree = "<group>"; };
 		A5AB37B6245851E60015A192 /* DetailInfoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInfoUseCase.swift; sourceTree = "<group>"; };
 		A5BD927A244DCAE500D6442F /* SideDish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SideDish.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -115,6 +117,7 @@
 				A5BF0E2724581CBF00222FF3 /* UIColorExtension.swift */,
 				A5AB37B42458510A0015A192 /* DetailDish.swift */,
 				A5F4755D2459146000237E1E /* DishSection.swift */,
+				A5A8693924DAA88F005CEE6C /* ColorBinder.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -386,6 +389,7 @@
 				A5E4F581245176E1007AAA3D /* DetailViewController.swift in Sources */,
 				A59ACBDD2453F40700359A0A /* ImageUseCase.swift in Sources */,
 				A5A4DFE82451467700C734F1 /* SideDishUseCase.swift in Sources */,
+				A5A8693A24DAA88F005CEE6C /* ColorBinder.swift in Sources */,
 				A5F4756224593C0900237E1E /* StockUseCase.swift in Sources */,
 				A516CF18245060C100F96635 /* NetworkManager.swift in Sources */,
 				A516CF4224507C8D00F96635 /* SideDishManager.swift in Sources */,
