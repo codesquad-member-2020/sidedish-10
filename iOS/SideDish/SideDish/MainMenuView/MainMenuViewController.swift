@@ -86,12 +86,8 @@ class MainMenuViewController: UIViewController {
     
     @objc func reloadSection(_ notification: Notification) {
         guard let index = notification.userInfo?["index"] as? Int else { return }
-        mainMenuTableView.reloadSections(IndexSet(index...index), with: .automatic)
-    }
-    
-    @objc func setupSection() {
-        DispatchQueue.main.async {
-            self.mainMenuTableView.reloadData()
+        DispatchQueue.main.sync { [weak self] in
+            self?.mainMenuTableView.reloadSections(IndexSet(index...index), with: .automatic)
         }
     }
 }
