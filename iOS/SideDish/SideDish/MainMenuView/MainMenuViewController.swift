@@ -23,6 +23,7 @@ class MainMenuViewController: UIViewController {
         setupTableView()
         setupObserver()
         setupDataSource()
+        configureUseCase()
     }
     
     private func setupFloatingButton() {
@@ -51,10 +52,6 @@ class MainMenuViewController: UIViewController {
                                                selector: #selector(reloadSection(_:)),
                                                name: .ModelInserted,
                                                object: nil)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(setupSection),
-                                               name: .SectionInserted,
-                                               object: nil)
     }
     
     private func setupTableView() {
@@ -63,29 +60,15 @@ class MainMenuViewController: UIViewController {
     }
     
     private func configureUseCase() {
-        SideDishUseCase.loadMainDish(with: NetworkManager(),
-                                     failureHandler: { self.errorHandling(error: $0) },
-                                     completed: { model, index in
-                                        DispatchQueue.main.async {
-                                            self.mainMenuDataSource.sideDishManager.insert(into: index, rows: model)
-                                        }
-        })
-        
-        SideDishUseCase.loadSideDish(with: NetworkManager(),
-                                     failureHandler: { self.errorHandling(error: $0) },
-                                     completed: { model, index in
-                                        DispatchQueue.main.async {
-                                            self.mainMenuDataSource.sideDishManager.insert(into: index, rows: model)
-                                        }
-        })
-        
-        SideDishUseCase.loadSoupDish(with: NetworkManager(),
-                                     failureHandler: { self.errorHandling(error: $0) },
-                                     completed: { model, index in
-                                        DispatchQueue.main.async {
-                                            self.mainMenuDataSource.sideDishManager.insert(into: index, rows: model)
-                                        }
-        })
+        for typeIndex in 0..<MenuType.allCases.count {
+            SideDishUseCase().loadDish(
+                with: NetworkManager(),
+                type: MenuType(index: typeIndex),
+                failureHandler: { _ in },
+                successHandler: { [weak self] dish in
+                    self?.mainMenuDataSource.sideDishManager.insert(into: typeIndex, rows: dish)
+            })
+        }
     }
     
     private func alertError(message: String) {
@@ -110,7 +93,6 @@ class MainMenuViewController: UIViewController {
         DispatchQueue.main.async {
             self.mainMenuTableView.reloadData()
         }
-        configureUseCase()
     }
 }
 

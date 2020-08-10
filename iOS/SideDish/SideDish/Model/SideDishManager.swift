@@ -12,27 +12,21 @@ class SideDishManager {
     
     init() {
         sideDish = [[SideDishInfo]]()
-        for _ in 0..<3 {
+        for _ in 0..<sectionCount {
             sideDish.append([SideDishInfo]())
         }
     }
     
-    private var sideDish: [[SideDishInfo]]
-    private let sections: [String] = [
-        "메인반찬/한그릇 뚝딱 메인 요리",
-        "국.찌개/김이 모락모락 국.찌개",
-        "밑반찬/언제 먹어도 든든한 밑반찬"
-    ]
+    var sideDish: [[SideDishInfo]]
+    var sectionCount: Int {
+        return MenuType.allCases.count
+    }
     
     func insert(into section: Int, rows: [SideDishInfo]) {
         sideDish[section] = rows
         NotificationCenter.default.post(name: .ModelInserted,
                                         object: nil,
                                         userInfo: ["index": section])
-    }
-    
-    func sectionCount() -> Int {
-        return sections.count
     }
     
     func sideDish(indexPath: IndexPath) -> SideDishInfo {
@@ -46,5 +40,4 @@ class SideDishManager {
 
 extension Notification.Name {
     static let ModelInserted = Notification.Name("ModelInserted")
-    static let SectionInserted = Notification.Name("SectionInserted")
 }

@@ -9,53 +9,40 @@
 import Foundation
 
 struct SideDishUseCase {
-    
-    static func loadMainDish(with manager: NetworkManager, failureHandler: @escaping (NetworkError) -> Void = { _ in }, completed: @escaping([SideDishInfo], Int) -> Void) {
+        
+    func loadDish(with manager: NetworkManager, type: MenuType, failureHandler: @escaping (NetworkError) -> Void, successHandler: @escaping([SideDishInfo]) -> Void) {
+        let url = getURL(from: type)
+        
         manager.getResource(
-            url: EndPoint(path: .main).url,
+            url: url,
             method: .get,
             headers: nil,
-            handler: {
-                handleImage(result: $0, failureHandler: failureHandler, completed: completed)
+            handler: { result in
+                switch result {
+                case .failure(let error):
+                    failureHandler(error)
+                    
+                case .success(let data):
+                    do {
+                        let model = try JSONDecoder().decode(SideDish.self, from: data)
+                        successHandler(model.sideDishes)
+                    } catch {
+                        failureHandler(.decodeError)
+                    }
+                }
         })
     }
     
-    static func loadSideDish(with manager: NetworkManager, failureHandler: @escaping (NetworkError) -> Void = { _ in }, completed: @escaping([SideDishInfo], Int) -> Void) {
-        manager.getResource(
-            url: EndPoint(path: .side).url,
-            method: .get,
-            headers: nil,
-            handler: {
-                handleImage(result: $0, failureHandler: failureHandler, completed: completed)
-        })
-    }
-    
-    static func loadSoupDish(with manager: NetworkManager, failureHandler: @escaping (NetworkError) -> Void = { _ in }, completed: @escaping([SideDishInfo], Int) -> Void) {
-        manager.getResource(
-            url: EndPoint(path: .soup).url,
-            method: .get,
-            headers: nil,
-            handler: {
-                handleImage(result: $0, failureHandler: failureHandler, completed: completed)
-        })
-    }
-    
-    static func handleImage(
-        result: Result<Data, NetworkError>,
-        failureHandler: @escaping (NetworkError) -> Void = { _ in },
-        completed: @escaping([SideDishInfo], Int) -> Void
-    ) {
-        switch result {
-        case .failure(let error):
-            failureHandler(error)
+    private func getURL(from type: MenuType) -> URL? {
+        switch type {
+        case .main:
+            return EndPoint(path: .main).url
             
-        case .success(let data):
-            do {
-                let model = try JSONDecoder().decode(SideDish.self, from: data)
-                completed(model.sideDishes, model.menuId - 1)
-            } catch {
-                failureHandler(.decodeError)
-            }
+        case .side:
+            return EndPoint(path: .side).url
+            
+        case .soup:
+            return  EndPoint(path: .soup).url
         }
     }
 }
