@@ -18,8 +18,8 @@ class MainMenuTableViewCell: UITableViewCell {
     @IBOutlet weak var eventStackView: UIStackView!
     
     func setImageFromData(data: Data) {
-        guard let height = menuImageView?.frame.height else { return }
         DispatchQueue.main.async {
+            guard let height = self.menuImageView?.frame.height else { return }
             self.menuImageView.image = UIImage(data: data)
             self.menuImageView?.layer.cornerRadius = height / 2
         }
