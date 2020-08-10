@@ -11,11 +11,9 @@ import Foundation
 struct SideDish: Codable {
     
     let sideDishes: [SideDishInfo]
-    let menuId: Int
     
     enum CodingKeys: String, CodingKey {
         case sideDishes = "body"
-        case menuId
     }
 }
 

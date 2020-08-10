@@ -24,7 +24,7 @@ struct EndPoint {
     }
     
     private let scheme = "https"
-    private let host = "h3rb9c0ugl.execute-api.ap-northeast-2.amazonaws.com/develop/baminchan/"
+    private let host = "h3rb9c0ugl.execute-api.ap-northeast-2.amazonaws.com"
     private let path: Path
     
     enum Path {
@@ -36,13 +36,13 @@ struct EndPoint {
         var description: String {
             switch self {
             case .main:
-                return "/main"
+                return "/develop/baminchan/main"
             case .soup:
-                return "/soup"
+                return "/develop/baminchan/soup"
             case .side:
-                return "/side"
+                return "/develop/baminchan/side"
             case .detail(let hash):
-                return "/detail/\(hash)"
+                return "/develop/baminchan/detail/\(hash)"
             }
         }
     }
