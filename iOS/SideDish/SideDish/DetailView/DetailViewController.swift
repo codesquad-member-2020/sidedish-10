@@ -28,9 +28,7 @@ class DetailViewController: UIViewController {
     var titleText: String!
     private var model: DetailDish? {
         didSet {
-            DispatchQueue.main.async {
-                self.setupUI()
-            }
+            self.setupUI()
         }
     }
     
@@ -68,58 +66,13 @@ class DetailViewController: UIViewController {
     
     private func setupUI() {
         guard let model = model else { return }
-        titleLabel.text = titleText
-        descriptionLabel.text = model.dishInfo.productDescription
-        mileageLabel.text = model.dishInfo.point
-        deliveryFeeLabel.text = model.dishInfo.deliveryFee
-        deliveryInfoLabel.text = model.dishInfo.deliveryInfo
-        
-        for from in model.dishInfo.thumbImages {
-            let imageView = UIImageView()
-            insertImageView(into: thumbnailStackView, imageView: imageView, constraintAnchor: thumbnailScrollView)
-            
-            guard let url = URL(string: from) else {
-                errorHandling(error: .invalidURL)
-                return
-            }
-            
-            ImageUseCase.loadImage(with: NetworkManager(),
-                                   from: url,
-                                   failureHandler: { self.errorHandling(error: $0) },
-                                   completed: {
-                                    let image = UIImage(data: $0)
-                                    DispatchQueue.main.async {
-                                        imageView.image = image
-                                    }
-            })
+        DispatchQueue.main.async { [weak self] in
+            self?.titleLabel.text = self?.titleText
+            self?.descriptionLabel.text = model.dishInfo.productDescription
+            self?.mileageLabel.text = model.dishInfo.point
+            self?.deliveryFeeLabel.text = model.dishInfo.deliveryFee
+            self?.deliveryInfoLabel.text = model.dishInfo.deliveryInfo
         }
-        
-        for from in model.dishInfo.detailSection {
-            let imageView = UIImageView()
-            insertImageView(into: detailImageStackView, imageView: imageView, constraintAnchor: contentScrollView)
-            
-            guard let url = URL(string: from) else {
-                errorHandling(error: .invalidURL)
-                return
-            }
-            
-            ImageUseCase.loadImage(with: NetworkManager(),
-                                   from: url,
-                                   failureHandler: { self.errorHandling(error: $0) },
-                                   completed: {
-                                    let image = UIImage(data: $0)
-                                    DispatchQueue.main.async {
-                                        imageView.image = image
-                                        imageView.heightAnchor.constraint(equalToConstant: imageView.frame.width * (image?.size.height ?? 1) / (image?.size.width ?? 1)).isActive = true
-                                    }
-            })
-        }
-    }
-    
-    private func insertImageView(into stackView: UIStackView, imageView: UIImageView, constraintAnchor: UIScrollView) {
-        imageView.contentMode = .scaleAspectFill
-        stackView.addArrangedSubview(imageView)
-        imageView.widthAnchor.constraint(equalTo: constraintAnchor.frameLayoutGuide.widthAnchor, multiplier: 1).isActive = true
     }
     
     private func alert(title: String, message: String, confirmMessage: String) {
