@@ -18,12 +18,15 @@ class MainMenuViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.interactivePopGestureRecognizer?.delegate = nil
+        setup()
+    }
+    
+    private func setup() {
         setupFloatingButton()
         setupTableView()
         setupObserver()
         setupDataSource()
-        configureUseCase()
+        setupDishUseCase()
     }
     
     private func setupFloatingButton() {
@@ -59,7 +62,7 @@ class MainMenuViewController: UIViewController {
         mainMenuTableView.dataSource = mainMenuDataSource
     }
     
-    private func configureUseCase() {
+    private func setupDishUseCase() {
         for typeIndex in 0..<MenuType.allCases.count {
             SideDishUseCase().loadDish(
                 with: NetworkManager(),
