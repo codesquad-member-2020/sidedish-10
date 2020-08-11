@@ -23,7 +23,8 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var originalPriceLabel: UILabel!
     @IBOutlet weak var specialPriceLabel: UILabel!
     
-    var id: String?
+    static let id = "DetailViewController"
+    var hashId: String?
     var titleText: String!
     private var model: DishInfo? {
         didSet {
@@ -35,8 +36,8 @@ class DetailViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        guard let id = id else { return }
-        configureUseCase(id: id)
+        guard let hashId = hashId else { return }
+        configureUseCase(id: hashId)
     }
     
     override func viewDidLoad() {

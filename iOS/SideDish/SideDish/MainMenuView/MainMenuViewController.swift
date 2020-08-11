@@ -60,6 +60,7 @@ class MainMenuViewController: UIViewController {
     private func setupTableView() {
         mainMenuTableView.register(MainMenuHeader.self, forHeaderFooterViewReuseIdentifier: "MenuHeaderView")
         mainMenuTableView.dataSource = mainMenuDataSource
+        mainMenuTableView.delegate = self
     }
     
     private func setupDishUseCase() {
@@ -92,6 +93,15 @@ class MainMenuViewController: UIViewController {
         DispatchQueue.main.sync { [weak self] in
             self?.mainMenuTableView.reloadSections(IndexSet(index...index), with: .automatic)
         }
+    }
+}
+
+extension MainMenuViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let detailViewController = storyboard?.instantiateViewController(withIdentifier: DetailViewController.id) as? DetailViewController else { return }
+        let id = mainMenuDataSource.sideDishManager.sideDish(indexPath: indexPath).id
+        detailViewController.hashId = id
+        navigationController?.pushViewController(detailViewController, animated: true)
     }
 }
 
