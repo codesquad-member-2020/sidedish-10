@@ -10,12 +10,17 @@ import Foundation
 
 struct DetailDish: Codable {
     
-    let body: DishInfo
+    let hashId: String
+    let dishInfo: DishInfo
+    
+    enum CodingKeys: String, CodingKey {
+        case hashId = "hash"
+        case dishInfo = "data"
+    }
 }
 
 struct DishInfo: Codable {
-    
-    let id: String
+  
     let thumbImages: [String]
     let productDescription: String
     let point: String
@@ -25,7 +30,6 @@ struct DishInfo: Codable {
     let detailSection: [String]
     
     enum CodingKeys: String, CodingKey {
-        case id = "hash"
         case thumbImages = "thumb_images"
         case productDescription = "product_description"
         case point

@@ -26,7 +26,7 @@ class DetailViewController: UIViewController {
     static let id = "DetailViewController"
     var hashId: String?
     var titleText: String!
-    private var model: DishInfo? {
+    private var model: DetailDish? {
         didSet {
             DispatchQueue.main.async {
                 self.setupUI()
@@ -34,14 +34,9 @@ class DetailViewController: UIViewController {
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        guard let hashId = hashId else { return }
-        configureUseCase(id: hashId)
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureUseCase()
         navigationController?.isNavigationBarHidden = false
     }
     
@@ -50,9 +45,10 @@ class DetailViewController: UIViewController {
         navigationController?.isNavigationBarHidden = true
     }
     
-    private func configureUseCase(id: String) {
+    private func configureUseCase() {
+        guard let hashId = hashId else { return }
         DetailInfoUseCase.loadDetailDish(with: NetworkManager(),
-                                         id: id,
+                                         id: hashId,
                                          failureHandler: { self.errorHandling(error: $0) },
                                          completed: { self.model = $0 }
         )
@@ -73,12 +69,12 @@ class DetailViewController: UIViewController {
     private func setupUI() {
         guard let model = model else { return }
         titleLabel.text = titleText
-        descriptionLabel.text = model.productDescription
-        mileageLabel.text = model.point
-        deliveryFeeLabel.text = model.deliveryFee
-        deliveryInfoLabel.text = model.deliveryInfo
+        descriptionLabel.text = model.dishInfo.productDescription
+        mileageLabel.text = model.dishInfo.point
+        deliveryFeeLabel.text = model.dishInfo.deliveryFee
+        deliveryInfoLabel.text = model.dishInfo.deliveryInfo
         
-        for from in model.thumbImages {
+        for from in model.dishInfo.thumbImages {
             let imageView = UIImageView()
             insertImageView(into: thumbnailStackView, imageView: imageView, constraintAnchor: thumbnailScrollView)
             
@@ -98,7 +94,7 @@ class DetailViewController: UIViewController {
             })
         }
         
-        for from in model.detailSection {
+        for from in model.dishInfo.detailSection {
             let imageView = UIImageView()
             insertImageView(into: detailImageStackView, imageView: imageView, constraintAnchor: contentScrollView)
             

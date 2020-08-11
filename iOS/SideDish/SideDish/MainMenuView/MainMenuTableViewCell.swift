@@ -30,7 +30,7 @@ class MainMenuTableViewCell: UITableViewCell {
         setDescription(text: info.subTitle)
         setOriginPriceLabel(text: info.originalPrice)
         setSpecialPriceLabel(text: info.specialPrice)
-        setEventStackView(badges: info.badges)
+        setEventStackView(badges: info.badge)
     }
     
     private func setTitle(text title: String) {

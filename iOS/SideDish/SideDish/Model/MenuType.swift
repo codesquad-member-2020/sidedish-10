@@ -14,8 +14,8 @@ enum MenuType: String, CaseIterable, CustomStringConvertible {
     }
     
     case main = "메인반찬/한그릇 뚝딱 메인 요리"
-    case side = "국.찌개/김이 모락모락 국.찌개"
-    case soup = "밑반찬/언제 먹어도 든든한 밑반찬"
+    case soup = "국.찌개/김이 모락모락 국.찌개"
+    case side = "밑반찬/언제 먹어도 든든한 밑반찬"
     
     init(index: Int) {
         self = MenuType.allCases[index]

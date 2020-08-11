@@ -26,7 +26,7 @@ struct SideDishInfo: Codable {
     let subTitle: String
     let originalPrice: String?
     let specialPrice: String
-    let badges: [String]?
+    let badge: [String]?
     
     enum CodingKeys: String, CodingKey {
         case id = "detail_hash"
@@ -36,6 +36,6 @@ struct SideDishInfo: Codable {
         case subTitle = "description"
         case originalPrice = "n_price"
         case specialPrice = "s_price"
-        case badges
+        case badge
     }
 }

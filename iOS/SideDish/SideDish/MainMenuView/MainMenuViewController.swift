@@ -99,8 +99,9 @@ class MainMenuViewController: UIViewController {
 extension MainMenuViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let detailViewController = storyboard?.instantiateViewController(withIdentifier: DetailViewController.id) as? DetailViewController else { return }
-        let id = mainMenuDataSource.sideDishManager.sideDish(indexPath: indexPath).id
-        detailViewController.hashId = id
+        let dish = mainMenuDataSource.sideDishManager.sideDish(indexPath: indexPath)
+        detailViewController.hashId = dish.id
+        detailViewController.titleText = dish.title
         navigationController?.pushViewController(detailViewController, animated: true)
     }
 }
