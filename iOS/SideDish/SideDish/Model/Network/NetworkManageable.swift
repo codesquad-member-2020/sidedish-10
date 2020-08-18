@@ -10,6 +10,7 @@ import Foundation
 
 protocol NetworkManageable {
     func getResource(url: URL?, method: HTTPMethod, headers: HTTPHeaders?, handler : @escaping DataHandler)
+    func downloadResource(from: URL, handler: @escaping DownloadHandler)
 }
 
 typealias DataHandler = (Result<Data, NetworkError>) -> Void

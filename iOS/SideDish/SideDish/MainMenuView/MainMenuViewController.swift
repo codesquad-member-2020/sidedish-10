@@ -43,7 +43,7 @@ class MainMenuViewController: UIViewController {
                 return
             }
             
-            ImageUseCase.loadImage(with: NetworkManager(),
+            ImageUseCase().loadImage(with: NetworkManager(),
                                    from: requestURL,
                                    failureHandler: { self.errorHandling(error: $0) },
                                    completed: { cell.setImageFromData(data: $0) })

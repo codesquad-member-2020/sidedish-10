@@ -10,7 +10,7 @@ import Foundation
 
 struct SideDishUseCase {
         
-    func loadDish(with manager: NetworkManager, type: MenuType, failureHandler: @escaping (NetworkError) -> Void, successHandler: @escaping([SideDishInfo]) -> Void) {
+    func loadDish(with manager: NetworkManageable, type: MenuType, failureHandler: @escaping (NetworkError) -> Void, successHandler: @escaping([SideDishInfo]) -> Void) {
         let url = getURL(from: type)
         
         manager.getResource(

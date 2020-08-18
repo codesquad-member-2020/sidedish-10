@@ -10,7 +10,7 @@ import Foundation
 
 struct DetailInfoUseCase {
     
-    static func loadDetailDish(with manager: NetworkManager, id: String, failureHandler: @escaping (NetworkError) -> Void = { _ in }, completed: @escaping(DetailDish) -> Void) {
+    func loadDetailDish(with manager: NetworkManageable, id: String, failureHandler: @escaping (NetworkError) -> Void = { _ in }, completed: @escaping(DetailDish) -> Void) {
         manager.getResource(
             url: EndPoint(path: .detail(id)).url,
             method: .get,

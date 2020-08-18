@@ -45,7 +45,7 @@ class DetailViewController: UIViewController {
     
     private func configureUseCase() {
         guard let hashId = hashId else { return }
-        DetailInfoUseCase.loadDetailDish(with: NetworkManager(),
+        DetailInfoUseCase().loadDetailDish(with: NetworkManager(),
                                          id: hashId,
                                          failureHandler: { self.errorHandling(error: $0) },
                                          completed: { self.model = $0 }
