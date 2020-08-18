@@ -32,6 +32,7 @@
 		A5BD928A244DCAE900D6442F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5BD9288244DCAE900D6442F /* LaunchScreen.storyboard */; };
 		A5BD9295244DCAE900D6442F /* SideDishTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BD9294244DCAE900D6442F /* SideDishTests.swift */; };
 		A5CD7C3B24DD2C090042CFDE /* MenuType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CD7C3A24DD2C090042CFDE /* MenuType.swift */; };
+		A5CD7C3F24E2D5450042CFDE /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = A5CD7C3E24E2D5450042CFDE /* README.md */; };
 		A5E4F581245176E1007AAA3D /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E4F580245176E1007AAA3D /* DetailViewController.swift */; };
 		A5ED948F24D80932008BDFFA /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = A5ED948E24D80932008BDFFA /* .swiftlint.yml */; };
 		A5F9D8E524D99C890093435E /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F9D8E424D99C890093435E /* EndPoint.swift */; };
@@ -79,6 +80,7 @@
 		A5BD9294244DCAE900D6442F /* SideDishTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideDishTests.swift; sourceTree = "<group>"; };
 		A5BD9296244DCAE900D6442F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A5CD7C3A24DD2C090042CFDE /* MenuType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuType.swift; sourceTree = "<group>"; };
+		A5CD7C3E24E2D5450042CFDE /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		A5E4F580245176E1007AAA3D /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		A5ED948E24D80932008BDFFA /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		A5F9D8E424D99C890093435E /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
@@ -176,6 +178,7 @@
 		A5BD9271244DCAE500D6442F = {
 			isa = PBXGroup;
 			children = (
+				A5CD7C3E24E2D5450042CFDE /* README.md */,
 				A5ED948E24D80932008BDFFA /* .swiftlint.yml */,
 				A5BD927C244DCAE500D6442F /* SideDish */,
 				A5BD9293244DCAE900D6442F /* SideDishTests */,
@@ -330,6 +333,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5CD7C3F24E2D5450042CFDE /* README.md in Resources */,
 				A5ED948F24D80932008BDFFA /* .swiftlint.yml in Resources */,
 				A53BA05D244EA46A0023D27D /* BMYEONSUNG_otf.otf in Resources */,
 				A5BD928A244DCAE900D6442F /* LaunchScreen.storyboard in Resources */,
