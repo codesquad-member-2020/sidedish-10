@@ -1,11 +1,9 @@
-# sidedish-10
-# 최초 실행 시
-![최초 실행 시](https://user-images.githubusercontent.com/37682858/81033151-61e41980-8ecd-11ea-8729-7d8e07ed49f1.gif)
+# 브랜치 요약
 
-# 품절 상품 주문 시
-![품절](https://user-images.githubusercontent.com/37682858/81033186-8cce6d80-8ecd-11ea-8c8f-c77a310b63ea.gif)
-
-# 주문 성공 시
-![주문 성공](https://user-images.githubusercontent.com/37682858/81032948-bc30aa80-8ecc-11ea-99f8-a709ead06e77.gif)
+![배민찬 브랜치 정리](https://user-images.githubusercontent.com/37682858/90497201-c9bf2700-e181-11ea-91e3-ba9335faa52b.jpeg)
 
 
+
+## 트러블 슈팅
+
+* [동시성 문제 해결](https://github.com/1Consumption/sidedish-10/blob/modifyNetwork/iOS/SideDish/README.md)

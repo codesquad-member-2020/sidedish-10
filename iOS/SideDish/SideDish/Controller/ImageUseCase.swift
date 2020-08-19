@@ -10,28 +10,30 @@ import Foundation
 
 struct ImageUseCase {
     
-    static let cachesDirectory = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first
-    static func loadImage(with manager: NetworkManager, from: URL, failureHandler: @escaping (NetworkManager.NetworkError) -> Void, completed: @escaping(Data) -> Void) {
+    let cachesDirectory = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first
+    
+    func loadImage(with manager: NetworkManageable, from: URL, failureHandler: @escaping (NetworkError) -> Void, completed: @escaping(Data) -> Void) {
         guard let cacheDir = cachesDirectory else { return }
         let imageURL = cacheDir.appendingPathComponent(from.lastPathComponent)
         
-        if FileManager.default.fileExists(atPath: imageURL.path) {
-            handleData(from: imageURL, failureHandler: failureHandler, completed: completed)
-        } else {
-            manager.downloadResource(from: from) {
+        guard FileManager.default.fileExists(atPath: imageURL.path) else {
+            manager.downloadResource(from: from) { 
                 switch $0 {
                 case .failure(let error):
                     failureHandler(error)
                     
                 case .success(let url):
-                    handleData(from: url, failureHandler: failureHandler, completed: completed)
+                    self.handleData(from: url, failureHandler: failureHandler, completed: completed)
                     try? FileManager.default.moveItem(at: url, to: imageURL)
                 }
             }
+            return
         }
+        
+        handleData(from: imageURL, failureHandler: failureHandler, completed: completed)
     }
     
-    private static func handleData(from url: URL, failureHandler: @escaping (NetworkManager.NetworkError) -> Void, completed: @escaping(Data) -> Void) {
+    private func handleData(from url: URL, failureHandler: @escaping (NetworkError) -> Void, completed: @escaping(Data) -> Void) {
         do {
             let data = try Data(contentsOf: url)
             completed(data)

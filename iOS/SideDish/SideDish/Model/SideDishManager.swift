@@ -9,14 +9,17 @@
 import Foundation
 
 class SideDishManager {
-    private var sideDish: [[SideDishInfo]]
-    private var sections: [Section] = []
     
     init() {
         sideDish = [[SideDishInfo]]()
-        for _ in 0..<3 {
+        for _ in 0..<sectionCount {
             sideDish.append([SideDishInfo]())
         }
+    }
+    
+    var sideDish: [[SideDishInfo]]
+    var sectionCount: Int {
+        return MenuType.allCases.count
     }
     
     func insert(into section: Int, rows: [SideDishInfo]) {
@@ -24,24 +27,6 @@ class SideDishManager {
         NotificationCenter.default.post(name: .ModelInserted,
                                         object: nil,
                                         userInfo: ["index": section])
-    }
-    
-    func insertSection(sections: [Section]) {
-        self.sections = sections
-        NotificationCenter.default.post(name: .SectionInserted,
-                                        object: nil)
-    }
-    
-    func sectionName(at index: Int) -> String {
-        return sections[index].title
-    }
-    
-    func sectionDescription(at index: Int) -> String {
-        return sections[index].info
-    }
-    
-    func sectionCount() -> Int {
-        return sections.count
     }
     
     func sideDish(indexPath: IndexPath) -> SideDishInfo {
@@ -55,5 +40,4 @@ class SideDishManager {
 
 extension Notification.Name {
     static let ModelInserted = Notification.Name("ModelInserted")
-    static let SectionInserted = Notification.Name("SectionInserted")
 }

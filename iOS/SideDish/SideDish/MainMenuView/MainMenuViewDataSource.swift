@@ -10,13 +10,8 @@ import UIKit
 
 class MainMenuViewDataSource: NSObject, UITableViewDataSource {
     
-    private(set) var sideDishManager: SideDishManager
+    private(set) var sideDishManager = SideDishManager()
     public var handler: (MainMenuTableViewCell, String) -> Void = { _, _ in }
-    
-    override init() {
-        sideDishManager = SideDishManager()
-        super.init()
-    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return sideDishManager.numOfRows(at: section)
@@ -31,7 +26,11 @@ class MainMenuViewDataSource: NSObject, UITableViewDataSource {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "\(MenuType.allCases[section])"
+    }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
-        return sideDishManager.sectionCount()
+        return sideDishManager.sectionCount
     }
 }

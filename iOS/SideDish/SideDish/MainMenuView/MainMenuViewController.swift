@@ -18,32 +18,22 @@ class MainMenuViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.interactivePopGestureRecognizer?.delegate = nil
+        setup()
+    }
+    
+    private func setup() {
         setupFloatingButton()
-        loadDishSection()
         setupTableView()
         setupObserver()
         setupDataSource()
+        setupDishUseCase()
     }
     
     private func setupFloatingButton() {
         let floaty = Floaty()
         floaty.buttonColor = UIColor(named: "PrimaryColor") ?? UIColor.cyan
         floaty.itemTitleColor = UIColor(named: "divisionColor") ?? UIColor.black
-        floaty.addItem("로그아웃", icon: UIImage(named: "person")) { _ in
-            guard let loginViewController = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController else { return }
-            loginViewController.modalPresentationStyle = .fullScreen
-            NetworkManager.jwtToken = nil
-            self.present(loginViewController, animated: true)
-            floaty.close()
-        }
         self.view.addSubview(floaty)
-    }
-    
-    private func loadDishSection() {
-        DishSectionUseCase.loadSectionHeaders(with: NetworkManager(),
-                                              failureHandler: { self.errorHandling(error: $0) },
-                                              completed: { self.mainMenuDataSource.sideDishManager.insertSection(sections: $0) })
     }
     
     private func setupDataSource() {
@@ -53,7 +43,7 @@ class MainMenuViewController: UIViewController {
                 return
             }
             
-            ImageUseCase.loadImage(with: NetworkManager(),
+            ImageUseCase().loadImage(with: NetworkManager(),
                                    from: requestURL,
                                    failureHandler: { self.errorHandling(error: $0) },
                                    completed: { cell.setImageFromData(data: $0) })
@@ -65,42 +55,24 @@ class MainMenuViewController: UIViewController {
                                                selector: #selector(reloadSection(_:)),
                                                name: .ModelInserted,
                                                object: nil)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(setupSection),
-                                               name: .SectionInserted,
-                                               object: nil)
     }
     
     private func setupTableView() {
-        mainMenuTableView.delegate = self
         mainMenuTableView.register(MainMenuHeader.self, forHeaderFooterViewReuseIdentifier: "MenuHeaderView")
         mainMenuTableView.dataSource = mainMenuDataSource
+        mainMenuTableView.delegate = self
     }
     
-    private func configureUseCase() {
-        SideDishUseCase.loadMainDish(with: NetworkManager(),
-                                     failureHandler: { self.errorHandling(error: $0) },
-                                     completed: { model, index in
-                                        DispatchQueue.main.async {
-                                            self.mainMenuDataSource.sideDishManager.insert(into: index, rows: model)
-                                        }
-        })
-        
-        SideDishUseCase.loadSideDish(with: NetworkManager(),
-                                     failureHandler: { self.errorHandling(error: $0) },
-                                     completed: { model, index in
-                                        DispatchQueue.main.async {
-                                            self.mainMenuDataSource.sideDishManager.insert(into: index, rows: model)
-                                        }
-        })
-        
-        SideDishUseCase.loadSoupDish(with: NetworkManager(),
-                                     failureHandler: { self.errorHandling(error: $0) },
-                                     completed: { model, index in
-                                        DispatchQueue.main.async {
-                                            self.mainMenuDataSource.sideDishManager.insert(into: index, rows: model)
-                                        }
-        })
+    private func setupDishUseCase() {
+        for typeIndex in 0..<MenuType.allCases.count {
+            SideDishUseCase().loadDish(
+                with: NetworkManager(),
+                type: MenuType(index: typeIndex),
+                failureHandler: { _ in },
+                successHandler: { [weak self] dish in
+                    self?.mainMenuDataSource.sideDishManager.insert(into: typeIndex, rows: dish)
+            })
+        }
     }
     
     private func alertError(message: String) {
@@ -112,53 +84,26 @@ class MainMenuViewController: UIViewController {
         }
     }
     
-    private func errorHandling(error: NetworkManager.NetworkError) {
+    private func errorHandling(error: NetworkError) {
         alertError(message: error.message())
     }
     
     @objc func reloadSection(_ notification: Notification) {
         guard let index = notification.userInfo?["index"] as? Int else { return }
-        mainMenuTableView.reloadSections(IndexSet(index...index), with: .automatic)
-    }
-    
-    @objc func setupSection() {
-        DispatchQueue.main.async {
-            self.mainMenuTableView.reloadData()
+        DispatchQueue.main.sync { [weak self] in
+            self?.mainMenuTableView.reloadSections(IndexSet(index...index), with: .automatic)
         }
-        configureUseCase()
     }
 }
 
 extension MainMenuViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "MenuHeaderView") as? MainMenuHeader else { return UIView() }
-        let sectionName = mainMenuDataSource.sideDishManager.sectionName(at: section)
-        let sectionInfo = mainMenuDataSource.sideDishManager.sectionDescription(at: section)
-        headerView.setTitleLabel(text: sectionName)
-        headerView.setContentLabel(text: sectionInfo)
-        headerView.index = section
-        headerView.delegate = self
-        
-        return headerView
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 80
-    }
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let detailViewController = storyboard?.instantiateViewController(withIdentifier: DetailViewController.id) as? DetailViewController else { return }
         let dish = mainMenuDataSource.sideDishManager.sideDish(indexPath: indexPath)
-        guard let detailViewController = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else { return }
-        detailViewController.id = dish.id
+        detailViewController.hashId = dish.id
         detailViewController.titleText = dish.title
-        let text = "타이틀 메뉴 : \(dish.title)\n\(dish.specialPrice)"
-        Toast(text: text).show()
-        self.navigationController?.pushViewController(detailViewController, animated: true)
+        navigationController?.pushViewController(detailViewController, animated: true)
     }
-}
-
-extension Notification.Name {
-    static let InjectionModel = Notification.Name("InjectionModel")
 }
 
 extension MainMenuViewController: SectionTapped {

@@ -10,20 +10,24 @@ import Foundation
 
 struct DetailInfoUseCase {
     
-    static func loadDetailDish(with manager: NetworkManager, id: Int, failureHandler: @escaping (NetworkManager.NetworkError) -> Void = { _ in }, completed: @escaping(DishInfo) -> Void) {
-        manager.getDetailDish(id: id) {
-            switch $0 {
-            case .failure(let error):
-                failureHandler(error)
-                
-            case .success(let data):
-                do {
-                    let model = try JSONDecoder().decode(DetailDish.self, from: data)
-                    completed(model.body)
-                } catch {
-                    failureHandler(.decodeError)
+    func loadDetailDish(with manager: NetworkManageable, id: String, failureHandler: @escaping (NetworkError) -> Void = { _ in }, completed: @escaping(DetailDish) -> Void) {
+        manager.getResource(
+            url: EndPoint(path: .detail(id)).url,
+            method: .get,
+            headers: nil,
+            handler: {
+                switch $0 {
+                case .failure(let error):
+                    failureHandler(error)
+                    
+                case .success(let data):
+                    do {
+                        let model = try JSONDecoder().decode(DetailDish.self, from: data)
+                        completed(model)
+                    } catch {
+                        failureHandler(.decodeError)
+                    }
                 }
-            }
-        }
+        })
     }
 }

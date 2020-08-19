@@ -23,39 +23,18 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var originalPriceLabel: UILabel!
     @IBOutlet weak var specialPriceLabel: UILabel!
     
-    @IBAction func orderButtonPushed(_ sender: UIButton) {
-        StockUseCase.isSoldOut(with: NetworkManager(),
-                               id: id,
-                               failureHandler: { self.errorHandling(error: $0) },
-                               completed: {
-                                if $0 {
-                                    DispatchQueue.main.async {
-                                        self.navigationController?.popViewController(animated: true)
-                                        self.alert(title: "주문 성공!", message: self.titleText, confirmMessage: "넵!")
-                                    }
-                                } else {
-                                    self.alert(title: "품절 입니다ㅠㅠ", message: "죄송합니다 흑흑", confirmMessage: "넵ㅠㅠ")
-                                }
-        })
-    }
-    
-    var id: Int!
+    static let id = "DetailViewController"
+    var hashId: String?
     var titleText: String!
-    private var model: DishInfo? {
+    private var dishInfo: DetailDish? {
         didSet {
-            DispatchQueue.main.async {
-                self.setupUI()
-            }
+            self.setupUI()
         }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        configureUseCase(id: id)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureUseCase()
         navigationController?.isNavigationBarHidden = false
     }
     
@@ -64,11 +43,12 @@ class DetailViewController: UIViewController {
         navigationController?.isNavigationBarHidden = true
     }
     
-    private func configureUseCase(id: Int) {
-        DetailInfoUseCase.loadDetailDish(with: NetworkManager(),
-                                         id: id,
+    private func configureUseCase() {
+        guard let hashId = hashId else { return }
+        DetailInfoUseCase().loadDetailDish(with: NetworkManager(),
+                                         id: hashId,
                                          failureHandler: { self.errorHandling(error: $0) },
-                                         completed: { self.model = $0 }
+                                         completed: { self.dishInfo = $0 }
         )
     }
     
@@ -85,61 +65,14 @@ class DetailViewController: UIViewController {
     }
     
     private func setupUI() {
-        guard let model = model else { return }
-        titleLabel.text = titleText
-        descriptionLabel.text = model.productDescription
-        mileageLabel.text = model.point
-        deliveryFeeLabel.text = model.deliveryFee
-        deliveryInfoLabel.text = model.deliveryInfo
-        setOriginPriceLabel(text: model.originalPrice)
-        specialPriceLabel.text = model.specialPrice
-        
-        for from in model.thumbImages {
-            let imageView = UIImageView()
-            insertImageView(into: thumbnailStackView, imageView: imageView, constraintAnchor: thumbnailScrollView)
-            
-            guard let url = URL(string: from) else {
-                errorHandling(error: .invalidURL)
-                return
-            }
-            
-            ImageUseCase.loadImage(with: NetworkManager(),
-                                   from: url,
-                                   failureHandler: { self.errorHandling(error: $0) },
-                                   completed: {
-                                    let image = UIImage(data: $0)
-                                    DispatchQueue.main.async {
-                                        imageView.image = image
-                                    }
-            })
+        guard let model = dishInfo else { return }
+        DispatchQueue.main.async { [weak self] in
+            self?.titleLabel.text = self?.titleText
+            self?.descriptionLabel.text = model.dishInfo.productDescription
+            self?.mileageLabel.text = model.dishInfo.point
+            self?.deliveryFeeLabel.text = model.dishInfo.deliveryFee
+            self?.deliveryInfoLabel.text = model.dishInfo.deliveryInfo
         }
-        
-        for from in model.detailSection {
-            let imageView = UIImageView()
-            insertImageView(into: detailImageStackView, imageView: imageView, constraintAnchor: contentScrollView)
-            
-            guard let url = URL(string: from) else {
-                errorHandling(error: .invalidURL)
-                return
-            }
-            
-            ImageUseCase.loadImage(with: NetworkManager(),
-                                   from: url,
-                                   failureHandler: { self.errorHandling(error: $0) },
-                                   completed: {
-                                    let image = UIImage(data: $0)
-                                    DispatchQueue.main.async {
-                                        imageView.image = image
-                                        imageView.heightAnchor.constraint(equalToConstant: imageView.frame.width * (image?.size.height ?? 1) / (image?.size.width ?? 1)).isActive = true
-                                    }
-            })
-        }
-    }
-    
-    private func insertImageView(into stackView: UIStackView, imageView: UIImageView, constraintAnchor: UIScrollView) {
-        imageView.contentMode = .scaleAspectFill
-        stackView.addArrangedSubview(imageView)
-        imageView.widthAnchor.constraint(equalTo: constraintAnchor.frameLayoutGuide.widthAnchor, multiplier: 1).isActive = true
     }
     
     private func alert(title: String, message: String, confirmMessage: String) {
@@ -155,7 +88,7 @@ class DetailViewController: UIViewController {
         self.alert(title: "문제가 생겼어요", message: message, confirmMessage: "넵...")
     }
     
-    private func errorHandling(error: NetworkManager.NetworkError) {
+    private func errorHandling(error: NetworkError) {
         alertError(message: error.message())
     }
 }
