@@ -10,10 +10,10 @@ import Foundation
 
 struct SideDish: Codable {
     
-    let sideDishes: [SideDishInfo]
+    let dishes: [SideDishInfo]
     
     enum CodingKeys: String, CodingKey {
-        case sideDishes = "body"
+        case dishes = "body"
     }
 }
 

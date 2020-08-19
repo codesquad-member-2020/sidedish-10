@@ -25,7 +25,7 @@ struct SideDishUseCase {
                 case .success(let data):
                     do {
                         let model = try JSONDecoder().decode(SideDish.self, from: data)
-                        successHandler(model.sideDishes)
+                        successHandler(model.dishes)
                     } catch {
                         failureHandler(.decodeError)
                     }

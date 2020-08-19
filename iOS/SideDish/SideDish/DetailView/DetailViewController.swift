@@ -26,7 +26,7 @@ class DetailViewController: UIViewController {
     static let id = "DetailViewController"
     var hashId: String?
     var titleText: String!
-    private var model: DetailDish? {
+    private var dishInfo: DetailDish? {
         didSet {
             self.setupUI()
         }
@@ -48,7 +48,7 @@ class DetailViewController: UIViewController {
         DetailInfoUseCase().loadDetailDish(with: NetworkManager(),
                                          id: hashId,
                                          failureHandler: { self.errorHandling(error: $0) },
-                                         completed: { self.model = $0 }
+                                         completed: { self.dishInfo = $0 }
         )
     }
     
@@ -65,7 +65,7 @@ class DetailViewController: UIViewController {
     }
     
     private func setupUI() {
-        guard let model = model else { return }
+        guard let model = dishInfo else { return }
         DispatchQueue.main.async { [weak self] in
             self?.titleLabel.text = self?.titleText
             self?.descriptionLabel.text = model.dishInfo.productDescription
